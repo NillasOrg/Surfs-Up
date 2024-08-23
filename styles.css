@@ -26,7 +26,16 @@ header {
 }
 
 .hero-image {
-    max-width: 100%;
+    display: flex;
+    flex-direction: column;
+    background-image: url("images/hjem.jpg");
+    height: 100vh;
+    align-self: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    align-items: center;
+    justify-content: center;
 }
 
 
