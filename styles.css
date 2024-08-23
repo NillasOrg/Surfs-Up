@@ -1,9 +1,10 @@
 body {
+    margin: 0;
+    padding: 0;
     font-family: Arial, sans-serif;
     background-color: #e0f7fa;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    max-width: 100%;
 }
 
 header {
@@ -12,8 +13,6 @@ header {
     padding: 15px 20px;
     text-align: center;
     position: sticky;
-    top: 0;
-    z-index: 1000;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -21,25 +20,18 @@ header {
 
 .logo-container {
     display: flex;
-    align-items: center;
+    align-items: left;
     margin-right: auto;
-    padding-right: 10px
+    padding-right: 10px;
 }
 
-
-.surfer {
-    height: auto;
-    width: 100%;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-           
-    
+.hero-image {
+    max-width: 100%;
 }
+
 
 .logo {
     max-height: 60px; /* Juster højden efter behov */
-    max-width: 200px; /* Juster bredden efter behov */    
     margin-left: 20px;
 }
 
@@ -61,7 +53,6 @@ nav a:hover {
 }
 
 main {
-    padding: 20px;
     flex: 1;
 }
 
@@ -88,8 +79,7 @@ h1, h2, h3, h4, h5, h6 {
 
 #link:hover {
     color: #df340d;
-        
-        transform: translateY(-10px);
+    transform: translateY(-10px);
     transition: .3s ease all; 
 }
 
@@ -113,7 +103,7 @@ footer {
     text-align: center;
     padding: 15px;
     position: relative;
-    width: 100%;
+    width: 99%;
 }
 
 footer a {
@@ -156,7 +146,7 @@ button:hover {
     background-color: #9b0404;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 100%) {
     nav a {
         display: block;
         margin: 10px 0;
