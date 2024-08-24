@@ -17,6 +17,11 @@ header {
     align-items: center;
     justify-content: space-between;
 }
+.LinkHover:hover{
+    color: red;
+    transition: .3s ease all;
+    transform: translateY(-5px);
+}
 
 .logo-container {
     display: flex;
@@ -36,6 +41,7 @@ header {
     background-attachment: fixed;
     align-items: center;
     justify-content: center;
+    
 }
 
 
@@ -81,16 +87,11 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 #link {
-    color: #000000;
+    color: blue;
     text-decoration:none;
     
 }
 
-#link:hover {
-    color: #df340d;
-    transform: translateY(-10px);
-    transition: .3s ease all; 
-}
 
 .item {
     border: 1px solid #ddd;
