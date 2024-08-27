@@ -87,7 +87,6 @@ nav a {
     font-weight: bold;
 }
 
-
 nav a:hover {
     text-decoration: underline;
     opacity: 0.8;
@@ -167,6 +166,24 @@ input, textarea, select {
     border-radius: 4px;
 }
 
+.Information_link1{
+    border-style: double;
+    display: inline-block;
+    width: 30vw;
+    height: 30vh;
+    margin-right: 10px;
+    margin-top: 10px;
+    vertical-align: top;
+    background-color: #e6e3e3;
+}
+
+#img{
+    float: left;
+    width:  100px;
+    height: 200px;
+    object-fit: cover;
+}
+
 #hero-btn {
     width: 200px;
     padding: 15px 0;
@@ -194,3 +211,4 @@ input, textarea, select {
         margin: 10px 0;
     }
 }
+
