@@ -1,5 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Surfs_Up.Models;
+using Surfs_Up.Repository;
+
 
 namespace Surfs_Up.Controllers
 {
@@ -10,10 +12,11 @@ namespace Surfs_Up.Controllers
             return View();
         }
 
-        public IActionResult Edit(int? id)
+        public IActionResult Edit(int id)
         {
-           Catalog catalog = new Catalog { CatalogId = id ?? 0 };
-           return View(catalog);
+            ItemList repo = new ItemList();
+            CatalogItem catalog = repo.catalogItems[id - 1];
+            return View(catalog);
         }
     }
 }
