@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Surfs-Up")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+0929ad592e0187f29291dfaf206a14ed966d8a38")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+4e5bc3d969a82f4fc5373fb76753bb1c821f6f13")]
 [assembly: System.Reflection.AssemblyProductAttribute("Surfs-Up")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Surfs-Up")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
