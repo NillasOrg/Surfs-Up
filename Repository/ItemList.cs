@@ -3,9 +3,9 @@ using Surfs_Up.Models;
 
 namespace Surfs_Up.Repository
 {
-    public class ItemList 
+    public static class ItemList 
     {
-        public List<CatalogItem> catalogItems = new List<CatalogItem>()
+        private static List<CatalogItem> catalogItems = new List<CatalogItem>()
         {
             new CatalogItem {
                 CatalogItemId = 1,
@@ -116,6 +116,11 @@ namespace Surfs_Up.Repository
                 Equipment = "Fin, Paddle, Pump, Leash"
             },
         };
+
+        public static List<CatalogItem> GetList() 
+        {
+            return catalogItems;
+        }
     }
 }
 
