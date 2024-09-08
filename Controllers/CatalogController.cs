@@ -9,13 +9,14 @@ namespace Surfs_Up.Controllers
     {
         public IActionResult Index()
         {
-            return View();
+            var items = ItemList.GetList();
+            return View(items);
         }
 
         public IActionResult Edit(int id)
         {
-            ItemList repo = new ItemList();
-            CatalogItem catalog = repo.catalogItems[id - 1];
+            List<CatalogItem> item = ItemList.GetList();
+            CatalogItem catalog = item[id - 1];
             return View(catalog);
         }
     }

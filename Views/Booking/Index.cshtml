@@ -1,3 +1,4 @@
+@model List<CatalogItem>
 <main>
     <section id="booking">
         <h2>Book dit udstyr</h2>
@@ -10,9 +11,10 @@
 
             <label for="equipment">Vælg udstyr:</label>
             <select id="equipment" name="equipment" required>
-                <option value="shortboard">Shortboard</option>
-                <option value="longboard">Longboard</option>
-                <option value="wetsuit">Våddragt</option>
+                @foreach (var item in Model as List<CatalogItem>)
+                {
+                    <option value="Item">@item.Name</option>
+                }
             </select>
 
             <label for="date">Dato:</label>

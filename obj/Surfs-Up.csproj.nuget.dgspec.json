@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "c:\\Users\\krame\\Desktop\\Projekter\\Surfs-Up\\Surfs-Up.csproj": {}
+    "C:\\Users\\krame\\Desktop\\Projekter\\Surfs-Up\\Surfs-Up.csproj": {}
   },
   "projects": {
-    "c:\\Users\\krame\\Desktop\\Projekter\\Surfs-Up\\Surfs-Up.csproj": {
+    "C:\\Users\\krame\\Desktop\\Projekter\\Surfs-Up\\Surfs-Up.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "c:\\Users\\krame\\Desktop\\Projekter\\Surfs-Up\\Surfs-Up.csproj",
+        "projectUniqueName": "C:\\Users\\krame\\Desktop\\Projekter\\Surfs-Up\\Surfs-Up.csproj",
         "projectName": "Surfs-Up",
-        "projectPath": "c:\\Users\\krame\\Desktop\\Projekter\\Surfs-Up\\Surfs-Up.csproj",
+        "projectPath": "C:\\Users\\krame\\Desktop\\Projekter\\Surfs-Up\\Surfs-Up.csproj",
         "packagesPath": "C:\\Users\\krame\\.nuget\\packages\\",
-        "outputPath": "c:\\Users\\krame\\Desktop\\Projekter\\Surfs-Up\\obj\\",
+        "outputPath": "C:\\Users\\krame\\Desktop\\Projekter\\Surfs-Up\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\krame\\AppData\\Roaming\\NuGet\\NuGet.Config",
