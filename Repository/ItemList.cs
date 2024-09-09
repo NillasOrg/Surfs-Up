@@ -15,7 +15,8 @@ namespace Surfs_Up.Repository
                 Thickness = 2.75,
                 Volume = 38.8,
                 Type = CATALOGTYPE.Shortboard,
-                Price = 565.00  
+                Price = 565.00  ,
+                ImagePath = "~/images/SurfboardShortboard.png",
             },
             new CatalogItem {
                 CatalogItemId = 2,
@@ -26,6 +27,7 @@ namespace Surfs_Up.Repository
                 Volume = 44.16,
                 Type = CATALOGTYPE.Funboard,
                 Price = 685,
+                ImagePath = "~/images/SurfboardFunboard.webp",
             },
             new CatalogItem {
                 CatalogItemId = 3,
@@ -36,6 +38,7 @@ namespace Surfs_Up.Repository
                 Volume = 43.22,
                 Type = CATALOGTYPE.Funboard,
                 Price = 695,
+                ImagePath = "~/images/SurfboardFunboard.webp",
             },
             new CatalogItem {
                 CatalogItemId = 4,
@@ -46,6 +49,7 @@ namespace Surfs_Up.Repository
                 Volume = 29.39,
                 Type = CATALOGTYPE.Fish,
                 Price = 645,
+                ImagePath = "~/images/SurfboardFish.png",
             },
             new CatalogItem {
                 CatalogItemId = 5,
@@ -55,7 +59,8 @@ namespace Surfs_Up.Repository
                 Thickness = 2.8,
                 Volume = 65.4,
                 Type = CATALOGTYPE.Longboard,
-                Price = 895,           
+                Price = 895,
+                ImagePath = "~/images/SurfboardLongboard.png",
             },
             new CatalogItem {
                 CatalogItemId = 6,
@@ -66,7 +71,8 @@ namespace Surfs_Up.Repository
                 Volume = 33.7,
                 Type = CATALOGTYPE.Shortboard,
                 Price = 645,
-                Equipment = ""
+                Equipment = "",
+                ImagePath = "~/images/SurfboardShortboard.png",
             },
             new CatalogItem {
                 CatalogItemId = 7,
@@ -77,7 +83,8 @@ namespace Surfs_Up.Repository
                 Volume = 80,
                 Type = CATALOGTYPE.Longboard,
                 Price = 1025,
-                Equipment = ""
+                Equipment = "",
+                ImagePath = "~/images/SurfboardLongboard.png",
             },
             new CatalogItem
             {
@@ -89,7 +96,8 @@ namespace Surfs_Up.Repository
                 Volume = 301,
                 Type = CATALOGTYPE.SUP,
                 Price = 854,
-                Equipment = "Paddle"
+                Equipment = "Paddle",
+                ImagePath = "~/images/SurfboardLongboard.png",
             },
             new CatalogItem
             {
@@ -101,7 +109,8 @@ namespace Surfs_Up.Repository
                 Volume = 270,
                 Type = CATALOGTYPE.SUP,
                 Price = 611,
-                Equipment = "Fin, Paddle, Pump, Leash"
+                Equipment = "Fin, Paddle, Pump, Leash",
+                ImagePath = "~/images/SurfboardLongboard.png",
             },
             new CatalogItem
             {
@@ -113,7 +122,8 @@ namespace Surfs_Up.Repository
                 Volume = 330,
                 Type = CATALOGTYPE.SUP,
                 Price = 1304,
-                Equipment = "Fin, Paddle, Pump, Leash"
+                Equipment = "Fin, Paddle, Pump, Leash",
+                ImagePath = "~/images/SurfboardLongboard.png",
             },
         };
 

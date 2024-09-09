@@ -2,13 +2,17 @@
 <main>
     <section id="catalog">
     <h2>Vores udstyr</h2>
-
+    <div class="catalog-grid">
         @foreach(var item in Model) 
         {
-            <div class="items">
-                <h3><a asp-controller="Catalog" asp-action="Edit" asp-route-id="@item.CatalogItemId">@item.Name</a></h3>
-                <p>Perfekt for hurtige vendinger og manøvrering. Udforsk vores sortiment af shortboards her</p>
+            <div class="catalog-card">
+                <img src="~/images/SurfboardFunboard.webp" alt="Avatar">
+                <div>
+                    <h4><b><a asp-controller="Catalog" asp-action="Edit" asp-route-id="@item.CatalogItemId">@item.Name</a></b></h4>
+                    <p>Perfekt for hurtige vendinger og manøvrering. Udforsk vores sortiment af shortboards her</p>
+                </div>
             </div>
         }
+    </div>
     </section>
 </main>
