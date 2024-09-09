@@ -5,13 +5,15 @@
     <div class="catalog-grid">
         @foreach(var item in Model) 
         {
-            <div class="catalog-card">
-                <img src="~/images/SurfboardFunboard.webp" alt="Avatar">
-                <div>
-                    <h4><b><a asp-controller="Catalog" asp-action="Edit" asp-route-id="@item.CatalogItemId">@item.Name</a></b></h4>
-                    <p>Perfekt for hurtige vendinger og manøvrering. Udforsk vores sortiment af shortboards her</p>
+            <a asp-controller="Catalog" asp-action="Edit" asp-route-id="@item.CatalogItemId">
+                <div class="catalog-card">
+                    <img src="@Url.Content(item.ImagePath)" alt="Image" />
+                    <div class="catalog-text-box">
+                        <h4><b>@item.Name</b></h4>
+                        <p>@item.Description</p>
+                    </div>
                 </div>
-            </div>
+            </a>
         }
     </div>
     </section>

@@ -15,8 +15,10 @@ namespace Surfs_Up.Repository
                 Thickness = 2.75,
                 Volume = 38.8,
                 Type = CATALOGTYPE.Shortboard,
-                Price = 565.00  ,
+                Price = 565.00,
+                Equipment = "Fin, Paddle, Pump, Leash",
                 ImagePath = "~/images/SurfboardShortboard.png",
+                Description = "Perfekt for hurtige vendinger og manøvrering. Udforsk vores sortiment af shortboards her"
             },
             new CatalogItem {
                 CatalogItemId = 2,
@@ -27,7 +29,9 @@ namespace Surfs_Up.Repository
                 Volume = 44.16,
                 Type = CATALOGTYPE.Funboard,
                 Price = 685,
+                Equipment = "Fin, Paddle, Pump, Leash",
                 ImagePath = "~/images/SurfboardFunboard.webp",
+                Description = "Skør og sjovt board til alle aldre. Udforsk vores sortiment af funboards her"
             },
             new CatalogItem {
                 CatalogItemId = 3,
@@ -38,7 +42,9 @@ namespace Surfs_Up.Repository
                 Volume = 43.22,
                 Type = CATALOGTYPE.Funboard,
                 Price = 695,
+                Equipment = "Fin, Paddle, Pump, Leash",
                 ImagePath = "~/images/SurfboardFunboard.webp",
+                Description = "Skør og sjovt board til alle aldre. Udforsk vores sortiment af funboards her"
             },
             new CatalogItem {
                 CatalogItemId = 4,
@@ -49,7 +55,9 @@ namespace Surfs_Up.Repository
                 Volume = 29.39,
                 Type = CATALOGTYPE.Fish,
                 Price = 645,
+                Equipment = "Fin, Paddle, Pump, Leash",
                 ImagePath = "~/images/SurfboardFish.png",
+                Description = "Lille og agil!. Udforsk vores sortiment af fish boards her"
             },
             new CatalogItem {
                 CatalogItemId = 5,
@@ -60,7 +68,9 @@ namespace Surfs_Up.Repository
                 Volume = 65.4,
                 Type = CATALOGTYPE.Longboard,
                 Price = 895,
+                Equipment = "Fin, Paddle, Pump, Leash",
                 ImagePath = "~/images/SurfboardLongboard.png",
+                Description = "Langt og hurtigt. Udforsk vores sortiment af longboards her"
             },
             new CatalogItem {
                 CatalogItemId = 6,
@@ -71,8 +81,9 @@ namespace Surfs_Up.Repository
                 Volume = 33.7,
                 Type = CATALOGTYPE.Shortboard,
                 Price = 645,
-                Equipment = "",
+                Equipment = "Fin, Paddle, Pump, Leash",
                 ImagePath = "~/images/SurfboardShortboard.png",
+                Description = "Perfekt for hurtige vendinger og manøvrering. Udforsk vores sortiment af shortboards her"
             },
             new CatalogItem {
                 CatalogItemId = 7,
@@ -83,8 +94,9 @@ namespace Surfs_Up.Repository
                 Volume = 80,
                 Type = CATALOGTYPE.Longboard,
                 Price = 1025,
-                Equipment = "",
+                Equipment = "Fin, Paddle, Pump, Leash",
                 ImagePath = "~/images/SurfboardLongboard.png",
+                Description = "Langt og hurtigt. Udforsk vores sortiment af longboards her"
             },
             new CatalogItem
             {
@@ -98,6 +110,7 @@ namespace Surfs_Up.Repository
                 Price = 854,
                 Equipment = "Paddle",
                 ImagePath = "~/images/SurfboardLongboard.png",
+                Description = "Hvad er en SUP?. Udforsk vores sortiment af SUPs her"
             },
             new CatalogItem
             {
@@ -111,6 +124,7 @@ namespace Surfs_Up.Repository
                 Price = 611,
                 Equipment = "Fin, Paddle, Pump, Leash",
                 ImagePath = "~/images/SurfboardLongboard.png",
+                Description = "Hvad er en SUP?. Udforsk vores sortiment af SUPs her"
             },
             new CatalogItem
             {
@@ -124,6 +138,7 @@ namespace Surfs_Up.Repository
                 Price = 1304,
                 Equipment = "Fin, Paddle, Pump, Leash",
                 ImagePath = "~/images/SurfboardLongboard.png",
+                Description = "Hvad er en SUP?. Udforsk vores sortiment af SUPs her"
             },
         };
 

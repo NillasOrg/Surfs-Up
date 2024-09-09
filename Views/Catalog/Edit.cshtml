@@ -1,16 +1,37 @@
 @model CatalogItem
 
+<main class="container">
+    <div class="product-left">
+        <img src="@Url.Content(Model.ImagePath)" alt="Image" />
+    </div>
 
-<h3>Catalog: @Model.Name</h3>
-<p>@Model.Description</p>
-<p>Included Equipment: @Model.Equipment</p>
-<h3>Price: @Model.Price</h3>
+    <div class="product-right">
+        <div class="product-description">
+            <span>Category</span>
+            <h1>@Model.Name</h1>
+            <p>@Model.Description</p>
+        </div>
 
-<div class="specifications">
-    <ul>
-        <li id="len">Length: @Model.Length</li>
-        <li id="width">Width: @Model.Width</li>
-        <li id="thick">Thickness: @Model.Thickness</li>
-        <li id="vol">Volume: @Model.Volume</li>
-    </ul>
-</div>
+        <div class="product-equipment">
+            <p>Includes: @Model.Equipment</p>
+            </div>
+
+        <div class="product-price">
+            <span>@Model.Price DKK</span>
+            <a href="#" class="cart-btn">Add to cart</a>
+        </div>
+
+        <div class="specifications">
+            <ul>
+                <li id="len">Length: @Model.Length</li>
+                <li id="width">Width: @Model.Width</li>
+                <li id="thick">Thickness: @Model.Thickness</li>
+                <li id="vol">Volume: @Model.Volume</li>
+            </ul>
+        </div>
+    </div>
+
+</main>
+
+
+

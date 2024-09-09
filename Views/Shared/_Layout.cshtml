@@ -7,15 +7,16 @@
     <link href="~/styles.css" rel="stylesheet"/>
 </head>
 <body>
-    <header>
-        <h1>Surfs Up Udlejning</h1>
+    <div class="header-bar">
+        <a href="/home/index">
+            <img src="~/images/logo_converted.png" class="Logo">
+        </a>
         <nav>
-            <a href="/home/index">Hjem</a>
             <a href="/catalog/index">Katalog</a>
             <a href="/booking/index">Booking</a>
             <a href="/information/index">Information</a>
         </nav>
-    </header>
+    </div>
     <div>
         @RenderBody()
     </div>
