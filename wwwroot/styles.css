@@ -303,20 +303,83 @@ nav a:hover {
     }
 }
 
-.booking-left{
+.booking-left {
     width: 50%;
     position: relative;
-    display: grid;
     grid-template-columns: repeat(1,2fr);
-    column-gap: 225px;
-    margin: 30px;
+    column-gap: 10px;
 }
 
-.booking-left div{
-    margin: 30px;
+.booking-left h2{
+    display: flex;
+    justify-content: center;
+    font-size: 50px;
+    color: #358ED7;
+}
+
+.booking-left input{
+    border-radius: 2px;
+    border: 2px solid black;
+    box-sizing: border-box;
+    font-size: 1.25em;
+    width: 100%;
+    height: 35px;
+}
+
+#date-elem{
+    display: flex;
+    justify-content: space-between;
+}
+
+.dateElement-left{
+    width: 45%;
+}
+
+#booking-remark {
+    height: 135px;
+    border-radius: 2px;
+    border: 2px solid black;
+    box-sizing: border-box;
+    font-size: 1.25em;
+    width: 100%;
+    resize: none;
+    font-family: Arial, sans-serif;
+}
+
+.booking-left label {
+    font-size: 1.25em;
+    display: block;
+    margin-top: 30px;
 }
 
 .booking-right{
     width: 50%;
-
 }
+
+#booking-submit {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50px;
+    padding: 0px;
+    margin-top: 20px;
+}
+
+#booking-submit button{
+    width: 80%;
+    height: 100%;
+    font-size: 1.3em;
+    color: white;
+    background-color: green;
+    border-radius: 15px;
+}
+
+#booking-submit button:hover{
+    transform: scale(1.02);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+}
+
+
+
+

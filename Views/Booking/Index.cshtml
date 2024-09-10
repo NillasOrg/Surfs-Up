@@ -1,9 +1,11 @@
 @model List<CatalogItem>
 <main class="container">
     <div class="booking-left">
-        <h2>Book dit udstyr</h2>
+        <div>
+            <h2>Book dit udstyr</h2>
+        </div>
         <form id="booking-form" asp-action="CreateBooking" method="post">
-            <div class="element-left">
+            <div>
                 <label for="name">Navn:</label>
                 <br />
                 <input type="text" id="booking-name" name="Customer.Name" required>
@@ -14,14 +16,14 @@
                 <br />
                 <input type="email" id="booking-email" name="Customer.Email" required>
             </div>
-           <div>
-                <div class="element-left">
+           <div id="date-elem">
+                <div class="dateElement-left">
                     <label for="start-date">Start Dato:</label>
                     <br />
                     <input type="date" id="booking-date" name="StartDate" required>
                 </div>
 
-                <div>
+                <div class="dateElement-left">
                     <label for="end-date">Slut Dato:</label>
                     <br />
                     <input type="date" id="booking-date" name="EndDate" required>
@@ -32,16 +34,25 @@
             <div>
                 <label for="remark">Bemærkning:</label>
                 <br />
-                <input type="text" id="booking-remark" name="Remark">
+                <textarea type="text" id="booking-remark" name="Remark"></textarea>
             </div>
             
-
-            <button type="submit" id="booking-submit">Book Nu</button>
+            <div id="booking-submit">
+                <button type="submit">Book Nu</button>
+            </div>
         </form>
     </div>
 
     <div class="booking-right">
         <h1> Kurv </h1>
+        @foreach(var item in Model) 
+        {
+            <div class="booking-item">
+                <h1>@item.Name</h1>
+                <p>@item.Description</p>
+            </div>
+        }
+
 
 
     </div>
