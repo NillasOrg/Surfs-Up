@@ -5,6 +5,7 @@ html, body {
     margin: 0;
     display: grid;
     grid-template-rows: auto 1fr auto;
+    overflow-x: hidden;
 }
 
 footer {
@@ -149,9 +150,9 @@ nav a:hover {
 
 .catalog-grid {
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 20px;
-    padding: 20px;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    padding: 10px;
 }
 
 .catalog-card {
