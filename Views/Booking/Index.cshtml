@@ -1,26 +1,48 @@
 @model List<CatalogItem>
-<main>
-    <section id="booking">
+<main class="container">
+    <div class="booking-left">
         <h2>Book dit udstyr</h2>
         <form id="booking-form" asp-action="CreateBooking" method="post">
-            <label for="name">Navn:</label>
-            <input type="text" id="name" name="Customer.Name" required>
+            <div class="element-left">
+                <label for="name">Navn:</label>
+                <br />
+                <input type="text" id="booking-name" name="Customer.Name" required>
+            </div>
 
-            <label for="email">E-mail:</label>
-            <input type="email" id="email" name="Customer.Email" required>
+            <div>
+                <label for="email">E-mail:</label>
+                <br />
+                <input type="email" id="booking-email" name="Customer.Email" required>
+            </div>
+           <div>
+                <div class="element-left">
+                    <label for="start-date">Start Dato:</label>
+                    <br />
+                    <input type="date" id="booking-date" name="StartDate" required>
+                </div>
 
-            <label for="equipment">Vælg udstyr:</label>
-            <select id="equipment" name="CatalogItem.CatalogItemId" required>
-                @foreach (var item in Model as List<CatalogItem>)
-                {
-                    <option value="@item.CatalogItemId">@item.Name</option>
-                }
-            </select>
+                <div>
+                    <label for="end-date">Slut Dato:</label>
+                    <br />
+                    <input type="date" id="booking-date" name="EndDate" required>
+                </div>
+           </div>
+            
+          
+            <div>
+                <label for="remark">Bemærkning:</label>
+                <br />
+                <input type="text" id="booking-remark" name="Remark">
+            </div>
+            
 
-            <label for="date">Dato:</label>
-            <input type="date" id="date" name="Date" required>
-
-            <button type="submit">Book Nu</button>
+            <button type="submit" id="booking-submit">Book Nu</button>
         </form>
-    </section>
+    </div>
+
+    <div class="booking-right">
+        <h1> Kurv </h1>
+
+
+    </div>
 </main>

@@ -14,7 +14,7 @@ namespace Surfs_Up.Repository
                 // Use StreamWriter to append data to the text file
                 using (StreamWriter writer = new StreamWriter(filePath, append: true))
                 {
-                    writer.WriteLine($"Date: {booking.Date}, CustomerName: {booking.Customer.Name}, CustomerEmail: {booking.Customer.Email}, Equipment: {booking.CatalogItem.Name}");
+                    writer.WriteLine($"Startdate: {booking.StartDate}, Enddate {booking.EndDate}, CustomerName: {booking.Customer.Name}, CustomerEmail: {booking.Customer.Email}, Equipment: {booking.CatalogItem.Name}");
                 }
             }
             catch (Exception ex)

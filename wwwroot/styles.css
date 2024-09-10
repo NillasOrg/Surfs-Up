@@ -302,3 +302,21 @@ nav a:hover {
         grid-template-columns: 1fr; /* 1 card per row on very small screens */
     }
 }
+
+.booking-left{
+    width: 50%;
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(1,2fr);
+    column-gap: 225px;
+    margin: 30px;
+}
+
+.booking-left div{
+    margin: 30px;
+}
+
+.booking-right{
+    width: 50%;
+
+}
