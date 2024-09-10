@@ -2,23 +2,23 @@
 <main>
     <section id="booking">
         <h2>Book dit udstyr</h2>
-        <form id="booking-form">
+        <form id="booking-form" asp-action="CreateBooking" method="post">
             <label for="name">Navn:</label>
-            <input type="text" id="name" name="name" required>
+            <input type="text" id="name" name="Customer.Name" required>
 
             <label for="email">E-mail:</label>
-            <input type="email" id="email" name="email" required>
+            <input type="email" id="email" name="Customer.Email" required>
 
             <label for="equipment">Vælg udstyr:</label>
-            <select id="equipment" name="equipment" required>
+            <select id="equipment" name="CatalogItem.CatalogItemId" required>
                 @foreach (var item in Model as List<CatalogItem>)
                 {
-                    <option value="Item">@item.Name</option>
+                    <option value="@item.CatalogItemId">@item.Name</option>
                 }
             </select>
 
             <label for="date">Dato:</label>
-            <input type="date" id="date" name="date" required>
+            <input type="date" id="date" name="Date" required>
 
             <button type="submit">Book Nu</button>
         </form>

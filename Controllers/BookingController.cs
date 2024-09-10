@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using Surfs_Up.Models;
 using Surfs_Up.Repository;
 
 namespace Surfs_Up.Controllers {
@@ -11,9 +12,27 @@ namespace Surfs_Up.Controllers {
             return View(items);
         }
 
-        public IActionResult Edit() 
+        [HttpPost]
+        public IActionResult CreateBooking(Booking booking)
         {
-            return View();
+            var items = ItemList.GetList();
+            CatalogItem? catalogItem = items.FirstOrDefault(item => item.CatalogItemId == booking.CatalogItem.CatalogItemId);
+            booking.CatalogItem = catalogItem;
+
+            if (ModelState.IsValid)
+            {
+                BookingRepo bookingRepo = new BookingRepo();
+                bookingRepo.SaveBookingToTextFile(booking);
+
+                return RedirectToAction("BookingSuccess");
+            }
+
+            return View("Index");
+        }
+
+        public IActionResult BookingSuccess()
+        {
+            return View("BookingSuccess");
         }
 
 
