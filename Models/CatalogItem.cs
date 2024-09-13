@@ -1,4 +1,4 @@
-using Microsoft.VisualBasic;
+using Microsoft.EntityFrameworkCore;
 
 namespace Surfs_Up.Models
 {
@@ -24,5 +24,25 @@ namespace Surfs_Up.Models
         Fish,
         Longboard,
         SUP
+    }
+    public class CatalogItemService
+    {
+        public readonly AppDbContext _dbContext;
+
+        public CatalogItemService(AppDbContext dbContext)
+        {
+            _dbContext = dbContext;
+        }
+
+        public async Task AddItem(CatalogItem catalogItem)
+        {
+            await _dbContext.CatalogItems.AddAsync(catalogItem);
+            await _dbContext.SaveChangesAsync();
+        }
+            public async Task<CatalogItem> GetAllUser(string name)
+        {
+            return await _dbContext.CatalogItems.FirstOrDefaultAsync();
+                        
+        }
     }
 }

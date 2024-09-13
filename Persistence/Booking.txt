@@ -4,3 +4,5 @@
 25-09-2024 00:00:00, Candis, Candis@gmail.com, Naish Maliko
 Date: 19-09-2024 00:00:00, CustomerName: Gorrila, CustomerEmail: IAmAGorilla@gmail.com, Equipment: The Emerald Glider
 Date: 19-09-2024 00:00:00, CustomerName: Pineapple, CustomerEmail: 123@gmail.com, Equipment: The Minilog
+Date: 24-09-2024 00:00:00, CustomerName: 123, CustomerEmail: 123@123.dk, Equipment: The Minilog
+Date: 20-09-2024 00:00:00, CustomerName: Simon, CustomerEmail: Simon@simon.dk, Equipment: Mahi Mahi
