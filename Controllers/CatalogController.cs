@@ -15,9 +15,24 @@ namespace Surfs_Up.Controllers
 
         public IActionResult Edit(int id)
         {
-            List<CatalogItem> item = ItemList.GetList();
-            CatalogItem catalog = item[id - 1];
-            return View(catalog);
+            List<CatalogItem> itemList = ItemList.GetList();
+            var catalogItem = itemList.FirstOrDefault(item => item.CatalogItemId == id);
+            return View(catalogItem);
         }
+
+        [HttpPost]
+        public IActionResult Add(int id){
+            List<CatalogItem> itemList = ItemList.GetList();
+            var catalogItem = itemList.FirstOrDefault(item => item.CatalogItemId == id);
+
+            if(catalogItem != null) {
+                ShoppingCart cart = ShoppingCart.GetInstance();
+                cart.AddToCart(catalogItem);
+
+                return RedirectToAction("Edit", new { id = catalogItem.CatalogItemId });
+                }
+                
+            return NotFound();
+        } 
     }
 }

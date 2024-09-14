@@ -4,7 +4,6 @@
     <div class="product-left">
         <img src="@Url.Content(Model.ImagePath)" alt="Image" />
     </div>
-
     <div class="product-right">
         <div class="product-description">
             <span>Category</span>
@@ -17,8 +16,10 @@
             </div>
 
         <div class="product-price">
-            <span>@Model.Price DKK</span>
-            <a href="#" class="cart-btn">Add to cart</a>
+            <form asp-action="Add" method="post">
+                <input type="hidden" name="id" value="@Model.CatalogItemId" />
+                <button type="submit" class="cart-btn">Add to cart</button>
+            </form>
         </div>
 
         <div class="specifications">
@@ -30,7 +31,6 @@
             </ul>
         </div>
     </div>
-
 </main>
 
 
