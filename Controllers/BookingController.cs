@@ -8,7 +8,8 @@ namespace Surfs_Up.Controllers {
     {
         public IActionResult Index()
         {
-            var items = ItemList.GetList();
+            ShoppingCart cart = ShoppingCart.GetInstance();
+            var items = cart.GetCartItems();
             return View(items);
         }
 
@@ -35,6 +36,19 @@ namespace Surfs_Up.Controllers {
             return View("BookingSuccess");
         }
 
+        [HttpPost]
+        public IActionResult RemoveFromCart(int id)
+        {
+            ShoppingCart cart = ShoppingCart.GetInstance();
+            var item = cart.GetCartItems().FirstOrDefault(item => item.CatalogItemId == id);
 
+            if(item != null) 
+            {
+                cart.RemoveFromCart(item);
+                return RedirectToAction("Index");
+            }
+            
+            return NotFound();
+        }
     }
 }

@@ -32,7 +32,7 @@ namespace Surfs_Up.Repository
             items.Remove(catalogItem);
         }
         
-        public List<CatalogItem> ShowCart() {
+        public List<CatalogItem> GetCartItems() {
             return items;
         }
     }

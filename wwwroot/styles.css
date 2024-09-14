@@ -381,9 +381,54 @@ nav a:hover {
 }
 
 .booking-right {
-    margin-left: 20px;
+    margin-left: 50px;
 }
 
+.booking-item {
+    display: flex;
+    border: 2px solid black;
+    border-radius: 10px;
+    background-color: white;
+    margin: 15px;
+    box-shadow: 7px 7px 4px rgba(0, 0, 0, 0.2) ;
+}
+
+.booking-item h1, p {
+    padding-left: 10px;
+}
+
+.booking-item-left {
+    width: 90%;
+    position: relative;
+}
+
+.booking-item-right {
+    width: 10%;
+}
+
+.booking-item button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: auto;
+    background-color: #00000000;
+    border: none;
+}
+
+
+.booking-item img {
+    width: 100%;
+    height: auto;
+    max-height: 25px;
+    margin-bottom: 10px;
+    object-fit: contain;
+    background-color: #00000000;
+}
+
+.booking-item img:hover {
+    transform: scale(1.2);
+    cursor: pointer;
+}
 
 
 
