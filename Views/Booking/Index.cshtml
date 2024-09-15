@@ -1,50 +1,61 @@
 @model List<CatalogItem>
 <main class="container">
     <div class="booking-left">
-        <div>
+        <div class="booking-head">
             <h2>Book dit udstyr</h2>
         </div>
-        <form id="booking-form" asp-action="CreateBooking" method="post">
-            <div>
-                <label for="name">Navn:</label>
-                <br />
-                <input type="text" id="booking-name" name="Customer.Name" required>
-            </div>
-
-            <div>
-                <label for="email">E-mail:</label>
-                <br />
-                <input type="email" id="booking-email" name="Customer.Email" required>
-            </div>
-           <div id="date-elem">
-                <div class="dateElement-left">
-                    <label for="start-date">Start Dato:</label>
+        <div class="booking-body">
+            <form id="booking-form" asp-action="CreateBooking" method="post">
+                <div>
+                    <label for="name">Navn:</label>
                     <br />
-                    <input type="date" id="booking-date" name="StartDate" required>
+                    <input type="text" id="booking-name" name="Customer.Name" required>
                 </div>
-
-                <div class="dateElement-left">
-                    <label for="end-date">Slut Dato:</label>
+                <div>
+                    <label for="email">E-mail:</label>
                     <br />
-                    <input type="date" id="booking-date" name="EndDate" required>
+                    <input type="email" id="booking-email" name="Customer.Email" required>
                 </div>
-           </div>
-            
-          
-            <div>
-                <label for="remark">Bemærkning:</label>
-                <br />
-                <textarea type="text" id="booking-remark" name="Remark"></textarea>
-            </div>
-            
-            <div id="booking-submit">
-                <button type="submit">Book Nu</button>
-            </div>
-        </form>
+                <div id="date-elem">
+                    <div class="dateElement-left">
+                        <label for="start-date">Start Dato:</label>
+                        <br />
+                        <input type="date" id="booking-date" name="StartDate" required>
+                    </div>
+
+                    <div class="dateElement-left">
+                        <label for="end-date">Slut Dato:</label>
+                        <br />
+                        <input type="date" id="booking-date" name="EndDate" required>
+                    </div>
+                </div>
+                <div>
+                    <label for="remark">Bemærkning:</label>
+                    <br />
+                    <textarea type="text" id="booking-remark" name="Remark"></textarea>
+                </div>
+                <div id="booking-submit">
+                    @if(!Model.Any())
+                    {
+                        <button disabled style="background-color: rgb(98, 98, 98);">Book Nu</button>
+                    }
+                    else{
+                        <button id="active-btn" type="submit">Book Nu</button>
+                    }
+                </div>
+            </form>
+        </div>
     </div>
 
     <div class="booking-right">
-        <h1> Kurv </h1>
+        <div class="booking-head">
+            <h2> Kurv </h2>
+        </div>
+        <div class="booking-body">
+        @if(!Model.Any())
+        {
+            <h2 style="display: flex; justify-content: center;">Kurven er tom</h2>
+        }
         @foreach(var item in Model) 
         {
             <div class="booking-item">
@@ -62,5 +73,6 @@
                 </div>
             </div>
         }
+        </div>
     </div>
 </main>

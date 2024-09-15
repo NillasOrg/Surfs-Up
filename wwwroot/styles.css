@@ -14,7 +14,7 @@ footer {
   }
 
 .container {
-    max-width: 1200px;
+    max-width: 1400px;
     margin: 0 auto;
     padding: 15px;
     display: flex;
@@ -303,23 +303,38 @@ nav a:hover {
     }
 }
 
-.booking-left {
-    width: 50%;
-    position: relative;
-    grid-template-columns: repeat(1,2fr);
-    column-gap: 10px;
+.booking-body {
+    border: 1px solid rgba(170, 170, 170, 0.5);
+    background-color: whitesmoke;
+    border-bottom-left-radius: 24px;
+    border-bottom-right-radius: 24px;
+    padding: 30px;
+    height: 600px;
+    overflow-y: scroll;
 }
 
-.booking-left h2{
+.booking-head {
+    border: 1px solid rgba(170, 170, 170, 0.2);
+    border-top-left-radius: 24px;
+    border-top-right-radius: 24px;
+    background-color: rgb(30, 131, 213);
+}
+
+.booking-left {
+    width: 60%;
+    position: relative;
+}
+
+.booking-head {
     display: flex;
     justify-content: center;
-    font-size: 50px;
-    color: #358ED7;
+    font-size: 16px;
+    color: #ffffff;
 }
 
 .booking-left input{
     border-radius: 2px;
-    border: 2px solid black;
+    border: 1px solid black;
     box-sizing: border-box;
     font-size: 1.25em;
     width: 100%;
@@ -332,13 +347,13 @@ nav a:hover {
 }
 
 .dateElement-left{
-    width: 45%;
+    width: 48%;
 }
 
 #booking-remark {
     height: 135px;
     border-radius: 2px;
-    border: 2px solid black;
+    border: 1px solid black;
     box-sizing: border-box;
     font-size: 1.25em;
     width: 100%;
@@ -348,12 +363,12 @@ nav a:hover {
 
 .booking-left label {
     font-size: 1.25em;
-    display: block;
-    margin-top: 30px;
+    display: flex;
+    padding-top: 15px;
 }
 
 .booking-right{
-    width: 50%;
+    width: 40%;
 }
 
 #booking-submit {
@@ -374,11 +389,12 @@ nav a:hover {
     border-radius: 15px;
 }
 
-#booking-submit button:hover{
-    transform: scale(1.02);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-    cursor: pointer;
-}
+    #active-btn:hover{
+        transform: scale(1.02);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        cursor: pointer;
+    }
+
 
 .booking-right {
     margin-left: 50px;
@@ -386,14 +402,19 @@ nav a:hover {
 
 .booking-item {
     display: flex;
-    border: 2px solid black;
+    border: 1px solid rgb(146, 146, 146);
     border-radius: 10px;
     background-color: white;
     margin: 15px;
-    box-shadow: 7px 7px 4px rgba(0, 0, 0, 0.2) ;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.2) ;
 }
 
-.booking-item h1, p {
+.booking-item h1 {
+    padding-left: 10px;
+    font-size: 24px;
+}
+
+.booking-item p {
     padding-left: 10px;
 }
 
@@ -414,7 +435,6 @@ nav a:hover {
     background-color: #00000000;
     border: none;
 }
-
 
 .booking-item img {
     width: 100%;
