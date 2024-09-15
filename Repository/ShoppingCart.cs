@@ -8,7 +8,7 @@ namespace Surfs_Up.Repository
 {
     class ShoppingCart
     {
-        private readonly List<CatalogItem> items;
+        private readonly List<CatalogItem> _items;
         private static ShoppingCart _instance;
         // Singleton :)
         public static ShoppingCart GetInstance()
@@ -21,19 +21,19 @@ namespace Surfs_Up.Repository
         }
 
         private ShoppingCart() {
-            items = [];
+            _items = [];
         }
 
         public void AddToCart(CatalogItem catalogItem) {
-            items.Add(catalogItem);
+            _items.Add(catalogItem);
         }
 
         public void RemoveFromCart(CatalogItem catalogItem) {
-            items.Remove(catalogItem);
+            _items.Remove(catalogItem);
         }
         
-        public List<CatalogItem> ShowCart() {
-            return items;
+        public List<CatalogItem> GetCartItems() {
+            return _items ?? new List<CatalogItem>();
         }
     }
     
