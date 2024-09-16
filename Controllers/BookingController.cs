@@ -8,26 +8,30 @@ namespace Surfs_Up.Controllers {
     {
         public IActionResult Index()
         {
-            var items = ItemList.GetList();
+            ShoppingCart cart = ShoppingCart.GetInstance();
+            var items = cart.GetCartItems();
             return View(items);
         }
 
         [HttpPost]
         public IActionResult CreateBooking(Booking booking)
         {
-            var items = ItemList.GetList();
-            CatalogItem? catalogItem = items.FirstOrDefault(item => item.CatalogItemId == booking.CatalogItem.CatalogItemId);
-            booking.CatalogItem = catalogItem;
+            ShoppingCart cart = ShoppingCart.GetInstance();
+            booking.BookingItems = cart.GetCartItems();
+
+            if (booking.BookingItems == null || !booking.BookingItems.Any())
+            {
+                ModelState.AddModelError("BookingItems", "Kurven er tom!");
+            }
 
             if (ModelState.IsValid)
             {
                 BookingRepo bookingRepo = new BookingRepo();
                 bookingRepo.SaveBookingToTextFile(booking);
-
                 return RedirectToAction("BookingSuccess");
             }
-
-            return View("Index");
+            
+            return View("Index", cart.GetCartItems());
         }
 
         public IActionResult BookingSuccess()
@@ -35,6 +39,19 @@ namespace Surfs_Up.Controllers {
             return View("BookingSuccess");
         }
 
+        [HttpPost]
+        public IActionResult RemoveFromCart(int id)
+        {
+            ShoppingCart cart = ShoppingCart.GetInstance();
+            var item = cart.GetCartItems().FirstOrDefault(item => item.CatalogItemId == id);
 
+            if(item != null) 
+            {
+                cart.RemoveFromCart(item);
+                return RedirectToAction("Index");
+            }
+            
+            return NotFound();
+        }
     }
 }
