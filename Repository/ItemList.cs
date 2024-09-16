@@ -18,7 +18,6 @@ namespace Surfs_Up.Repository
                 Price = 565.00,
                 Equipment = "Fin, Paddle, Pump, Leash",
                 ImagePath = "~/images/SurfboardShortboard.png",
-                Quantity = 10,
                 Description = "Perfekt for hurtige vendinger og manøvrering. Udforsk vores sortiment af shortboards her"
             },
             new CatalogItem {
@@ -32,7 +31,6 @@ namespace Surfs_Up.Repository
                 Price = 685,
                 Equipment = "Fin, Paddle, Pump, Leash",
                 ImagePath = "~/images/SurfboardFunboard.webp",
-                Quantity = 10,
                 Description = "Skør og sjovt board til alle aldre. Udforsk vores sortiment af funboards her"
             },
             new CatalogItem {
@@ -46,7 +44,6 @@ namespace Surfs_Up.Repository
                 Price = 695,
                 Equipment = "Fin, Paddle, Pump, Leash",
                 ImagePath = "~/images/SurfboardFunboard.webp",
-                Quantity = 11,
                 Description = "Skør og sjovt board til alle aldre. Udforsk vores sortiment af funboards her"
             },
             new CatalogItem {
@@ -60,7 +57,6 @@ namespace Surfs_Up.Repository
                 Price = 645,
                 Equipment = "Fin, Paddle, Pump, Leash",
                 ImagePath = "~/images/SurfboardFish.png",
-                Quantity = 10,
                 Description = "Lille og agil!. Udforsk vores sortiment af fish boards her"
             },
             new CatalogItem {
@@ -74,7 +70,6 @@ namespace Surfs_Up.Repository
                 Price = 895,
                 Equipment = "Fin, Paddle, Pump, Leash",
                 ImagePath = "~/images/SurfboardLongboard.png",
-                Quantity = 5,   
                 Description = "Langt og hurtigt. Udforsk vores sortiment af longboards her"
             },
             new CatalogItem {
@@ -88,7 +83,6 @@ namespace Surfs_Up.Repository
                 Price = 645,
                 Equipment = "Fin, Paddle, Pump, Leash",
                 ImagePath = "~/images/SurfboardShortboard.png",
-                Quantity = 10,
                 Description = "Perfekt for hurtige vendinger og manøvrering. Udforsk vores sortiment af shortboards her"
             },
             new CatalogItem {
@@ -102,7 +96,6 @@ namespace Surfs_Up.Repository
                 Price = 1025,
                 Equipment = "Fin, Paddle, Pump, Leash",
                 ImagePath = "~/images/SurfboardLongboard.png",
-                Quantity = 4,
                 Description = "Langt og hurtigt. Udforsk vores sortiment af longboards her"
             },
             new CatalogItem
@@ -117,7 +110,6 @@ namespace Surfs_Up.Repository
                 Price = 854,
                 Equipment = "Paddle",
                 ImagePath = "~/images/SurfboardLongboard.png",
-                Quantity = 2,
                 Description = "Hvad er en SUP?. Udforsk vores sortiment af SUPs her"
             },
             new CatalogItem
@@ -132,7 +124,6 @@ namespace Surfs_Up.Repository
                 Price = 611,
                 Equipment = "Fin, Paddle, Pump, Leash",
                 ImagePath = "~/images/SurfboardLongboard.png",
-                Quantity = 3,
                 Description = "Hvad er en SUP?. Udforsk vores sortiment af SUPs her"
             },
             new CatalogItem
@@ -147,7 +138,6 @@ namespace Surfs_Up.Repository
                 Price = 1304,
                 Equipment = "Fin, Paddle, Pump, Leash",
                 ImagePath = "~/images/SurfboardLongboard.png",
-                Quantity = 1,
                 Description = "Hvad er en SUP?. Udforsk vores sortiment af SUPs her"
             },
         };
