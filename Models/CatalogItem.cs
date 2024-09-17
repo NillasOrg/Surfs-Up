@@ -39,10 +39,9 @@ namespace Surfs_Up.Models
             await _dbContext.CatalogItems.AddAsync(catalogItem);
             await _dbContext.SaveChangesAsync();
         }
-            public async Task<CatalogItem> GetAllUser(string name)
-        {
-            return await _dbContext.CatalogItems.FirstOrDefaultAsync();
-                        
-        }
+        //public async Task<CatalogItem> GetAllCatalogItem(string name)
+        //{
+        //    return await _dbContext.CatalogItems.FirstOrDefaultAsync();
+        //}
     }
 }
