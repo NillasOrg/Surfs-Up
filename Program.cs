@@ -11,12 +11,12 @@ builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
 
-using (var scope = app.Services.CreateScope())
-{
-    var services = scope.ServiceProvider;
+//using (var scope = app.Services.CreateScope())
+//{
+//    var services = scope.ServiceProvider;
 
-    SeedData.Initialize(services);
-}
+//    SeedData.Initialize(services);
+//}
 
 app.UseRouting();
 app.UseStaticFiles();
