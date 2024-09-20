@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Hosting;
+using Surfs_Up.Data;
 using Surfs_Up.Models;
 
 public class AppDbContext : DbContext
@@ -19,4 +20,6 @@ public class AppDbContext : DbContext
             .HasMany(e => e.BookingItems)
             .WithMany(e => e.Bookings);
     }
+
+
 }
