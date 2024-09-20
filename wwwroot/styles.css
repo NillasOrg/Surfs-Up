@@ -450,5 +450,65 @@ nav a:hover {
     cursor: pointer;
 }
 
+.btn {
+    padding: 10px 60px;
+    background: white;
+    border: 0;
+    outline: none;
+    cursor: pointer;
+    font-size: 22px;
+    font-weight: 500;
+    border-radius: 30px;
+}
 
 
+.popup {
+    display: none; 
+    width: 400px;
+    background: #fff;
+    border-radius: 6px;
+    position: fixed; 
+    top: 50%;
+    left: 50%; 
+    transform: translate(-50%, -50%) scale(0.1); 
+    text-align: center;
+    padding: 20px;
+    color: #333;
+    transition: transform 0.4s, opacity 0.4s;
+    z-index: 1000; 
+}
+
+.open-popup {
+    display: block; 
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1; 
+}
+
+.popup-content {
+    padding: 20px;
+}
+
+.popup img {
+    width: 100px;
+    border-radius: 50%;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.close-btn {
+    width: 100%;
+    margin-top: 20px;
+    padding: 10px 0;
+    background: #009688; 
+    color: #fff; 
+    border: none; 
+    font-size: 18px;
+    border-radius: 4px;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    outline: none;
+}
+
+.popup form {
+    margin: 0;
+    padding: 0;
+}

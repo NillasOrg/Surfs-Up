@@ -1,20 +1,59 @@
 @model List<CatalogItem>
+@{
+    ViewBag.Title = "Catalog";
+    int? popupItemId = ViewBag.PopupItemId;
+}
+
 <main>
     <section id="catalog">
-    <h2>Vores udstyr</h2>
-    <div class="catalog-grid">
-        @foreach(var item in Model) 
-        {
-            <a asp-controller="Catalog" asp-action="Edit" asp-route-id="@item.CatalogItemId">
-                <div class="catalog-card">
-                    <img src="@Url.Content(item.ImagePath)" alt="Image" />
-                    <div class="catalog-text-box">
-                        <h4><b>@item.Name</b></h4>
+        <h2>Vores udstyr</h2>
+        <div class="catalog-grid">
+            @foreach (var item in Model)
+            {
+                <form asp-action="Popup" method="post" class="item-form">
+                    <input type="hidden" name="id" value="@item.CatalogItemId" />
+                    <button type="submit" class="catalog-card-button">
+                        <div class="catalog-card">
+                            <img src="@Url.Content(item.ImagePath)" alt="Image" />
+                            <div class="catalog-text-box">
+                                <h4><b>@item.Name</b></h4>
+                                <p>@item.Description</p>
+                            </div>
+                        </div>
+                    </button>
+                </form>
+            }
+        </div>
+
+      
+        <div class="popup @(popupItemId.HasValue ? "open-popup" : "")">
+            <div class="popup-content">
+                @if (popupItemId.HasValue)
+                {
+                    var item = Model.FirstOrDefault(i => i.CatalogItemId == popupItemId.Value);
+                    if (item != null)
+                    {
+                        <img src="@Url.Content(item.ImagePath)" alt="Popup Image" />
+                        <h2>@item.Name</h2>
                         <p>@item.Description</p>
-                    </div>
-                </div>
-            </a>
-        }
-    </div>
+                        <p>Length: @item.Length ft</p>
+                        <p>Width: @item.Width in</p>
+                        <p>Thickness: @item.Thickness in</p>
+                        <p>Volume: @item.Volume L</p>
+                        <p>Price: $@item.Price</p>
+                        <p>Equipment: @item.Equipment</p>
+                        <form asp-action="Index" method="post">
+                            <button class="close-btn">Close</button>
+                        </form>
+                        <form asp-action="Edit" asp-route-id="@item.CatalogItemId" method="post">
+                            <button class="close-btn">Open</button>
+                        </form>
+                        
+
+                    }
+                }
+            </div>
+        </div>
     </section>
 </main>
+
