@@ -7,6 +7,7 @@
 *.sln.docstates
 .vs/
 *.db
+appsettings.json
 
 # Build results
 
