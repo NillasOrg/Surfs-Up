@@ -1,2 +1,0 @@
-Startdate: 18-09-2024 00:00:00, Enddate 25-09-2024 00:00:00, CustomerName: Rasmus, CustomerEmail: altintas12@outlook.dk, Equipment:  The Golden Ration,
-Startdate: 18-09-2024 00:00:00, Enddate 24-09-2024 00:00:00, CustomerName: Rasmus, CustomerEmail: altintas12@outlook.dk, Equipment:  Mahi Mahi,

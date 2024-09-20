@@ -13,11 +13,27 @@ namespace Surfs_Up.Controllers {
         {
             _dbContext = dbContext;
         }
+        //public async Task AddCustomer(Customer customer)
+        //{
+        //    await _dbContext.Customers.AddAsync(customer);
+        //    await _dbContext.SaveChangesAsync();
+        //}
+
+        public async Task AddBooking(Booking booking)
+        {
+            await _dbContext.Bookings.AddAsync(booking);
+            await _dbContext.SaveChangesAsync();
+        }
+
         public IActionResult Index()
         {
             ShoppingCart cart = ShoppingCart.GetInstance();
             var items = cart.GetCartItems();
-            return View(items);
+            Booking booking = new Booking()
+            {
+                BookingItems = items
+            };
+            return View(booking);
         }
 
         [HttpPost]
@@ -46,19 +62,7 @@ namespace Surfs_Up.Controllers {
                 return RedirectToAction("BookingSuccess");
             }
             
-            return View("Index", cart.GetCartItems());
-        }
-
-        public async Task AddCustomer(Customer customer)
-        {
-            await _dbContext.Customers.AddAsync(customer);
-            await _dbContext.SaveChangesAsync();
-        }
-
-        public async Task AddBooking(Booking booking)
-        {
-            await _dbContext.Bookings.AddAsync(booking);
-            await _dbContext.SaveChangesAsync();
+            return View("Index", booking);
         }
 
         public IActionResult BookingSuccess()
