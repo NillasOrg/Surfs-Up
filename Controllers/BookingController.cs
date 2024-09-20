@@ -1,20 +1,43 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Surfs_Up.Models;
 using Surfs_Up.Repository;
+using System.Threading.Tasks;
 
 namespace Surfs_Up.Controllers {
 
     public class BookingController : Controller 
     {
+        private readonly AppDbContext _dbContext;
+        public BookingController(AppDbContext dbContext)
+        {
+            _dbContext = dbContext;
+        }
+        //public async Task AddCustomer(Customer customer)
+        //{
+        //    await _dbContext.Customers.AddAsync(customer);
+        //    await _dbContext.SaveChangesAsync();
+        //}
+
+        public async Task AddBooking(Booking booking)
+        {
+            await _dbContext.Bookings.AddAsync(booking);
+            await _dbContext.SaveChangesAsync();
+        }
+
         public IActionResult Index()
         {
             ShoppingCart cart = ShoppingCart.GetInstance();
             var items = cart.GetCartItems();
-            return View(items);
+            Booking booking = new Booking()
+            {
+                BookingItems = items
+            };
+            return View(booking);
         }
 
         [HttpPost]
-        public IActionResult CreateBooking(Booking booking)
+        public async Task<IActionResult> CreateBooking(Booking booking)
         {
             ShoppingCart cart = ShoppingCart.GetInstance();
             booking.BookingItems = cart.GetCartItems();
@@ -26,12 +49,20 @@ namespace Surfs_Up.Controllers {
 
             if (ModelState.IsValid)
             {
-                BookingRepo bookingRepo = new BookingRepo();
-                bookingRepo.SaveBookingToTextFile(booking);
+                //Customer customer = booking.Customer;
+                //await AddCustomer(customer);
+                foreach (var item in booking.BookingItems)
+                {
+                    if (_dbContext.CatalogItems.Any(c => c.CatalogItemId == item.CatalogItemId))
+                    {
+                        _dbContext.Attach(item);
+                    } 
+                }
+                    await AddBooking(booking);
                 return RedirectToAction("BookingSuccess");
             }
             
-            return View("Index", cart.GetCartItems());
+            return View("Index", booking);
         }
 
         public IActionResult BookingSuccess()
