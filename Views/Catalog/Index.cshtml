@@ -12,7 +12,7 @@
             {
                 <form asp-action="Edit" method="post" class="item-form">
                     <input type="hidden" name="id" value="@item.CatalogItemId" />
-                    <button type="submit" class="catalog-card-button">
+                    <a type="submit">
                         <div class="catalog-card">
                             <img src="@Url.Content(item.ImagePath)" alt="Image" />
                             <div class="catalog-text-box">
@@ -20,7 +20,7 @@
                                 <p>@item.Description</p>
                             </div>
                         </div>
-                    </button>
+                    </a>
                 </form> 
             }
         </div>
