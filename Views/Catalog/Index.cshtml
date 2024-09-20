@@ -8,22 +8,19 @@
     <section id="catalog">
         <h2>Vores udstyr</h2>
         <div class="catalog-grid">
-            @foreach (var item in Model)
-            {
-                <form asp-action="Edit" method="post" class="item-form">
-                    <input type="hidden" name="id" value="@item.CatalogItemId" />
-                    <button type="submit" class="catalog-card-button">
-                        <div class="catalog-card">
-                            <img src="@Url.Content(item.ImagePath)" alt="Image" />
-                            <div class="catalog-text-box">
-                                <h4><b>@item.Name</b></h4>
-                                <p>@item.Description</p>
-                            </div>
-                        </div>
-                    </button>
-                </form> 
-            }
+    @foreach (var item in Model)
+    {
+        <a href="@Url.Action("Popup", new { id = item.CatalogItemId })">
+            <div class="catalog-card">
+                <img src="@Url.Content(item.ImagePath)" alt="Image" />
+                <div class="catalog-text-box">
+                <h4><b>@item.Name</b></h4>
+                <p>@item.Description</p>
+            </div>
         </div>
+        </a>
+    }
+
 
       
         <div class="popup @(popupItemId.HasValue ? "open-popup" : "")">
