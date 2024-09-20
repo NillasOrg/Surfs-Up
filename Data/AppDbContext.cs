@@ -1,6 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Hosting;
-using Surfs_Up.Data;
+//using Surfs_Up.Data;
 using Surfs_Up.Models;
 
 public class AppDbContext : DbContext

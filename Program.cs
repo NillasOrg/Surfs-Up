@@ -1,4 +1,6 @@
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Surfs_Up.Models;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -8,6 +10,8 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 
 
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie();
 
 var app = builder.Build();
 
@@ -19,6 +23,10 @@ using (var scope = app.Services.CreateScope())
 }
 
 app.UseRouting();
+
+app.UseAuthentication();
+app.UseAuthorization();
+
 app.UseStaticFiles();
 
 app.MapControllerRoute(
