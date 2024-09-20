@@ -10,7 +10,7 @@
         <div class="catalog-grid">
             @foreach (var item in Model)
             {
-                <form asp-action="Popup" method="post" class="item-form">
+                <form asp-action="Edit" method="post" class="item-form">
                     <input type="hidden" name="id" value="@item.CatalogItemId" />
                     <button type="submit" class="catalog-card-button">
                         <div class="catalog-card">
@@ -21,7 +21,7 @@
                             </div>
                         </div>
                     </button>
-                </form>
+                </form> 
             }
         </div>
 

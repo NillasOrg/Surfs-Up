@@ -12,16 +12,13 @@ namespace Surfs_Up.Controllers
         private readonly AppDbContext _dbContext;
 
         public CatalogController(AppDbContext dbContext)
-        public IActionResult Index(int? popupItemId = null)
         {
-            var items = ItemList.GetList();
-            ViewBag.PopupItemId = popupItemId;
             _dbContext = dbContext;
         }
-
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int? popupItemId = null)
         {
             var items = await _dbContext.CatalogItems.ToListAsync();
+            ViewBag.PopupItemId = popupItemId;
             return View(items);
         }
 
@@ -52,6 +49,12 @@ namespace Surfs_Up.Controllers
 
             // Return a 404 error if the item does not exist
             return NotFound();
+        }
+
+        public async Task<IActionResult> Popup(int id)
+        {
+            var catalogItem = await _dbContext.CatalogItems.FirstOrDefaultAsync(item => item.CatalogItemId == id);
+            return RedirectToAction("Index", new {popupItemId = catalogItem.CatalogItemId});
         }
     }
 }
