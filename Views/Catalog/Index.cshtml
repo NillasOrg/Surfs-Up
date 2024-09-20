@@ -10,7 +10,7 @@
         <div class="catalog-grid">
             @foreach (var item in Model)
             {
-                <form asp-action="Add" method="post" class="item-form">
+                <form asp-action="Popup" method="post" class="item-form">
                     <input type="hidden" name="id" value="@item.CatalogItemId" />
                     <button type="submit" class="catalog-card-button">
                         <div class="catalog-card">
@@ -42,10 +42,16 @@
                         <p>Volume: @item.Volume L</p>
                         <p>Price: $@item.Price</p>
                         <p>Equipment: @item.Equipment</p>
+                        <form asp-action="Index" method="post">
+                            <button class="close-btn">Close</button>
+                        </form>
+                        <form asp-action="Edit" asp-route-id="@item.CatalogItemId" method="post">
+                            <button class="close-btn">Open</button>
+                        </form>
+                        
+
                     }
                 }
-            
-                <button type="button" class="close-btn" onclick="location.href='@Url.Action("Index", "Catalog")'">Close</button>
             </div>
         </div>
     </section>

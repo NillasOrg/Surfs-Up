@@ -33,10 +33,18 @@ namespace Surfs_Up.Controllers
                 ShoppingCart cart = ShoppingCart.GetInstance();
                 cart.AddToCart(catalogItem);
 
-                return RedirectToAction("Index", new { popupItemId = catalogItem.CatalogItemId });
+                return RedirectToAction("Index", new { id = catalogItem.CatalogItemId });
             }
 
             return NotFound();
+        }
+
+        public IActionResult Popup (int id)
+        {
+            List<CatalogItem> itemList = ItemList.GetList();
+            var catalogItem = itemList.FirstOrDefault(item => item.CatalogItemId == id);
+
+            return RedirectToAction("Index", new { popupItemId = catalogItem.CatalogItemId });
         }
     }
 }
