@@ -1,1 +1,32 @@
-﻿<h1> BookingSuccess </h1>
+﻿@model Booking
+
+<div class="confirmation-container">
+    <h1>Bookingbekræftigelse</h1>
+    <h2>Tak for din booking! Her kan du se din ordre</h2>
+
+    <div class="order-info">
+        <p><strong>Booking ID:</strong> @Model.BookingId</p>
+
+        @{
+            double totalPrice = 0;
+        }
+
+        <ul class="booking-items">
+            @foreach (var item in Model.BookingItems)
+            {
+                <li class="booking-item">
+                    <p><strong>Navn:</strong> @item.Name</p>
+                    <p><strong>Pris:</strong> @item.Price.ToString("C")</p>
+                </li>
+                totalPrice += item.Price;
+            }
+        </ul>
+
+        <p><strong>Total pris:</strong> @totalPrice.ToString("C")</p>
+        <p><strong>Lejeperiode:</strong> @Model.StartDate - @Model.EndDate</p>
+        <p><strong>Kunde:</strong> @Model.Customer.Name</p>
+    </div>
+
+    <p class="thank-you">Hav en surftastic dag!</p>
+</div>
+    
