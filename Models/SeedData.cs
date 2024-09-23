@@ -23,7 +23,7 @@ namespace Surfs_Up.Models
                         Thickness = 2.75,
                         Volume = 38.8,
                         Type = CATALOGTYPE.Shortboard,
-                        Price = 565.00,
+                        Price = 565,
                         Equipment = "Fin, Paddle, Pump, Leash",
                         ImagePath = "~/images/SurfboardShortboard.png",
                         Description = "Perfekt for hurtige vendinger og manøvrering. Udforsk vores sortiment af shortboards her"

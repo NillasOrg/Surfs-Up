@@ -512,3 +512,45 @@ nav a:hover {
     margin: 0;
     padding: 0;
 }
+
+.confirmation-container {
+    align-content:center;
+    padding: 20px;
+    border-radius: 10px;
+    max-width: 600px;
+    width: 100%;
+}
+
+.order-info p {
+    font-size: 1em;
+    margin: 10px 0;
+}
+.booking-items {
+    list-style: none;
+    padding: 0;
+}
+
+    .booking-items li {
+        background-color: #f9f9f9;
+        padding: 15px;
+        margin-bottom: 10px;
+        border-radius: 8px;
+        box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.05);
+    }
+
+        .booking-items li p {
+            margin: 5px 0;
+        }
+
+            .booking-items li p strong {
+                color: #333;
+            }
+
+.thank-you {
+    margin-top: 20px;
+    font-size: 1.2em;
+    text-align: center;
+    color: #1e90ff;
+    font-weight: bold;
+}
+

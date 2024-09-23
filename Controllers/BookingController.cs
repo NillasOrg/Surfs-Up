@@ -1,7 +1,9 @@
+
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Surfs_Up.Models;
 using Surfs_Up.Repository;
+
 using System.Threading.Tasks;
 
 namespace Surfs_Up.Controllers {
@@ -9,15 +11,13 @@ namespace Surfs_Up.Controllers {
     public class BookingController : Controller 
     {
         private readonly AppDbContext _dbContext;
+
+
         public BookingController(AppDbContext dbContext)
         {
             _dbContext = dbContext;
         }
-        //public async Task AddCustomer(Customer customer)
-        //{
-        //    await _dbContext.Customers.AddAsync(customer);
-        //    await _dbContext.SaveChangesAsync();
-        //}
+     
 
         public async Task AddBooking(Booking booking)
         {
@@ -49,8 +49,7 @@ namespace Surfs_Up.Controllers {
 
             if (ModelState.IsValid)
             {
-                //Customer customer = booking.Customer;
-                //await AddCustomer(customer);
+                
                 foreach (var item in booking.BookingItems)
                 {
                     if (_dbContext.CatalogItems.Any(c => c.CatalogItemId == item.CatalogItemId))
@@ -59,15 +58,26 @@ namespace Surfs_Up.Controllers {
                     } 
                 }
                     await AddBooking(booking);
-                return RedirectToAction("BookingSuccess");
+                return RedirectToAction("BookingSuccess", booking);
             }
             
             return View("Index", booking);
         }
 
-        public IActionResult BookingSuccess()
+        public IActionResult BookingSuccess(Booking booking, int bookingId)
         {
-            return View("BookingSuccess");
+            booking = _dbContext.Bookings
+                   .Include(b => b.BookingItems) 
+                   .Include(b => b.Customer)      
+                   .FirstOrDefault(b => b.BookingId == bookingId);
+
+            if (booking == null)
+            {
+                return NotFound();
+            }
+           
+
+            return View("BookingSuccess", booking);
         }
 
         [HttpPost]

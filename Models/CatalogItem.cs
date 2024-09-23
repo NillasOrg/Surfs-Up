@@ -12,7 +12,7 @@ namespace Surfs_Up.Models
         public double? Thickness {get; set;}
         public double? Volume {get; set;}
         public CATALOGTYPE Type {get; set;}
-        public double? Price {get; set;}
+        public double Price {get; set;}
         public string? Equipment {get; set;}
         public string? ImagePath {get; set;}
         public List<Booking>? Bookings { get; set; }
