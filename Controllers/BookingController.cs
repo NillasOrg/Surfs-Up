@@ -37,6 +37,7 @@ namespace Surfs_Up.Controllers {
         }
 
         [HttpPost]
+
         public async Task<IActionResult> CreateBooking(Booking booking)
         {
             ShoppingCart cart = ShoppingCart.GetInstance();
@@ -47,9 +48,10 @@ namespace Surfs_Up.Controllers {
                 ModelState.AddModelError("BookingItems", "Kurven er tom!");
             }
 
+            ModelState.Remove("Customer.Password"); // Ignorerer password
             if (ModelState.IsValid)
             {
-                
+
                 foreach (var item in booking.BookingItems)
                 {
                     if (_dbContext.CatalogItems.Any(c => c.CatalogItemId == item.CatalogItemId))
@@ -57,7 +59,13 @@ namespace Surfs_Up.Controllers {
                         _dbContext.Attach(item);
                     } 
                 }
-                    await AddBooking(booking);
+
+                if (_dbContext.Customers.Any(c => c.Email == booking.Customer.Email))
+                {
+                    _dbContext.Attach(booking.Customer);
+                }
+
+                await AddBooking(booking);
                 return RedirectToAction("BookingSuccess", booking);
             }
             
