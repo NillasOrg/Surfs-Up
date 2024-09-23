@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Surfs_Up.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240923102534_InitialCreate")]
+    [Migration("20240923122556_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />

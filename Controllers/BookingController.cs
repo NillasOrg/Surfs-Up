@@ -60,8 +60,11 @@ namespace Surfs_Up.Controllers {
                     } 
                 }
 
-                if (_dbContext.Customers.Any(c => c.Email == booking.Customer.Email))
+                Customer customer = _dbContext.Customers.FirstOrDefault(c => c.Email == booking.Customer.Email);
+
+                if (customer != null)
                 {
+                    booking.Customer = customer;
                     _dbContext.Attach(booking.Customer);
                 }
 
