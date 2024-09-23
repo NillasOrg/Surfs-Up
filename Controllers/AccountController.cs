@@ -21,12 +21,12 @@ namespace Surfs_Up.Controllers
             return View(_context.Customers.ToList());
         }
 
-        public IActionResult Registratrion()
+        public IActionResult Registration()
         {
             return View();
         }
         [HttpPost]
-        public IActionResult Registratrion(RegistrationVeiwModel model)
+        public IActionResult Registration(RegistrationVeiwModel model)
         {
             if (ModelState.IsValid)
             {
