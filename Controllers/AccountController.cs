@@ -33,7 +33,6 @@ namespace Surfs_Up.Controllers
                 Customer customer = new Customer();
                 customer.Email = model.Email;
                 customer.Name = model.Name;
-                customer.UserName = model.UserName;
                 customer.Password = model.Password;
 
                 try
@@ -64,7 +63,7 @@ namespace Surfs_Up.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = _context.Customers.Where(x => (x.UserName == model.UserNameOrEmail || x.Email == model.UserNameOrEmail) && x.Password == model.Password).FirstOrDefault();
+                var user = _context.Customers.Where(x => (x.Email == model.UserNameOrEmail) && x.Password == model.Password).FirstOrDefault();
                 if (user != null) 
                 {
                     //Success, create cookie
