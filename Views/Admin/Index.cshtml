@@ -1,0 +1,12 @@
+﻿@model BookingViewModel
+<main>
+    @foreach (var booking in Model.Bookings)
+    {
+        <div style = padding:10px;>
+            <h3>Customer Name: @booking.Customer.Name</h3>
+            <p>Email: @booking.Customer.Email</p>
+            <p>Date: @booking.EndDate.ToString()</p>
+        </div>
+    }
+</main>
+
