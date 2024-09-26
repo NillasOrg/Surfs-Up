@@ -26,6 +26,12 @@ namespace Surfs_Up.Controllers
             return View(apiItems);
         }
 
+        public async Task<IActionResult> Edit(int id)
+        {
+            var catalogItem = await _service.GetById(id);
+            return View(catalogItem);
+        }
+
         [HttpPost]
         public async Task<IActionResult> Add(int id)
         {
@@ -41,7 +47,7 @@ namespace Surfs_Up.Controllers
                 // Add the item to the cart
                 cart.AddToCart(catalogItem);
 
-                // Redirect to the edit page for the added item
+            // Return a 404 error if the item does not exist
                 return RedirectToAction("Index", new { popupItemId = catalogItem.Id });
                 
             }
