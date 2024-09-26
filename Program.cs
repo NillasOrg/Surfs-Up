@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
-using Surfs_Up.Models;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,12 +14,6 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
 
 var app = builder.Build();
 
-using (var scope = app.Services.CreateScope())
-{
-    var services = scope.ServiceProvider;
-
-    SeedData.Initialize(services);
-}
 
 app.UseRouting();
 

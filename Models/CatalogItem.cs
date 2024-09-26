@@ -4,7 +4,7 @@ namespace Surfs_Up.Models
 {
     public class CatalogItem
     {
-        public int? CatalogItemId {get; set;}
+        public int? Id {get; set;}
         public string? Name {get; set;}
         public string? Description {get; set;}
         public double? Length {get; set;}
@@ -26,23 +26,4 @@ namespace Surfs_Up.Models
         Longboard,
         SUP
     }
-    //public class CatalogItemService
-    //{
-    //    public readonly AppDbContext _dbContext;
-
-    //    public CatalogItemService(AppDbContext dbContext)
-    //    {
-    //        _dbContext = dbContext;
-    //    }
-
-    //    public async Task AddItem(CatalogItem catalogItem)
-    //    {
-    //        await _dbContext.CatalogItems.AddAsync(catalogItem);
-    //        await _dbContext.SaveChangesAsync();
-    //    }
-    //    //public async Task<CatalogItem> GetAllCatalogItem(string name)
-    //    //{
-    //    //    return await _dbContext.CatalogItems.FirstOrDefaultAsync();
-    //    //}
-    //}
 }
