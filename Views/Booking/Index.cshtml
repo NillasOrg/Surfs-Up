@@ -75,7 +75,7 @@
                     </div>
                     <div class="booking-item-right">
                         <form asp-action="RemoveFromCart" method="post">
-                            <input type="hidden" name="id" value="@item.CatalogItemId" />
+                            <input type="hidden" name="id" value="@item.Id" />
                             <button type="submit">
                                 <img src="~/images/trash-can.png" alt="Remove from cart" />
                             </button>

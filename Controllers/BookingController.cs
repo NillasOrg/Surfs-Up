@@ -55,7 +55,7 @@ namespace Surfs_Up.Controllers {
 
                 foreach (var item in booking.BookingItems)
                 {
-                    if (_dbContext.CatalogItems.Any(c => c.CatalogItemId == item.CatalogItemId))
+                    if (_dbContext.CatalogItems.Any(c => c.Id == item.Id))
                     {
                         _dbContext.Attach(item);
                     } 
@@ -99,7 +99,7 @@ namespace Surfs_Up.Controllers {
         public IActionResult RemoveFromCart(int id)
         {
             ShoppingCart cart = ShoppingCart.GetInstance();
-            var item = cart.GetCartItems().FirstOrDefault(item => item.CatalogItemId == id);
+            var item = cart.GetCartItems().FirstOrDefault(item => item.Id == id);
 
             if(item != null) 
             {
