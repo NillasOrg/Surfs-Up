@@ -75,8 +75,8 @@
                     </div>
                     <div class="booking-item-right">
                         <form asp-action="RemoveFromCart" method="post">
-                            <input type="hidden" name="id" value="@item.CatalogItemId" />
-                            <button type="submit" class="bkslet"> @* Her manglede btn en klasse *@
+                            <input type="hidden" name="id" value="@item.Id" />
+                            <button type="submit">
                                 <img src="~/images/trash-can.png" alt="Remove from cart" />
                             </button>
                         </form>
