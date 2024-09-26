@@ -1,12 +1,47 @@
-﻿@model BookingViewModel
-<main>
-    @foreach (var booking in Model.Bookings)
-    {
-        <div style = padding:10px;>
-            <h3>Customer Name: @booking.Customer.Name</h3>
-            <p>Email: @booking.Customer.Email</p>
-            <p>Date: @booking.EndDate.ToString()</p>
+﻿@model List<Booking>
+<main class="container">
+    <div class="admin-booking">
+        <div class="booking-head">
+            <h2>Current bookings</h2>
         </div>
-    }
+        <div class="booking-body">
+            @foreach (var booking in Model)
+            {
+                <div class="booking-item">
+                    <div class="booking-item-left">
+                        <h1>Booking ID: @booking.BookingId</h1>
+                        <p>Name: @booking.Customer.Name</p>
+                        <p>Email: @booking.Customer.Email</p>
+                        <p>Date: @booking.EndDate.ToString()</p>
+                        <h3>Booked items:</h3>
+                        
+                        <div class="booking-item-inner">
+                            @foreach (var item in booking.BookingItems)
+                            {
+                                <p>- @item.Name</p>
+                            }
+                        </div>
+                    </div>
+                    <div class="booking-item-right">
+                        <form asp-action="DeleteBooking" method="post">
+                            <input type="hidden" name="id" value="@booking.BookingId"/>
+                            <button type="submit" onClientClick="return confirm('Are you sure?')">
+                                <img src="~/images/trash-can.png" alt="Remove from cart"/>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+    
+    <div class="admin-dashboard">
+        <div class="booking-head">
+            <h2>Dashboard</h2>
+        </div>
+        <div class="booking-body">
+            <h2 style="display: flex; justify-content: center;">Indhold er ikke bestemt endnu</h2>
+        </div>
+    </div>
 </main>
 

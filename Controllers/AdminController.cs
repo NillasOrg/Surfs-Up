@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+
 using Surfs_Up.Models;
 
 namespace Surfs_Up.Controllers;
@@ -16,10 +17,25 @@ public class AdminController : Controller
 
     public async Task<IActionResult> Index()
     {
-        BookingViewModel viewModel = new BookingViewModel();
-        viewModel.Bookings = await _dbContext.Bookings.ToListAsync();
-        viewModel.CatalogItems = await _dbContext.CatalogItems.ToListAsync();
-        viewModel.Customers = await _dbContext.Customers.ToListAsync();
-        return View(viewModel);
+        var bookings = await _dbContext.Bookings
+            .Include(b => b.BookingItems) 
+            .Include(b => b.Customer)      
+            .ToListAsync();
+        return View(bookings);
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> DeleteBooking(int id)
+    {
+        var booking = await _dbContext.Bookings.FirstOrDefaultAsync(x => x.BookingId == id);
+
+        if (booking != null)
+        {
+            _dbContext.Bookings.Remove(booking);
+            await _dbContext.SaveChangesAsync();
+            return RedirectToAction("Index");
+        }
+
+        return NotFound();
     }
 }
