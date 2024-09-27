@@ -69,7 +69,7 @@ namespace Surfs_Up.Controllers
 
                 if (result.Succeeded)
                 {
-                    return RedirectToAction("SecurePage");
+                    return RedirectToAction("Index", "Home");
                 }
                 ModelState.AddModelError("", "Ugyldigt login");
                 return View(model);
@@ -80,15 +80,7 @@ namespace Surfs_Up.Controllers
 
         public IActionResult LogOut()
         {
-            _signInManager.SignOutAsync();
             return RedirectToAction("Login");
-        }
-
-        [Authorize]
-        public IActionResult SecurePage()
-        {
-            ViewBag.Name = HttpContext.User.Identity.Name;
-            return View();
         }
 
     }
