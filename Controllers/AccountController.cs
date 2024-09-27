@@ -78,7 +78,7 @@ namespace Surfs_Up.Controllers
                     HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity));
 
 
-                    return RedirectToAction("SucurePage");
+                    return RedirectToAction("SecurePage");
                 }
                 else
                 {

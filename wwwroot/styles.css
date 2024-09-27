@@ -10,7 +10,7 @@ html, body {
 
 footer {
     min-height: 50px;
-    background: PapayaWhip;
+    background: #ffffff;
   }
 
 .container {
@@ -369,6 +369,7 @@ nav a:hover {
 
 .booking-right{
     width: 40%;
+    margin-left: 50px;
 }
 
 #booking-submit {
@@ -389,16 +390,12 @@ nav a:hover {
     border-radius: 15px;
 }
 
-    #active-btn:hover{
-        transform: scale(1.02);
-        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-        cursor: pointer;
-    }
-
-
-.booking-right {
-    margin-left: 50px;
+#active-btn:hover{
+    transform: scale(1.02);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
 }
+    
 
 .booking-item {
     display: flex;
@@ -412,6 +409,19 @@ nav a:hover {
 .booking-item h1 {
     padding-left: 10px;
     font-size: 24px;
+}
+.booking-item h3 {
+    padding-left: 10px;
+    font-size: 18px;
+}
+
+.booking-item-inner {
+    justify-content: center;
+    background-color: #c9c9c9;
+    margin-left: 10%;
+    margin-bottom: 10%;
+    border-radius: 10px;
+    padding: 5px;
 }
 
 .booking-item p {
@@ -530,21 +540,21 @@ nav a:hover {
     padding: 0;
 }
 
-    .booking-items li {
-        background-color: #f9f9f9;
-        padding: 15px;
-        margin-bottom: 10px;
-        border-radius: 8px;
-        box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.05);
-    }
+.booking-items li {
+    background-color: #f9f9f9;
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.05);
+}
 
-        .booking-items li p {
-            margin: 5px 0;
-        }
+.booking-items li p {
+    margin: 5px 0;
+}
 
-            .booking-items li p strong {
-                color: #333;
-            }
+.booking-items li p strong {
+    color: #333;
+}
 
 .thank-you {
     margin-top: 20px;
@@ -552,5 +562,15 @@ nav a:hover {
     text-align: center;
     color: #1e90ff;
     font-weight: bold;
+}
+
+.admin-booking {
+    width: 30%;
+    position: relative;
+}
+
+.admin-dashboard {
+    width: 70%;
+    margin-left: 50px;
 }
 
