@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Surfs_Up.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240923122556_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20240927080253_InitalCreate")]
+    partial class InitalCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -93,6 +93,12 @@ namespace Surfs_Up.Migrations
 
                     b.Property<double>("Price")
                         .HasColumnType("float");
+
+                    b.Property<byte[]>("RowVersion")
+                        .IsConcurrencyToken()
+                        .IsRequired()
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("rowversion");
 
                     b.Property<double?>("Thickness")
                         .HasColumnType("float");

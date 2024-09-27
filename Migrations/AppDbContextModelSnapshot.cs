@@ -91,6 +91,12 @@ namespace Surfs_Up.Migrations
                     b.Property<double>("Price")
                         .HasColumnType("float");
 
+                    b.Property<byte[]>("RowVersion")
+                        .IsConcurrencyToken()
+                        .IsRequired()
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("rowversion");
+
                     b.Property<double?>("Thickness")
                         .HasColumnType("float");
 
