@@ -80,8 +80,8 @@ namespace Surfs_Up.Controllers
 
         public IActionResult LogOut()
         {
-            HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
-            return RedirectToAction("Index");
+            _signInManager.SignOutAsync();
+            return RedirectToAction("Login");
         }
 
         [Authorize]
