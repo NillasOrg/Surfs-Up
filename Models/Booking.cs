@@ -9,7 +9,7 @@ namespace Surfs_Up.Models
         public DateTime? StartDate {get; set;}
         public DateTime? EndDate { get; set;}
         [Required]
-        public Customer Customer { get; set; }
+        public User User { get; set; }
         public List<CatalogItem>? BookingItems { get; set; }
         public string Remark { get; set; }
     }

@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
-namespace Surfs_Up.Models
+namespace Surfs_Up.ViewModels
 {
     public class LoginViewModel
     {

@@ -1,4 +1,5 @@
 
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Surfs_Up.Models;
@@ -11,11 +12,12 @@ namespace Surfs_Up.Controllers {
     public class BookingController : Controller 
     {
         private readonly AppDbContext _dbContext;
+        private readonly UserManager<User> _userManager;
 
-
-        public BookingController(AppDbContext dbContext)
+        public BookingController(AppDbContext dbContext, UserManager<User> userManager)
         {
             _dbContext = dbContext;
+            _userManager = userManager;
         }
      
 
@@ -48,7 +50,6 @@ namespace Surfs_Up.Controllers {
                 ModelState.AddModelError("BookingItems", "Kurven er tom!");
             }
 
-            ModelState.Remove("Customer.Password"); // Ignorerer password
             if (ModelState.IsValid)
             {
 
@@ -60,13 +61,16 @@ namespace Surfs_Up.Controllers {
                     } 
                 }
 
-                Customer customer = _dbContext.Customers.FirstOrDefault(c => c.Email == booking.Customer.Email);
+                 User user = await _userManager.GetUserAsync(User); 
+            if (user != null)
+            {
+                booking.User = user;
+            }
+            else
+            {
+                ModelState.AddModelError("", "User not found.");
+            }
 
-                if (customer != null)
-                {
-                    booking.Customer = customer;
-                    _dbContext.Attach(booking.Customer);
-                }
 
                 await AddBooking(booking);
                 return RedirectToAction("BookingSuccess", booking);
@@ -79,7 +83,7 @@ namespace Surfs_Up.Controllers {
         {
             booking = _dbContext.Bookings
                    .Include(b => b.BookingItems) 
-                   .Include(b => b.Customer)      
+                   .Include(b => b.User)      
                    .FirstOrDefault(b => b.BookingId == bookingId);
 
             if (booking == null)

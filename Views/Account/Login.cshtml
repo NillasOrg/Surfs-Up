@@ -1,4 +1,4 @@
-﻿@model Surfs_Up.Models.LoginViewModel
+﻿@model LoginViewModel
 
 @{
     ViewData["Title"] = "Login";
@@ -29,9 +29,10 @@
 </div>
 
 <div>
-    Har du ikke en bruger? <a asp-action="Registration">Tilmeld dig</a>
+    Har du ikke en bruger? <a asp-action="Register">Tilmeld dig</a>
 </div>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
+        
