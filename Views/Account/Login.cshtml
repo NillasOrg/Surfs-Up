@@ -33,13 +33,9 @@
             </form>
             <div class="login-signup">
                 <p>Har du ikke en bruger?</p>
-                <a asp-action="Registration">Tilmeld dig</a>
+                <a asp-action="Register">Tilmeld dig</a>
             </div>
         </div>
     </div>
 </main>
-
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
         

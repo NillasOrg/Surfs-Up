@@ -78,8 +78,9 @@ namespace Surfs_Up.Controllers
 
         }
 
-        public IActionResult LogOut()
+        public async Task<IActionResult> LogOut()
         {
+            await _signInManager.SignOutAsync();
             return RedirectToAction("Login");
         }
 
