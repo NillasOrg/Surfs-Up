@@ -1,4 +1,6 @@
 using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations;
+
 
 namespace Surfs_Up.Models
 {
@@ -16,6 +18,9 @@ namespace Surfs_Up.Models
         public string? Equipment {get; set;}
         public string? ImagePath {get; set;}
         public List<Booking>? Bookings { get; set; }
+
+        [Timestamp]
+        public byte[] RowVersion { get; set; }
     }
 
     public enum CATALOGTYPE
