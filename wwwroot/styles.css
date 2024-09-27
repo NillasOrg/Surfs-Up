@@ -574,3 +574,38 @@ nav a:hover {
     margin-left: 50px;
 }
 
+.confirmation-box {
+    background: #fff;
+    padding: 15px;
+    border-radius: 6px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    position: absolute; /* Make it absolutely positioned */
+    z-index: 10; /* Ensure it is on top */
+    width: 250px; /* Adjust the width */
+    margin-top: 10px; /* Space below the button */
+    left: 50%; /* Horizontally center relative to button */
+    transform: translateX(-80%); /* Adjust for centering */
+    text-align: center;
+}
+
+.admin-confirm, .admin-reject {
+    margin: 10px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.admin-confirm {
+    background-color: #5bc0de; /* Red color */
+    color: black;
+}
+
+.admin-reject {
+    background-color: #d9534f; /* Blue color */
+    color: black;
+}
+
+.adminPopPopUp {
+    position: relative; /* To position the confirmation box relative to this container */
+}

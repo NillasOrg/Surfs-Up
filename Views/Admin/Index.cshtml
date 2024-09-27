@@ -1,4 +1,8 @@
 ﻿@model List<Booking>
+@{
+    int? deleteBookingId = ViewBag.DeleteBookingId;
+}
+
 <main class="container">
     <div class="admin-booking">
         <div class="booking-head">
@@ -14,7 +18,7 @@
                         <p>Email: @booking.Customer.Email</p>
                         <p>Date: @booking.EndDate.ToString()</p>
                         <h3>Booked items:</h3>
-                        
+
                         <div class="booking-item-inner">
                             @foreach (var item in booking.BookingItems)
                             {
@@ -22,19 +26,37 @@
                             }
                         </div>
                     </div>
-                    <div class="booking-item-right">
-                        <form asp-action="DeleteBooking" method="post">
-                            <input type="hidden" name="id" value="@booking.BookingId"/>
-                            <button type="submit" onClientClick="return confirm('Are you sure?')">
-                                <img src="~/images/trash-can.png" alt="Remove from cart"/>
-                            </button>
-                        </form>
+                    <div class="adminPopPopUp">
+                        @if (deleteBookingId == booking.BookingId)
+                        {
+                            <!-- This block shows if the user clicked delete and is confirming -->
+                            <div class="confirmation-box">
+                                <p>Are you sure you want to delete booking @booking.BookingId?</p>
+                                <form asp-action="ConfirmDeleteBooking" method="post">
+                                    <input type="hidden" name="id" value="@booking.BookingId" />
+                                    <button type="submit" class="admin-confirm">Ja, slet booking</button>
+                                </form>
+                                <form asp-action="Index" method="get">
+                                    <button type="submit" class="admin-reject">Annuller slet</button>
+                                </form>
+                            </div>
+                        }
+                        else
+                        {
+                            <!-- Normal delete button -->
+                            <form asp-action="ConfirmDeletionStep" method="post">
+                                <input type="hidden" name="id" value="@booking.BookingId"/>
+                                <button type="submit">
+                                    <img src="~/images/trash-can.png" alt="Remove booking" />
+                                </button>
+                            </form>
+                        }
                     </div>
                 </div>
             }
         </div>
     </div>
-    
+
     <div class="admin-dashboard">
         <div class="booking-head">
             <h2>Dashboard</h2>
@@ -44,4 +66,3 @@
         </div>
     </div>
 </main>
-

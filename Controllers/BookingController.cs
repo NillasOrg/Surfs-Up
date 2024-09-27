@@ -17,6 +17,7 @@ namespace Surfs_Up.Controllers {
         {
             _dbContext = dbContext;
         }
+
      
 
         public async Task AddBooking(Booking booking)
@@ -27,6 +28,7 @@ namespace Surfs_Up.Controllers {
 
         public IActionResult Index()
         {
+
             ShoppingCart cart = ShoppingCart.GetInstance();
             var items = cart.GetCartItems();
             Booking booking = new Booking()
