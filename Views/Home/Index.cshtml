@@ -11,10 +11,14 @@
         <div class="hero-bar">
             <img src="~/images/logo_converted.png" class="Logo">
             <nav>
-                <a href="/home/index">Hjem</a>
+                @if (User.IsInRole("Admin"))
+                {
+                    <a href="/Admin/index">Administrer bookings</a>
+                }
                 <a href="/catalog/index">Katalog</a>
                 <a href="/booking/index">Booking</a>
                 <a href="/information/index">Information</a>
+                @await Html.PartialAsync("_LoginPartial")
             </nav>
         </div>
         <div class="hero-image">

@@ -1,56 +1,58 @@
 ﻿using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Surfs_Up.Models;
+using Surfs_Up.ViewModels;
 using System.Security.Claims;
 
 namespace Surfs_Up.Controllers
 {
     public class AccountController : Controller
     {
-        private readonly AppDbContext _context;
+        private readonly SignInManager<User> _signInManager;
+        private readonly UserManager<User> _userManager;
 
-        public AccountController(AppDbContext appDbContext)
+        public AccountController(SignInManager<User> signInManager, UserManager<User> userManager)
         {
-            _context = appDbContext;
+            _signInManager = signInManager;
+            _userManager = userManager;
         }
         public IActionResult Index()
         {
-            return View(_context.Customers.ToList());
+            return View(_userManager.Users.ToList());
         }
 
-        public IActionResult Registration()
+        public IActionResult Register()
         {
             return View();
         }
         [HttpPost]
-        public IActionResult Registration(RegistrationVeiwModel model)
+        public async Task<IActionResult> Register(RegisterViewModel model)
         {
             if (ModelState.IsValid)
             {
-                Customer customer = new Customer();
-                customer.Email = model.Email;
-                customer.Name = model.Name;
-                customer.Password = model.Password;
-
-                try
+                User user = new User()
                 {
-                    _context.Customers.Add(customer);
-                    _context.SaveChanges();
+                    UserName = model.Email,
+                    Email = model.Email,
+                    Name = model.Name,
+                    Password = model.Password,
+                };
+              
+                var result = await _userManager.CreateAsync(user, model.Password!);
 
-                    ModelState.Clear();
-                    ViewBag.Message = $"{customer.Name} {customer.Email} {customer.Password} er oprettet";
-                }
-                catch (DbUpdateException ex)
+                if (result.Succeeded)
                 {
-                    ModelState.AddModelError("", "Indtast venligst et unikt Email eller adgangskode");
-                    return View(model);
-             
+                    await _signInManager.SignInAsync(user, false);
+                    return RedirectToAction("Index", "Home");
                 }
-
-                return View();
+                foreach (var error in result.Errors)
+                {
+                    ModelState.AddModelError("", error.Description);
+                }
             }
             return View(model);
         }
@@ -59,46 +61,27 @@ namespace Surfs_Up.Controllers
             return View(); 
         }
         [HttpPost]
-        public IActionResult Login(LoginViewModel model)
+        public async Task<IActionResult> Login(LoginViewModel model)
         {
-            if (ModelState.IsValid)
+            if(ModelState.IsValid)
             {
-                var user = _context.Customers.Where(x => (x.Email == model.UserNameOrEmail) && x.Password == model.Password).FirstOrDefault();
-                if (user != null) 
+                var result = await _signInManager.PasswordSignInAsync(model.UserNameOrEmail!, model.Password, false, false);
+
+                if (result.Succeeded)
                 {
-                    //Success, create cookie
-                    var claims = new List<Claim>
-                    {
-                        new Claim(ClaimTypes.Name, user.Email),
-                        new Claim("Name", user.Name),
-                        new Claim(ClaimTypes.Role, "User"),
-                    };
-
-                    var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
-                    HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity));
-
-
-                    return RedirectToAction("SecurePage");
+                    return RedirectToAction("Index", "Home");
                 }
-                else
-                {
-                    ModelState.AddModelError("", "Brugernavn/Email eller Adgangskode er ikke korrekt");
-                }
+                ModelState.AddModelError("", "Ugyldigt login");
+                return View(model);
             }
             return View(model);
+
         }
 
-        public IActionResult LogOut()
+        public async Task<IActionResult> LogOut()
         {
-            HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
-            return RedirectToAction("Index");
-        }
-
-        [Authorize]
-        public IActionResult SecurePage()
-        {
-            ViewBag.Name = HttpContext.User.Identity.Name;
-            return View();
+            await _signInManager.SignOutAsync();
+            return RedirectToAction("Login");
         }
 
     }

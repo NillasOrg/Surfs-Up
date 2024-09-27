@@ -1,10 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 using Surfs_Up.Models;
 
 namespace Surfs_Up.Controllers;
 
+[Authorize(Roles = "Admin")]
 public class AdminController : Controller
 {
     private readonly AppDbContext _dbContext;
@@ -19,7 +21,7 @@ public class AdminController : Controller
     {
         var bookings = await _dbContext.Bookings
             .Include(b => b.BookingItems) 
-            .Include(b => b.Customer)      
+            .Include(b => b.User)      
             .ToListAsync();
         return View(bookings);
     }

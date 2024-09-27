@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 
 namespace Surfs_Up.Models
 {
@@ -6,6 +7,7 @@ namespace Surfs_Up.Models
     {
         public static void Initialize(IServiceProvider serviceProvider)
         {
+
             using (var context = new AppDbContext(
                 serviceProvider.GetRequiredService<
                     DbContextOptions<AppDbContext>>()))
@@ -149,5 +151,44 @@ namespace Surfs_Up.Models
                 context.SaveChanges();
             }
         }
+
+        public static async Task InitializeRole(IServiceProvider serviceProvider)
+        {
+            var userManager = serviceProvider.GetRequiredService<UserManager<User>>();
+            var roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+
+            // Ensure Admin role exists
+            if (!await roleManager.RoleExistsAsync("Admin"))
+            {
+                await roleManager.CreateAsync(new IdentityRole("Admin"));
+            }
+
+            // Ensure Customer role exists
+            if (!await roleManager.RoleExistsAsync("User"))
+            {
+                await roleManager.CreateAsync(new IdentityRole("User"));
+            }
+
+            // Create an admin user if it doesn't exist
+            var adminEmail = "admin@example.com";
+            var adminUser = await userManager.FindByEmailAsync(adminEmail);
+            if (adminUser == null)
+            {
+                adminUser = new User
+                {
+                    UserName = adminEmail,
+                    Email = adminEmail,
+                    Name = "Admin User",
+                    Password = "admin12345678",
+                };
+
+                var result = await userManager.CreateAsync(adminUser, adminUser.Password);
+                if (result.Succeeded)
+                {
+                    await userManager.AddToRoleAsync(adminUser, "Admin");
+                }
+            }
+        }
+
     }
 }
