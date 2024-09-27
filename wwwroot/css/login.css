@@ -1,0 +1,80 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.login-head {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 1rem;
+}
+
+.login-box {
+    background-color: #ffffff;
+    border: 1px solid gray;
+    width: 30%;
+    border-radius: 12px;
+    display: grid;
+    padding: 0rem 2rem 2rem;
+    margin-top: 2rem;
+    
+}
+
+.input-box {
+    display: flex;
+    margin-top: 1rem;
+    flex-direction: column;
+    align-items: center;
+    
+}
+
+.input-box input {
+    width: 80%;
+    border-radius: 4px;
+    border: 1px solid gray;
+    height: 1.5rem;
+}
+
+.button-box {
+    display: flex;
+    flex-direction: column;
+    margin-top: 2rem;
+    align-items: center;
+}
+
+.button-box input {
+    width: 50%;
+    height: 2rem;
+    border-radius: 8px;
+    background-color: rgb(30, 131, 213);
+    color: white;
+}
+
+.button-box input:hover {
+    background-color: rgb(0, 54, 96);
+    cursor: pointer;
+}
+
+.login-signup {
+    margin-top: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-signup a {
+    color: #358ED7;
+    text-decoration: underline;
+}
+
+.login-signup a:hover {
+    color: #000000;
+    text-decoration: underline;
+}
+
+.text-danger {
+    color: red;
+}

@@ -11,7 +11,7 @@
         <div class="hero-bar">
             <img src="~/images/logo_converted.png" class="Logo">
             <nav>
-                <a href="/home/index">Hjem</a>
+                @await Html.PartialAsync("_LoginPartial")
                 <a href="/catalog/index">Katalog</a>
                 <a href="/booking/index">Booking</a>
                 <a href="/information/index">Information</a>

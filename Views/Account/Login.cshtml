@@ -3,34 +3,41 @@
 @{
     ViewData["Title"] = "Login";
 }
+<head>
+    <link href="~/css/login.css" rel="stylesheet" />
+</head>
 
-<h1>Login</h1>
-
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Login">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="UserNameOrEmail" class="control-label"></label>
-                <input asp-for="UserNameOrEmail" class="form-control" />
-                <span asp-validation-for="UserNameOrEmail" class="text-danger"></span>
+<main class="container">
+    <div class="login-box">
+        <div class="login-head">
+            <h1>Login</h1>
+        </div>
+        <div>
+            <form asp-action="Login">
+                <div class="input-box">
+                    <div asp-validation-summary="ModelOnly" class="label-danger"></div>
+                    <label asp-for="UserNameOrEmail" class="label"></label>
+                    <br/>
+                    <input asp-for="UserNameOrEmail" class="input"/>
+                    <span asp-validation-for="UserNameOrEmail" class="text-danger"></span>
+                </div>
+                <div class="input-box">
+                    <label asp-for="Password" class="label"></label>
+                    <br/>
+                    <input asp-for="Password" class="input"/>
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                </div>
+                <div class="button-box">
+                    <input type="submit" value="Login"/>
+                </div>
+            </form>
+            <div class="login-signup">
+                <p>Har du ikke en bruger?</p>
+                <a asp-action="Registration">Tilmeld dig</a>
             </div>
-            <div class="form-group">
-                <label asp-for="Password" class="control-label"></label>
-                <input asp-for="Password" class="form-control" />
-                <span asp-validation-for="Password" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Login" class="btn btn-primary" />
-            </div>
-        </form>
+        </div>
     </div>
-</div>
-
-<div>
-    Har du ikke en bruger? <a asp-action="Registration">Tilmeld dig</a>
-</div>
+</main>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
