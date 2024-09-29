@@ -130,6 +130,16 @@
     cursor: pointer;
 }
 
+#date-elem{
+    display: flex;
+    justify-content: space-between;
+}
+
+.dateElement-left{
+    width: 48%;
+}
+
+
 /* Booking confirmation */
 
 .confirmation-container {
@@ -170,3 +180,4 @@
     color: #1e90ff;
     font-weight: bold;
 }
+

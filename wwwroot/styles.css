@@ -62,14 +62,3 @@ nav a:hover {
     left: 10px;
     top: 10px;
 }
-
-
-#date-elem{
-    display: flex;
-    justify-content: space-between;
-}
-
-.dateElement-left{
-    width: 48%;
-}
-
