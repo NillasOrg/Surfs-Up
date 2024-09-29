@@ -437,12 +437,21 @@ nav a:hover {
     width: 10%;
 }
 
-.booking-item button {
+/*.booking-item button {
     display: flex;
     justify-content: center;
     align-items: center;
     margin-left: auto;
-    background-color: #00000000;
+    background-color: red;
+    border: none;*/
+}
+/*Nyt buttun til farverne ved slet*/
+.bkslet {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: auto;
+    background-color: red;
     border: none;
 }
 
@@ -509,7 +518,7 @@ nav a:hover {
     margin-top: 20px;
     padding: 10px 0;
     background: #009688; 
-    color: #fff; 
+    color: white; 
     border: none; 
     font-size: 18px;
     border-radius: 4px;
