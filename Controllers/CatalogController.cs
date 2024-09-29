@@ -22,12 +22,6 @@ namespace Surfs_Up.Controllers
             return View(items);
         }
 
-        public async Task<IActionResult> Edit(int id)
-        {
-            var catalogItem = await _dbContext.CatalogItems.FirstOrDefaultAsync(item => item.CatalogItemId == id);
-            return View(catalogItem);
-        }
-
         [HttpPost]
         public async Task<IActionResult> Add(int id)
         {
@@ -44,10 +38,9 @@ namespace Surfs_Up.Controllers
                 cart.AddToCart(catalogItem);
 
                 // Redirect to the edit page for the added item
-                return RedirectToAction("Edit", new { id = catalogItem.CatalogItemId });
+                return RedirectToAction("Index", new { popupItemId = catalogItem.CatalogItemId });
+                
             }
-
-            // Return a 404 error if the item does not exist
             return NotFound();
         }
 
