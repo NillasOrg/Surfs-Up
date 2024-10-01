@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Surfs_Up.Models
 {
-    public class CatalogItem
+    public class Surfboard
     {
         public int? Id {get; set;}
         public string? Name {get; set;}
@@ -13,7 +13,7 @@ namespace Surfs_Up.Models
         public double? Width {get; set;}
         public double? Thickness {get; set;}
         public double? Volume {get; set;}
-        public CATALOGTYPE Type {get; set;}
+        public BOARDTYPE Type {get; set;}
         public double Price {get; set;}
         public string? Equipment {get; set;}
         public string? ImagePath {get; set;}
@@ -23,7 +23,7 @@ namespace Surfs_Up.Models
         public byte[] RowVersion { get; set; }
     }
 
-    public enum CATALOGTYPE
+    public enum BOARDTYPE
     {
         Shortboard,
         Funboard,

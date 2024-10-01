@@ -1,6 +1,6 @@
-﻿@if(Context.User.Identity.Name != null)
+﻿@if(User.Identity.IsAuthenticated)
 {
-    <a>Goddag @Context.User.Identity.Name</a> 
+    <a>Goddag @User.Identity.Name</a> 
     <a asp-controller="Account" asp-action="LogOut">Log ud</a>
 }
 else
