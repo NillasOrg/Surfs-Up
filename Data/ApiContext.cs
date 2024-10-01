@@ -1,4 +1,5 @@
-﻿using System.Net.Http.Headers;
+﻿using System.Net;
+using System.Net.Http.Headers;
 
 namespace Surfs_Up.Data;
 
@@ -9,7 +10,12 @@ public static class ApiContext
 
     public static void Initialize()
     {
-        _apiClient = new HttpClient();
+        var handler = new HttpClientHandler
+        {
+            UseCookies = true, // Enables cookie handling
+            CookieContainer = new CookieContainer() // Stores cookies
+        };
+        _apiClient = new HttpClient(handler);
         // Angiver adressen på vores API
         _apiClient.BaseAddress = new Uri("https://localhost:5005");
     }

@@ -12,12 +12,12 @@ namespace Surfs_Up.Controllers
     public class CatalogController : Controller
     {
         private readonly AppDbContext _dbContext;
-        private readonly CatalogItemService _service;
+        private readonly SurfboardService _service;
 
         public CatalogController(AppDbContext dbContext)
         {
             _dbContext = dbContext;
-            _service = new CatalogItemService();
+            _service = new SurfboardService();
         }
         public async Task<IActionResult> Index(int? popupItemId = null)
         {
@@ -30,19 +30,19 @@ namespace Surfs_Up.Controllers
         public async Task<IActionResult> Add(int id)
         {
             // Retrieve the catalog item from the database
-            var catalogItem = await _service.GetById(id);
+            var surfboard = await _service.GetById(id);
 
             // Check if the item was found
-            if (catalogItem != null)
+            if (surfboard != null)
             {
                 // Get the instance of the shopping cart
                 ShoppingCart cart = ShoppingCart.GetInstance();
 
                 // Add the item to the cart
-                cart.AddToCart(catalogItem);
+                cart.AddToCart(surfboard);
 
                 // Redirect to the edit page for the added item
-                return RedirectToAction("Index", new { popupItemId = catalogItem.Id });
+                return RedirectToAction("Index", new { popupItemId = surfboard.Id });
                 
             }
             return NotFound();
@@ -50,8 +50,8 @@ namespace Surfs_Up.Controllers
 
         public async Task<IActionResult> Popup(int id)
         {
-            var catalogItem = await _service.GetById(id);
-            return RedirectToAction("Index", new {popupItemId = catalogItem.Id});
+            var surfboard = await _service.GetById(id);
+            return RedirectToAction("Index", new {popupItemId = surfboard.Id});
         }
     }
 }

@@ -6,6 +6,7 @@ using Surfs_Up.Models;
 using Surfs_Up.Repository;
 
 using System.Threading.Tasks;
+using Surfs_Up.Data.Services;
 
 namespace Surfs_Up.Controllers {
 
@@ -13,18 +14,21 @@ namespace Surfs_Up.Controllers {
     {
         private readonly AppDbContext _dbContext;
         private readonly UserManager<User> _userManager;
+        private readonly BookingService _service;
 
         public BookingController(AppDbContext dbContext, UserManager<User> userManager)
         {
             _dbContext = dbContext;
             _userManager = userManager;
+            _service = new BookingService();
         }
      
 
         public async Task AddBooking(Booking booking)
         {
-            await _dbContext.Bookings.AddAsync(booking);
-            await _dbContext.SaveChangesAsync();
+            await _service.Create(booking);
+            //await _dbContext.Bookings.AddAsync(booking);
+            //await _dbContext.SaveChangesAsync();
         }
 
         public IActionResult Index()
@@ -55,7 +59,7 @@ namespace Surfs_Up.Controllers {
 
                 foreach (var item in booking.BookingItems)
                 {
-                    if (_dbContext.CatalogItems.Any(c => c.Id == item.Id))
+                    if (_dbContext.Surfboards.Any(c => c.Id == item.Id))
                     {
                         _dbContext.Attach(item);
                     } 
