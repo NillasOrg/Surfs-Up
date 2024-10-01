@@ -1,4 +1,4 @@
-@model List<CatalogItem>
+@model List<Surfboard>
 @{
     ViewBag.Title = "Catalog";
     int? popupItemId = ViewBag.PopupItemId;
@@ -62,7 +62,7 @@
 
                                     <div class="specifications">
                                         <ul>
-                                            <li id="len">Længde: @item.Length (Inch)</li>
+                                            <li id="len">L�ngde: @item.Length (Inch)</li>
                                             <li id="width">Bredde: @item.Width (Inch)</li>
                                             <li id="thick">Tykkelse: @item.Thickness (Inch)</li>
                                             <li id="vol">Volumen: @item.Volume (L)</li>

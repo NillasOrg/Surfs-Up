@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Surfs_Up.Migrations
 {
     /// <inheritdoc />
-    public partial class Initialcreate : Migration
+    public partial class WorkMigrations : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -54,10 +54,10 @@ namespace Surfs_Up.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "CatalogItems",
+                name: "Surfboards",
                 columns: table => new
                 {
-                    CatalogItemId = table.Column<int>(type: "int", nullable: false)
+                    SurfboardId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -73,7 +73,22 @@ namespace Surfs_Up.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_CatalogItems", x => x.CatalogItemId);
+                    table.PrimaryKey("PK_Surfboards", x => x.SurfboardId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Wetsuits",
+                columns: table => new
+                {
+                    WetsuitId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Price = table.Column<double>(type: "float", nullable: false),
+                    Size = table.Column<double>(type: "float", nullable: false),
+                    Gender = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Wetsuits", x => x.WetsuitId);
                 });
 
             migrationBuilder.CreateTable(
@@ -205,26 +220,50 @@ namespace Surfs_Up.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "BookingCatalogItem",
+                name: "BookingSurfboard",
                 columns: table => new
                 {
-                    BookingItemsCatalogItemId = table.Column<int>(type: "int", nullable: false),
-                    BookingsBookingId = table.Column<int>(type: "int", nullable: false)
+                    BookingsBookingId = table.Column<int>(type: "int", nullable: false),
+                    SurfboardsSurfboardId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_BookingCatalogItem", x => new { x.BookingItemsCatalogItemId, x.BookingsBookingId });
+                    table.PrimaryKey("PK_BookingSurfboard", x => new { x.BookingsBookingId, x.SurfboardsSurfboardId });
                     table.ForeignKey(
-                        name: "FK_BookingCatalogItem_Bookings_BookingsBookingId",
+                        name: "FK_BookingSurfboard_Bookings_BookingsBookingId",
                         column: x => x.BookingsBookingId,
                         principalTable: "Bookings",
                         principalColumn: "BookingId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_BookingCatalogItem_CatalogItems_BookingItemsCatalogItemId",
-                        column: x => x.BookingItemsCatalogItemId,
-                        principalTable: "CatalogItems",
-                        principalColumn: "CatalogItemId",
+                        name: "FK_BookingSurfboard_Surfboards_SurfboardsSurfboardId",
+                        column: x => x.SurfboardsSurfboardId,
+                        principalTable: "Surfboards",
+                        principalColumn: "SurfboardId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "BookingWetsuit",
+                columns: table => new
+                {
+                    BookingsBookingId = table.Column<int>(type: "int", nullable: false),
+                    WetsuitsWetsuitId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_BookingWetsuit", x => new { x.BookingsBookingId, x.WetsuitsWetsuitId });
+                    table.ForeignKey(
+                        name: "FK_BookingWetsuit_Bookings_BookingsBookingId",
+                        column: x => x.BookingsBookingId,
+                        principalTable: "Bookings",
+                        principalColumn: "BookingId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_BookingWetsuit_Wetsuits_WetsuitsWetsuitId",
+                        column: x => x.WetsuitsWetsuitId,
+                        principalTable: "Wetsuits",
+                        principalColumn: "WetsuitId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -274,14 +313,19 @@ namespace Surfs_Up.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_BookingCatalogItem_BookingsBookingId",
-                table: "BookingCatalogItem",
-                column: "BookingsBookingId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Bookings_UserId",
                 table: "Bookings",
                 column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_BookingSurfboard_SurfboardsSurfboardId",
+                table: "BookingSurfboard",
+                column: "SurfboardsSurfboardId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_BookingWetsuit_WetsuitsWetsuitId",
+                table: "BookingWetsuit",
+                column: "WetsuitsWetsuitId");
         }
 
         /// <inheritdoc />
@@ -303,16 +347,22 @@ namespace Surfs_Up.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "BookingCatalogItem");
+                name: "BookingSurfboard");
+
+            migrationBuilder.DropTable(
+                name: "BookingWetsuit");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
+                name: "Surfboards");
+
+            migrationBuilder.DropTable(
                 name: "Bookings");
 
             migrationBuilder.DropTable(
-                name: "CatalogItems");
+                name: "Wetsuits");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");

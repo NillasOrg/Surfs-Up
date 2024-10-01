@@ -35,7 +35,7 @@ namespace Surfs_Up.Controllers {
             var items = cart.GetCartItems();
             Booking booking = new Booking()
             {
-                BookingItems = items
+                Surfboards = items
             };
             return View(booking);
         }
@@ -45,19 +45,19 @@ namespace Surfs_Up.Controllers {
         public async Task<IActionResult> CreateBooking(Booking booking)
         {
             ShoppingCart cart = ShoppingCart.GetInstance();
-            booking.BookingItems = cart.GetCartItems();
+            booking.Surfboards = cart.GetCartItems();
 
-            if (booking.BookingItems == null || !booking.BookingItems.Any())
+            if (booking.Surfboards == null || !booking.Surfboards.Any())
             {
-                ModelState.AddModelError("BookingItems", "Kurven er tom!");
+                ModelState.AddModelError("Surfboards", "Kurven er tom!");
             }
 
             if (ModelState.IsValid)
             {
 
-                foreach (var item in booking.BookingItems)
+                foreach (var item in booking.Surfboards)
                 {
-                    if (_dbContext.CatalogItems.Any(c => c.CatalogItemId == item.CatalogItemId))
+                    if (_dbContext.Surfboards.Any(c => c.SurfboardId == item.SurfboardId))
                     {
                         _dbContext.Attach(item);
                     } 
@@ -84,7 +84,7 @@ namespace Surfs_Up.Controllers {
         public IActionResult BookingSuccess(Booking booking, int bookingId)
         {
             booking = _dbContext.Bookings
-                   .Include(b => b.BookingItems) 
+                   .Include(b => b.Surfboards) 
                    .Include(b => b.User)      
                    .FirstOrDefault(b => b.BookingId == bookingId);
 
@@ -101,7 +101,7 @@ namespace Surfs_Up.Controllers {
         public IActionResult RemoveFromCart(int id)
         {
             ShoppingCart cart = ShoppingCart.GetInstance();
-            var item = cart.GetCartItems().FirstOrDefault(item => item.CatalogItemId == id);
+            var item = cart.GetCartItems().FirstOrDefault(item => item.SurfboardId == id);
 
             if(item != null) 
             {

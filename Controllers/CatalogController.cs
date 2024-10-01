@@ -15,9 +15,15 @@ namespace Surfs_Up.Controllers
         {
             _dbContext = dbContext;
         }
+
+        public IActionResult CatalogOverview()
+        {
+            return View();
+        }
+
         public async Task<IActionResult> Index(int? popupItemId = null)
         {
-            var items = await _dbContext.CatalogItems.ToListAsync();
+            var items = await _dbContext.Surfboards.ToListAsync();
             ViewBag.PopupItemId = popupItemId;
             return View(items);
         }
@@ -26,7 +32,7 @@ namespace Surfs_Up.Controllers
         public async Task<IActionResult> Add(int id)
         {
             // Retrieve the catalog item from the database
-            var catalogItem = await _dbContext.CatalogItems.FirstOrDefaultAsync(item => item.CatalogItemId == id);
+            var catalogItem = await _dbContext.Surfboards.FirstOrDefaultAsync(item => item.SurfboardId == id);
 
             // Check if the item was found
             if (catalogItem != null)
@@ -46,8 +52,9 @@ namespace Surfs_Up.Controllers
 
         public async Task<IActionResult> Popup(int id)
         {
-            var catalogItem = await _dbContext.CatalogItems.FirstOrDefaultAsync(item => item.CatalogItemId == id);
-            return RedirectToAction("Index", new {popupItemId = catalogItem.CatalogItemId});
+            var catalogItem = await _dbContext.Surfboards.FirstOrDefaultAsync(item => item.SurfboardId == id);
+            return RedirectToAction("Index", new {popupItemId = catalogItem.SurfboardId});
         }
+
     }
 }

@@ -44,7 +44,7 @@
                     <textarea id="booking-remark" name="Remark" asp-for="Remark"></textarea>
                 </div>
                 <div id="booking-submit">
-                    @if (!Model.BookingItems.Any())
+                    @if (!Model.Surfboards.Any())
                     {
                         <button disabled style="background-color: rgb(98, 98, 98);">Book Nu</button>
                     }
@@ -62,11 +62,11 @@
             <h2>Kurv</h2>
         </div>
         <div class="booking-body">
-            @if (!Model.BookingItems.Any())
+            @if (!Model.Surfboards.Any())
             {
                 <h2 style="display: flex; justify-content: center;">Kurven er tom</h2>
             }
-            @foreach (var item in Model.BookingItems)
+            @foreach (var item in Model.Surfboards)
             {
                 <div class="booking-item">
                     <div class="booking-item-left">
@@ -75,8 +75,8 @@
                     </div>
                     <div class="booking-item-right">
                         <form asp-action="RemoveFromCart" method="post">
-                            <input type="hidden" name="id" value="@item.CatalogItemId" />
-                            <button type="submit" class="bkslet"> @* Her manglede btn en klasse *@
+                            <input type="hidden" name="id" value="@item.SurfboardId" />
+                            <button type="submit">
                                 <img src="~/images/trash-can.png" alt="Remove from cart" />
                             </button>
                         </form>

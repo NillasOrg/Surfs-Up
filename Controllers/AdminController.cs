@@ -16,7 +16,7 @@ public class AdminController : Controller
     public async Task<IActionResult> Index(int? deleteBookingId = null)
     {
         var bookings = await _dbContext.Bookings
-            .Include(b => b.BookingItems) 
+            .Include(b => b.Surfboards) 
             .Include(b => b.User)      
             .ToListAsync();
 
