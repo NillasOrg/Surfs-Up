@@ -12,12 +12,12 @@ namespace Surfs_Up.ViewModels
         [EmailAddress]
         public string Email { get; set; }
 
-        public string UserName { get; set; }
         [Required(ErrorMessage = "Indtast gylding adgangskode")]
         [MaxLength(25, ErrorMessage = "Adgangskode må maks være 25 tegn")]
         [MinLength(8, ErrorMessage = "Adgangskode skal være minimum 8 tegn")]
         [DataType(DataType.Password)]
         public string Password { get; set; }
+
         [Required(ErrorMessage = "Bekræft venligst din adgangskode")]
         [Compare("Password", ErrorMessage = "Adgangskode matcher ikke")]
         [DataType(DataType.Password)]
