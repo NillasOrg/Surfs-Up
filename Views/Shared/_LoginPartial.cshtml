@@ -1,6 +1,25 @@
-﻿@if(User.Identity.IsAuthenticated)
+﻿@using System.IdentityModel.Tokens.Jwt
+@inject IHttpContextAccessor HttpContextAccessor
+@using System.Security.Claims
+
+@{
+    // Get the JWT token from session
+    string token = HttpContextAccessor.HttpContext.Session.GetString("JWToken");
+
+    string username = null;
+    if (!string.IsNullOrEmpty(token))
+    {
+        var handler = new JwtSecurityTokenHandler();
+        var jwtToken = handler.ReadJwtToken(token);
+
+        // Extract the username (or email) from the "name" claim
+        username = jwtToken.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Name)?.Value;
+    }
+}
+
+@if (!string.IsNullOrEmpty(username))
 {
-    <a>Goddag @User.Identity.Name</a> 
+    <a>Goddag @username</a>
     <a asp-controller="Account" asp-action="LogOut">Log ud</a>
 }
 else
