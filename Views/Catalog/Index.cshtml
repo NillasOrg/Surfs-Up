@@ -4,54 +4,89 @@
     int? popupItemId = ViewBag.PopupItemId;
 }
 
+<head>
+    <link href="~/css/catalog.css" rel="stylesheet"/>
+</head>
+
+
 <main>
     <section id="catalog">
-        <h2>Vores udstyr</h2>
-        <div class="catalog-grid">
-    @foreach (var item in Model)
-    {
-        <a href="@Url.Action("Popup", new { id = item.CatalogItemId })">
-            <div class="catalog-card">
-                <img src="@Url.Content(item.ImagePath)" alt="Image" />
-                <div class="catalog-text-box">
-                <h4><b>@item.Name</b></h4>
-                <p>@item.Description</p>
-            </div>
+        <div class="catalog-head">
+            <h2>Udstyr</h2>
         </div>
-        </a>
-    }
-
-
-      
-    <div class="popup @(popupItemId.HasValue ? "open-popup" : "")">
-        <div class="popup-content">
+        <div class="catalog-grid">
+            @foreach (var item in Model)
+            {
+                <a class="catalog-card" asp-action="Popup" asp-route-id="@item.CatalogItemId">
+                    <img src="@Url.Content(item.ImagePath)"/>
+                    <div class="catalog-text-box">
+                        <h4><b>@item.Name</b></h4>
+                        <h4>@item.Price,- / dag</h4>
+                        <p>@item.Description</p>
+                    </div>
+                </a>
+            }
+    
             @if (popupItemId.HasValue)
             {
-                var item = Model.FirstOrDefault(i => i.CatalogItemId == popupItemId.Value);
-                if (item != null)
-                {
-                    <img src="@Url.Content(item.ImagePath)" alt="Popup Image" />
-                    <h2>@item.Name</h2>
-                    <p>@item.Description</p>
-                    <p>Length: @item.Length ft</p>
-                    <p>Width: @item.Width in</p>
-                    <p>Thickness: @item.Thickness in</p>
-                    <p>Volume: @item.Volume L</p>
-                    <p>Price: $@item.Price</p>
-                    <p>Equipment: @item.Equipment</p>
-                    <form asp-action="Index" method="post">
-                        <button class="close-btn">Close</button>
-                    </form>
-                    <form asp-action="Edit" asp-route-id="@item.CatalogItemId" method="post">
-                        <button class="close-btn">Open</button>
-                    </form>
-                        
+                <div id="popup" class="popup @(popupItemId.HasValue ? "open-popup" : "")">
+                    <div class="popup-content" id="popup">
+                        @{
+                            var item = Model.FirstOrDefault(i => i.CatalogItemId == popupItemId.Value);
+                            if (item != null)
+                            {
+                                <form asp-action="Index" method="post">
+                                    <button class="close-btn">x</button>
+                                </form>
+                                <div class="product-left">
+                                    <img src="@Url.Content(item.ImagePath)" alt="Image"/>
+                                </div>
+                                <div class="product-right">
+                                    <div class="product-description">
+                                        <span>Surfboard</span>
+                                        <h1>@item.Name</h1>
+                                        <p>@item.Description</p>
+                                    </div>
 
-                }
+                                    <div class="product-equipment">
+                                        <p>Includes: @item.Equipment</p>
+                                    </div>
+
+                                    <div class="product-price">
+                                        <form asp-action="Add" method="post">
+                                            <input type="hidden" name="id" value="@item.CatalogItemId"/>
+                                            <button type="submit" class="cart-btn">Tilføj til kurv</button>
+                                        </form>
+                                        <h5>@item.Price,- / dag</h5>
+                                    </div>
+
+                                    <div class="specifications">
+                                        <ul>
+                                            <li id="len">Længde: @item.Length (Inch)</li>
+                                            <li id="width">Bredde: @item.Width (Inch)</li>
+                                            <li id="thick">Tykkelse: @item.Thickness (Inch)</li>
+                                            <li id="vol">Volumen: @item.Volume (L)</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            }
+                        }
+                    </div>
+                </div>
             }
         </div>
-    </div>
-    </div>
     </section>
 </main>
 
+@if (popupItemId.HasValue)
+{ 
+    <style>
+        .catalog-grid > *:not(.popup) {
+            filter: blur(4px);
+        }
+
+        .catalog-head {
+            filter: blur(4px);
+        }
+    </style>
+}

@@ -5,9 +5,9 @@ namespace Surfs_Up.ViewModels
 {
     public class LoginViewModel
     {
-        [Required(ErrorMessage = "Indtast gyldig Brugernavn eller Email")]
-        [MaxLength(20, ErrorMessage = "Brugernavn må maks være 20 tegn")]
-        [DisplayName("Brugernavn eller Email")]
+        [Required(ErrorMessage = "Indtast en gyldig Email")]
+        [MaxLength(320)]
+        [DisplayName("Email")]
         public string UserNameOrEmail { get; set; }
 
         [Required(ErrorMessage = "Indtast korrekt adgangskode")]

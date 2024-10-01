@@ -1,0 +1,183 @@
+﻿.booking-body {
+    border: 1px solid rgba(170, 170, 170, 0.5);
+    background-color: whitesmoke;
+    border-bottom-left-radius: 24px;
+    border-bottom-right-radius: 24px;
+    padding: 30px;
+    height: 600px;
+    overflow-y: scroll;
+}
+
+.booking-head {
+    border: 1px solid rgba(170, 170, 170, 0.2);
+    border-top-left-radius: 24px;
+    border-top-right-radius: 24px;
+    background-color: rgb(30, 131, 213);
+    display: flex;
+    justify-content: center;
+    font-size: 16px;
+    color: #ffffff;
+}
+
+.booking-left {
+    width: 60%;
+    position: relative;
+}
+    .booking-left input{
+        border-radius: 2px;
+        border: 1px solid black;
+        box-sizing: border-box;
+        font-size: 1.25em;
+        width: 100%;
+        height: 35px;
+    }
+    .booking-left label {
+        font-size: 1.25em;
+        display: flex;
+        padding-top: 15px;
+    }
+    
+.booking-right{
+    width: 40%;
+    margin-left: 50px;
+}
+    .booking-item {
+        display: flex;
+        border: 1px solid rgb(146, 146, 146);
+        border-radius: 10px;
+        background-color: white;
+        margin: 15px;
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.2) ;
+    }
+        .booking-item h1 {
+            padding-left: 10px;
+            font-size: 24px;
+        }
+        .booking-item h3 {
+            padding-left: 10px;
+            font-size: 18px;
+        }
+        .booking-item-inner {
+            justify-content: center;
+            background-color: #c9c9c9;
+            margin-left: 10%;
+            margin-bottom: 10%;
+            border-radius: 10px;
+            padding: 5px;
+        }
+        .booking-item p {
+            padding-left: 10px;
+        }
+        .booking-item-left {
+            width: 90%;
+            position: relative;
+        }
+        .booking-item-right {
+            width: 10%;
+        }
+        .booking-item button {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-left: auto;
+            background-color: #00000000;
+            border: none;
+        }
+        .booking-item img {
+            width: 100%;
+            height: auto;
+            max-height: 25px;
+            margin-bottom: 10px;
+            object-fit: contain;
+            background-color: #00000000;
+        }
+        .booking-item img:hover {
+            transform: scale(1.2);
+            cursor: pointer;
+        }
+        
+#booking-remark {
+    height: 135px;
+    border-radius: 2px;
+    border: 1px solid black;
+    box-sizing: border-box;
+    font-size: 1.25em;
+    width: 100%;
+    resize: none;
+    font-family: Arial, sans-serif;
+}
+
+#booking-submit {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50px;
+    padding: 0px;
+    margin-top: 20px;
+}
+    #booking-submit button{
+        width: 80%;
+        height: 100%;
+        font-size: 1.3em;
+        color: white;
+        background-color: green;
+        border-radius: 15px;
+    }
+
+#active-btn:hover{
+    transform: scale(1.02);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+}
+
+#date-elem{
+    display: flex;
+    justify-content: space-between;
+}
+
+.dateElement-left{
+    width: 48%;
+}
+
+
+/* Booking confirmation */
+
+.confirmation-container {
+    align-content:center;
+    padding: 20px;
+    border-radius: 10px;
+    max-width: 600px;
+    width: 100%;
+}
+
+.order-info p {
+    font-size: 1em;
+    margin: 10px 0;
+}
+
+.booking-items {
+    list-style: none;
+    padding: 0;
+}
+    .booking-items li {
+        background-color: #f9f9f9;
+        padding: 15px;
+        margin-bottom: 10px;
+        border-radius: 8px;
+        box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.05);
+    }
+    .booking-items li p {
+        margin: 5px 0;
+    }
+    .booking-items li p strong {
+        color: #333;
+    }
+
+.thank-you {
+    margin-top: 20px;
+    font-size: 1.2em;
+    text-align: center;
+    color: #1e90ff;
+    font-weight: bold;
+}
+

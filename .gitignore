@@ -8,6 +8,7 @@
 .vs/
 *.db
 appsettings.json
+.idea
 
 # Build results
 

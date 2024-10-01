@@ -5,7 +5,7 @@
 }
 
 <head>
-    <link href="~/css/login.css" rel="stylesheet" />
+    <link href="~/css/account.css" rel="stylesheet" />
 </head>
 
 <main class="container">
@@ -14,7 +14,7 @@
             <h1>Registrer dig</h1>
         </div>
         <div>
-            <form asp-action="Registration">
+            <form asp-action="Register" method="post">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 @if (ViewBag.Message != null)
                 {

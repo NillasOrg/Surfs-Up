@@ -1,12 +1,16 @@
 ﻿@model Booking
 
+<head>
+    <link href="~/css/booking.css" rel="stylesheet" />
+</head>
+
+
 <div class="confirmation-container">
     <h1>Bookingbekræftigelse</h1>
     <h2>Tak for din booking! Her kan du se din ordre</h2>
 
     <div class="order-info">
         <p><strong>Booking ID:</strong> @Model.BookingId</p>
-
         @{
             double totalPrice = 0;
         }

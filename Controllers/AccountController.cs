@@ -1,12 +1,7 @@
-﻿using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using Surfs_Up.Models;
 using Surfs_Up.ViewModels;
-using System.Security.Claims;
 
 namespace Surfs_Up.Controllers
 {
@@ -71,7 +66,7 @@ namespace Surfs_Up.Controllers
                 {
                     return RedirectToAction("Index", "Home");
                 }
-                ModelState.AddModelError("", "Ugyldigt login");
+                ModelState.AddModelError("", "Forkert email eller adgangskode");
                 return View(model);
             }
             return View(model);
