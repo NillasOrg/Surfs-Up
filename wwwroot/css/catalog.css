@@ -29,7 +29,7 @@
 
 .catalog-grid {
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     gap: 10px;
     padding: 10px;
 }
@@ -89,12 +89,14 @@
     /* Popup */
 
 .product-left {
-    width: 65%;
+    width: 45%;
     position: relative;
+    margin-left: 0px;
+    margin-top: 40px;
 }
 
 .product-right {
-    width: 35%;
+    width: 55%;
     margin-top: 60px;
 }
 
@@ -123,14 +125,14 @@
 }
 .product-description h1 {
     font-weight: 300;
-    font-size: 52px;
+    font-size: 2em;
     color: #43484D;
     margin-top: 15px;
     margin-bottom: 0;
 }
 
 .product-description p {
-    font-size: 16px;
+    font-size: 1em;
     font-weight: 300;
     color: #86939E;
     line-height: 24px;
@@ -147,7 +149,7 @@
 }
 
 .product-price span {
-    font-size: 26px;
+    font-size: 2em;
     font-weight: 300;
     color: #43474D;
     margin-right: 20px;
@@ -156,7 +158,7 @@
 .product-price h5 {
     margin-left: 20px;
     font-weight: 700;
-    font-size: 16px;
+    font-size: 1em;
     color: #43484D;
 }
 
@@ -168,7 +170,7 @@
     top: 50%;
     left: 50%;
     text-align: center;
-    padding: 20px;
+    padding: 10px;
     color: #333;
     z-index: 1000;
 }
@@ -190,6 +192,7 @@
 
 .popup-content {
     max-width: 1400px;
+    max-height: 600px;
     margin: 0 auto;
     padding: 15px;
     display: flex;
