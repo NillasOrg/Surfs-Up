@@ -35,14 +35,16 @@ namespace Surfs_Up.Controllers
         [HttpPost]
         public async Task<IActionResult> Login(LoginViewModel model)
         {
-            bool isLoggedIn = await _service.Login(model.UserNameOrEmail, model.Password);
+            var isLoggedIn = await _service.Login(model.UserNameOrEmail, model.Password);
 
             if (isLoggedIn)
             {
+                Console.WriteLine($"Logged in with {model.UserNameOrEmail}");
                 return RedirectToAction("Index", "Home");
             }
             return View(model);
         }
+
 
         public async Task<IActionResult> LogOut()
         {
