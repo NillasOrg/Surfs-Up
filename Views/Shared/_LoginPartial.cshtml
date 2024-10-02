@@ -3,23 +3,23 @@
 @using System.Security.Claims
 
 @{
-    // Get the JWT token from session
+    // Henter JWT token for at se hvem der er logget ind.
     string token = HttpContextAccessor.HttpContext.Session.GetString("JWToken");
 
-    string username = null;
+    string name = null;
     if (!string.IsNullOrEmpty(token))
     {
         var handler = new JwtSecurityTokenHandler();
         var jwtToken = handler.ReadJwtToken(token);
 
-        // Extract the username (or email) from the "name" claim
-        username = jwtToken.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Name)?.Value;
+        // Får 
+        name = jwtToken.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Name)?.Value;
     }
 }
 
-@if (!string.IsNullOrEmpty(username))
+@if (!string.IsNullOrEmpty(name))
 {
-    <a>Goddag @username</a>
+    <a>Goddag @name</a>
     <a asp-controller="Account" asp-action="LogOut">Log ud</a>
 }
 else

@@ -11,12 +11,10 @@ namespace Surfs_Up.Controllers
 {
     public class CatalogController : Controller
     {
-        private readonly AppDbContext _dbContext;
         private readonly SurfboardService _service;
 
-        public CatalogController(AppDbContext dbContext)
+        public CatalogController()
         {
-            _dbContext = dbContext;
             _service = new SurfboardService();
         }
         public async Task<IActionResult> Index(int? popupItemId = null)

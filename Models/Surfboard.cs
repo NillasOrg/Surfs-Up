@@ -17,7 +17,6 @@ namespace Surfs_Up.Models
         public double Price {get; set;}
         public string? Equipment {get; set;}
         public string? ImagePath {get; set;}
-        public List<Booking>? Bookings { get; set; }
 
         [Timestamp]
         public byte[] RowVersion { get; set; }

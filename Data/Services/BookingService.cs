@@ -1,5 +1,5 @@
 ﻿using System.Text;
-using Newtonsoft.Json;
+using System.Text.Json;
 using Surfs_Up.Models;
 
 namespace Surfs_Up.Data.Services;
@@ -35,18 +35,35 @@ public class BookingService
                 return booking;
             }
             throw new Exception(response.ReasonPhrase);
-        }
+        }       
     }
 
     public async Task<Booking> Create(Booking booking)
     {
-        using (HttpResponseMessage response = await ApiContext._apiClient.PostAsJsonAsync("/api/booking", booking))
+        var content = new StringContent(JsonSerializer.Serialize(booking), Encoding.UTF8, "application/json");
+        using (HttpResponseMessage response = await ApiContext._apiClient.PostAsync("/api/booking", content))
         {
             if (response.IsSuccessStatusCode)
             {
-                return response.Content.ReadFromJsonAsync<Booking>().Result;
+                Console.WriteLine(JsonSerializer.Serialize(booking));
+                var createdBooking = await response.Content.ReadFromJsonAsync<Booking>();
+                return createdBooking;
+            }
+            Console.WriteLine(response.ReasonPhrase);
+            throw new Exception(response.ReasonPhrase);
+        }
+    }
+
+    public async Task<bool> Delete(int bookingId)
+    {
+        using (HttpResponseMessage response = await ApiContext._apiClient.DeleteAsync($"/api/booking/{bookingId}"))
+        {
+            if (response.IsSuccessStatusCode)
+            {
+                return true;
             }
             throw new Exception(response.ReasonPhrase);
         }
     }
+
 }
