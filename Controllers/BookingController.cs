@@ -12,89 +12,64 @@ namespace Surfs_Up.Controllers {
 
     public class BookingController : Controller 
     {
-        private readonly AppDbContext _dbContext;
-        private readonly UserManager<User> _userManager;
         private readonly BookingService _service;
-
-        public BookingController(AppDbContext dbContext, UserManager<User> userManager)
+        private readonly UserService _userService;
+        public BookingController()
         {
-            _dbContext = dbContext;
-            _userManager = userManager;
+            _userService = new UserService();
             _service = new BookingService();
         }
-     
-
-        public async Task AddBooking(Booking booking)
-        {
-            await _service.Create(booking);
-            //await _dbContext.Bookings.AddAsync(booking);
-            //await _dbContext.SaveChangesAsync();
-        }
-
+        
         public IActionResult Index()
         {
             ShoppingCart cart = ShoppingCart.GetInstance();
             var items = cart.GetCartItems();
             Booking booking = new Booking()
             {
-                BookingItems = items
+                Surfboards = items
             };
             return View(booking);
         }
 
         [HttpPost]
-
         public async Task<IActionResult> CreateBooking(Booking booking)
         {
             ShoppingCart cart = ShoppingCart.GetInstance();
-            booking.BookingItems = cart.GetCartItems();
+            booking.Surfboards = cart.GetCartItems();
 
-            if (booking.BookingItems == null || !booking.BookingItems.Any())
+            if (booking.Surfboards == null || !booking.Surfboards.Any())
             {
                 ModelState.AddModelError("BookingItems", "Kurven er tom!");
             }
 
             if (ModelState.IsValid)
             {
-
-                foreach (var item in booking.BookingItems)
+                if (await _userService.isLoggedIn())
                 {
-                    if (_dbContext.Surfboards.Any(c => c.Id == item.Id))
-                    {
-                        _dbContext.Attach(item);
-                    } 
+                    User user = await _userService.GetUser();
+                    booking.User = user;
                 }
-
-                 User user = await _userManager.GetUserAsync(User); 
-            if (user != null)
-            {
-                booking.User = user;
+                else
+                {
+                    ModelState.AddModelError("", "User not found.");
+                    return View("Index", booking);
+                }
+                
+                var createdBooking = await _service.Create(booking);
+                Console.WriteLine($"Booking ID: {createdBooking.Id}");
+                return RedirectToAction("BookingSuccess", new { bookingId = createdBooking.Id });
             }
-            else
-            {
-                ModelState.AddModelError("", "User not found.");
-            }
-
-
-                await AddBooking(booking);
-                return RedirectToAction("BookingSuccess", booking);
-            }
-            
             return View("Index", booking);
         }
 
-        public IActionResult BookingSuccess(Booking booking, int bookingId)
+        public async Task<IActionResult> BookingSuccess(int bookingId)
         {
-            booking = _dbContext.Bookings
-                   .Include(b => b.BookingItems) 
-                   .Include(b => b.User)      
-                   .FirstOrDefault(b => b.BookingId == bookingId);
-
+            var booking = await _service.GetById(bookingId);
+            
             if (booking == null)
             {
                 return NotFound();
             }
-           
 
             return View("BookingSuccess", booking);
         }

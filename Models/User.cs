@@ -19,7 +19,5 @@ namespace Surfs_Up.Models
         [Required(ErrorMessage = "Indtats venligst et gyldigt Email")]
         [MaxLength(50, ErrorMessage = "Email må maks være 50 tegn")]
         public string Email { get; set; }
-        
-        public string? Password { get; set; }
     }
 }

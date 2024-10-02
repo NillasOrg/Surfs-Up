@@ -13,22 +13,26 @@
             {
                 <div class="booking-item">
                     <div class="booking-item-left">
-                        <h1>Booking ID: @booking.BookingId</h1>
+                        <h1>Booking ID: @booking.Id</h1>
                         <p>Name: @booking.User.Name</p>
                         <p>Email: @booking.User.Email</p>
                         <p>Date: @booking.EndDate.ToString()</p>
                         <h3>Booked items:</h3>
                         
                         <div class="booking-item-inner">
-                            @foreach (var item in booking.BookingItems)
-                            {
-                                <p>- @item.Name</p>
+                            @if (booking.Surfboards != null)
+                            {   
+                                foreach (var item in booking.Surfboards)
+                                {
+                                    <p>- @item.Name</p>
+                                }
                             }
+                            
                         </div>
                     </div>
                     <div class="booking-item-right">
                         <form asp-action="DeleteBooking" method="post">
-                            <input type="hidden" name="id" value="@booking.BookingId"/>
+                            <input type="hidden" name="id" value="@booking.Id"/>
                             <button type="submit" onClientClick="return confirm('Are you sure?')">
                                 <img src="~/images/trash-can.png" alt="Remove from cart"/>
                             </button>

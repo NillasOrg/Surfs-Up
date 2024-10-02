@@ -14,24 +14,28 @@ namespace Surfs_Up.Controllers
         {
             _service = new UserService();
         }
-        public IActionResult Index()
-        {
-            return View();
-        }
 
         public IActionResult Register()
         {
             return View();
         }
+        
         [HttpPost]
         public async Task<IActionResult> Register(RegisterViewModel model)
         {
+            var isRegistered = await _service.Register(model.Name, model.Email, model.Password);
+
+            if (isRegistered)
+            {
+                return RedirectToAction("Login");
+            }
             return View(model);
         }
         public IActionResult Login() 
         { 
             return View(); 
         }
+        
         [HttpPost]
         public async Task<IActionResult> Login(LoginViewModel model)
         {
@@ -39,7 +43,6 @@ namespace Surfs_Up.Controllers
 
             if (isLoggedIn)
             {
-                Console.WriteLine($"Logged in with {model.UserNameOrEmail}");
                 return RedirectToAction("Index", "Home");
             }
             return View(model);
@@ -48,7 +51,13 @@ namespace Surfs_Up.Controllers
 
         public async Task<IActionResult> LogOut()
         {
-            return RedirectToAction("Login");
+            _service.Logout();
+
+            if (!await _service.isLoggedIn())
+            {
+                return RedirectToAction("Login");
+            }
+            return RedirectToAction("Index", "Home");
         }
 
     }
