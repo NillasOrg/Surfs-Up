@@ -1,0 +1,75 @@
+﻿@model Wetsuit
+
+@{
+    ViewBag.Title = "Catalog";
+    bool showWetsuitPopup = ViewBag.ShowWetsuitPopup ?? false;
+}
+
+<head>
+    <link href="~/css/CatalogOverview.css" rel="stylesheet" />
+</head>
+
+<main>
+    <section id="catalog">
+        <div class="catalog-head">
+            <h2>Udstyr</h2>
+        </div>
+        <div class="catalog-grid">
+            <a class="catalog-card" asp-action="Index">
+                <img src="~/images/SurfBoards.jpg" />
+                <div class="catalog-text-box">
+                    <h4><b>Surfboards</b></h4>
+                </div>
+            </a>
+            <a class="catalog-card" asp-action="PopupWetsuit">
+                <img src="~/images/Våddragt.jpg" />
+                <div class="catalog-text-box">
+                    <h4><b>Våddragter</b></h4>
+                </div>
+            </a>
+
+      
+            @if (showWetsuitPopup)
+            {
+            <div class="popup">
+                <form asp-action="overview" method="post">
+                    <button class="close-btn">x</button>
+                </form>
+
+                <div class="product-left">
+                    <img src="~/images/Våddragt.jpg" alt="Image"/>
+                </div>
+
+                <div class="product-right">
+                    <div class="product-description">
+                        <span>Våddragt</span>
+                        <h1>Aquasuit</h1>
+                    </div>
+                    <form asp-action="AddWetsuitToCart" method="post">
+                        <div class="product-price">
+                                <input type="hidden" name="id" value=""/>
+                                <button type="submit" class="cart-btn">Tilføj til kurv</button>
+                            <h5>@Model.Price,- / dag</h5>
+                        </div>
+                    
+                        <div class="specification">
+                            <label for="size">Størrelse:</label>
+                            <input asp-for="@Model.Size" id="size" placeholder="Enter size" />
+                            <span asp-validation-for="Size" class="text-danger"></span>
+                        </div>
+
+
+                        <div class="specification">
+                            <label for="gender">Køn:</label>
+                            <select asp-for="@Model.Gender" asp-items="Html.GetEnumSelectList<Wetsuit.GENDER>()" class="form-control"></select>
+                            <span asp-validation-for="Gender" class="text-danger"></span>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            }
+        </div>
+    </section>
+</main>
+
+

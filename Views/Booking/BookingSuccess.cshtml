@@ -16,13 +16,22 @@
         }
 
         <ul class="booking-items">
-            @foreach (var item in Model.BookingItems)
+            @foreach (var item in Model.Surfboards)
             {
                 <li class="booking-item">
                     <p><strong>Navn:</strong> @item.Name</p>
                     <p><strong>Pris:</strong> @item.Price.ToString("C")</p>
                 </li>
                 totalPrice += item.Price;
+            }
+            @foreach (var wetsuit in Model.Wetsuits)
+            {
+                <li class="booking-item">
+                    <p><strong>Gender:</strong> @wetsuit.Gender</p>
+                    <p><strong>Size:</strong> @wetsuit.Size</p>
+                    <p><strong>Pris:</strong> @wetsuit.Price.ToString("C")</p>
+                </li>
+                totalPrice += wetsuit.Price;
             }
         </ul>
 

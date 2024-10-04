@@ -4,16 +4,16 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Surfs_Up.Models
 {
-    public class CatalogItem
+    public class Surfboard : ICartItem
     {
-        public int? CatalogItemId {get; set;}
+        public int? SurfboardId {get; set;}
         public string? Name {get; set;}
         public string? Description {get; set;}
         public double? Length {get; set;}
         public double? Width {get; set;}
         public double? Thickness {get; set;}
         public double? Volume {get; set;}
-        public CATALOGTYPE Type {get; set;}
+        public SURFBOARDTYPE Type {get; set;}
         public double Price {get; set;}
         public string? Equipment {get; set;}
         public string? ImagePath {get; set;}
@@ -23,7 +23,7 @@ namespace Surfs_Up.Models
         public byte[] RowVersion { get; set; }
     }
 
-    public enum CATALOGTYPE
+    public enum SURFBOARDTYPE
     {
         Shortboard,
         Funboard,
@@ -40,14 +40,14 @@ namespace Surfs_Up.Models
     //        _dbContext = dbContext;
     //    }
 
-    //    public async Task AddItem(CatalogItem catalogItem)
+    //    public async Task AddItem(Surfboard catalogItem)
     //    {
-    //        await _dbContext.CatalogItems.AddAsync(catalogItem);
+    //        await _dbContext.Surfboards.AddAsync(catalogItem);
     //        await _dbContext.SaveChangesAsync();
     //    }
-    //    //public async Task<CatalogItem> GetAllCatalogItem(string name)
+    //    //public async Task<Surfboard> GetAllCatalogItem(string name)
     //    //{
-    //    //    return await _dbContext.CatalogItems.FirstOrDefaultAsync();
+    //    //    return await _dbContext.Surfboards.FirstOrDefaultAsync();
     //    //}
     //}
 }

@@ -5,8 +5,10 @@ using Surfs_Up.Models;
 
 public class AppDbContext : IdentityDbContext<User>
 {
-    public DbSet<CatalogItem> CatalogItems { get; set; }
+    public DbSet<Surfboard> Surfboards { get; set; }
     public DbSet<Booking> Bookings { get; set; }
+    public DbSet<Wetsuit> Wetsuits { get; set; }
+
 
     public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
     {
@@ -17,7 +19,7 @@ public class AppDbContext : IdentityDbContext<User>
         base.OnModelCreating(modelBuilder);
 
         modelBuilder.Entity<Booking>()
-            .HasMany(e => e.BookingItems)
+            .HasMany(e => e.Surfboards)
             .WithMany(e => e.Bookings);
     }
 }

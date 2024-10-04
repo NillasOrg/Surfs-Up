@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Surfs_Up.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240927092420_Initialcreate")]
-    partial class Initialcreate
+    [Migration("20241002060240_WorkMigrations")]
+    partial class WorkMigrations
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,19 +24,34 @@ namespace Surfs_Up.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("BookingCatalogItem", b =>
+            modelBuilder.Entity("BookingSurfboard", b =>
                 {
-                    b.Property<int>("BookingItemsCatalogItemId")
-                        .HasColumnType("int");
-
                     b.Property<int>("BookingsBookingId")
                         .HasColumnType("int");
 
-                    b.HasKey("BookingItemsCatalogItemId", "BookingsBookingId");
+                    b.Property<int>("SurfboardsSurfboardId")
+                        .HasColumnType("int");
 
-                    b.HasIndex("BookingsBookingId");
+                    b.HasKey("BookingsBookingId", "SurfboardsSurfboardId");
 
-                    b.ToTable("BookingCatalogItem");
+                    b.HasIndex("SurfboardsSurfboardId");
+
+                    b.ToTable("BookingSurfboard");
+                });
+
+            modelBuilder.Entity("BookingWetsuit", b =>
+                {
+                    b.Property<int>("BookingsBookingId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("WetsuitsWetsuitId")
+                        .HasColumnType("int");
+
+                    b.HasKey("BookingsBookingId", "WetsuitsWetsuitId");
+
+                    b.HasIndex("WetsuitsWetsuitId");
+
+                    b.ToTable("BookingWetsuit");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -202,13 +217,13 @@ namespace Surfs_Up.Migrations
                     b.ToTable("Bookings");
                 });
 
-            modelBuilder.Entity("Surfs_Up.Models.CatalogItem", b =>
+            modelBuilder.Entity("Surfs_Up.Models.Surfboard", b =>
                 {
-                    b.Property<int?>("CatalogItemId")
+                    b.Property<int?>("SurfboardId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int?>("CatalogItemId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int?>("SurfboardId"));
 
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
@@ -246,9 +261,9 @@ namespace Surfs_Up.Migrations
                     b.Property<double?>("Width")
                         .HasColumnType("float");
 
-                    b.HasKey("CatalogItemId");
+                    b.HasKey("SurfboardId");
 
-                    b.ToTable("CatalogItems");
+                    b.ToTable("Surfboards");
                 });
 
             modelBuilder.Entity("Surfs_Up.Models.User", b =>
@@ -332,17 +347,54 @@ namespace Surfs_Up.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
-            modelBuilder.Entity("BookingCatalogItem", b =>
+            modelBuilder.Entity("Surfs_Up.Models.Wetsuit", b =>
                 {
-                    b.HasOne("Surfs_Up.Models.CatalogItem", null)
-                        .WithMany()
-                        .HasForeignKey("BookingItemsCatalogItemId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.Property<int>("WetsuitId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
 
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("WetsuitId"));
+
+                    b.Property<int>("Gender")
+                        .HasColumnType("int");
+
+                    b.Property<double>("Price")
+                        .HasColumnType("float");
+
+                    b.Property<double>("Size")
+                        .HasColumnType("float");
+
+                    b.HasKey("WetsuitId");
+
+                    b.ToTable("Wetsuits");
+                });
+
+            modelBuilder.Entity("BookingSurfboard", b =>
+                {
                     b.HasOne("Surfs_Up.Models.Booking", null)
                         .WithMany()
                         .HasForeignKey("BookingsBookingId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Surfs_Up.Models.Surfboard", null)
+                        .WithMany()
+                        .HasForeignKey("SurfboardsSurfboardId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("BookingWetsuit", b =>
+                {
+                    b.HasOne("Surfs_Up.Models.Booking", null)
+                        .WithMany()
+                        .HasForeignKey("BookingsBookingId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Surfs_Up.Models.Wetsuit", null)
+                        .WithMany()
+                        .HasForeignKey("WetsuitsWetsuitId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

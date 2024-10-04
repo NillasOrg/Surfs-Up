@@ -10,7 +10,8 @@ namespace Surfs_Up.Models
         public DateTime? EndDate { get; set;}
         [Required]
         public User User { get; set; }
-        public List<CatalogItem>? BookingItems { get; set; }
+        public List<Surfboard>? Surfboards { get; set; }
+        public List<Wetsuit>? Wetsuits { get; set; }
         public string Remark { get; set; }
     }
 
