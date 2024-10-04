@@ -32,10 +32,12 @@ namespace Surfs_Up.Controllers {
         {
 
             ShoppingCart cart = ShoppingCart.GetInstance();
-            var items = cart.GetCartItems();
+            var wetsuits = cart.GetItemsOfType<Wetsuit>();
+            var surfboards = cart.GetItemsOfType<Surfboard>();
             Booking booking = new Booking()
             {
-                Surfboards = items
+                Wetsuits = wetsuits,
+                Surfboards = surfboards
             };
             return View(booking);
         }
@@ -45,7 +47,8 @@ namespace Surfs_Up.Controllers {
         public async Task<IActionResult> CreateBooking(Booking booking)
         {
             ShoppingCart cart = ShoppingCart.GetInstance();
-            booking.Surfboards = cart.GetCartItems();
+            booking.Surfboards = cart.GetItemsOfType<Surfboard>();
+            booking.Wetsuits = cart.GetItemsOfType<Wetsuit>();
 
             if (booking.Surfboards == null || !booking.Surfboards.Any())
             {
@@ -63,7 +66,15 @@ namespace Surfs_Up.Controllers {
                     } 
                 }
 
-                 User user = await _userManager.GetUserAsync(User); 
+                foreach (var item in booking.Wetsuits)
+                {
+                    if (_dbContext.Wetsuits.Any(c => c.WetsuitId == item.WetsuitId))
+                    {
+                        _dbContext.Attach(item);
+                    }
+                }
+
+                User user = await _userManager.GetUserAsync(User); 
             if (user != null)
             {
                 booking.User = user;
@@ -85,6 +96,7 @@ namespace Surfs_Up.Controllers {
         {
             booking = _dbContext.Bookings
                    .Include(b => b.Surfboards) 
+                   .Include(b => b.Wetsuits)
                    .Include(b => b.User)      
                    .FirstOrDefault(b => b.BookingId == bookingId);
 
@@ -92,24 +104,39 @@ namespace Surfs_Up.Controllers {
             {
                 return NotFound();
             }
+
+
            
 
             return View("BookingSuccess", booking);
         }
 
         [HttpPost]
-        public IActionResult RemoveFromCart(int id)
+        public IActionResult RemoveFromCart(int id, string itemType)
         {
             ShoppingCart cart = ShoppingCart.GetInstance();
-            var item = cart.GetCartItems().FirstOrDefault(item => item.SurfboardId == id);
 
-            if(item != null) 
+            if (itemType == "surfboard")
             {
-                cart.RemoveFromCart(item);
-                return RedirectToAction("Index");
+                var surfboard = cart.GetItemsOfType<Surfboard>().FirstOrDefault(item => item.SurfboardId == id);
+                if (surfboard != null)
+                {
+                    cart.RemoveFromCart(surfboard);
+                    return RedirectToAction("Index");
+                }
             }
-            
+            else if (itemType == "wetsuit")
+            {
+                var wetsuit = cart.GetItemsOfType<Wetsuit>().FirstOrDefault(item => item.WetsuitId == id);
+                if (wetsuit != null)
+                {
+                    cart.RemoveFromCart(wetsuit);
+                    return RedirectToAction("Index");
+                }
+            }
+
             return NotFound();
         }
+
     }
 }

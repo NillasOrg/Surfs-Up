@@ -28,6 +28,11 @@
                             {
                                 <p>- @item.Name</p>
                             }
+                            @foreach (var item in booking.Wetsuits)
+                            {
+                                <p>- Våddragt størrele: @item.Size</p>
+                                <p>@item.Gender</p>
+                            }
                         </div>
                     </div>
                     <div class="adminPopPopUp">

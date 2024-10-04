@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Surfs_Up.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20241001093941_WorkMigrations")]
+    [Migration("20241002060240_WorkMigrations")]
     partial class WorkMigrations
     {
         /// <inheritdoc />

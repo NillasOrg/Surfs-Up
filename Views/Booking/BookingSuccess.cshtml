@@ -24,6 +24,15 @@
                 </li>
                 totalPrice += item.Price;
             }
+            @foreach (var wetsuit in Model.Wetsuits)
+            {
+                <li class="booking-item">
+                    <p><strong>Gender:</strong> @wetsuit.Gender</p>
+                    <p><strong>Size:</strong> @wetsuit.Size</p>
+                    <p><strong>Pris:</strong> @wetsuit.Price.ToString("C")</p>
+                </li>
+                totalPrice += wetsuit.Price;
+            }
         </ul>
 
         <p><strong>Total pris:</strong> @totalPrice.ToString("C")</p>

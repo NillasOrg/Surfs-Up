@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Surfs_Up.Models
 {
-    public class Surfboard
+    public class Surfboard : ICartItem
     {
         public int? SurfboardId {get; set;}
         public string? Name {get; set;}

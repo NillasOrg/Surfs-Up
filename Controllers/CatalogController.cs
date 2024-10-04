@@ -16,7 +16,7 @@ namespace Surfs_Up.Controllers
             _dbContext = dbContext;
         }
 
-        public IActionResult CatalogOverview()
+        public IActionResult Overview()
         {
             return View();
         }
@@ -44,10 +44,30 @@ namespace Surfs_Up.Controllers
                 cart.AddToCart(catalogItem);
 
                 // Redirect to the edit page for the added item
-                return RedirectToAction("Index", new { popupItemId = catalogItem.CatalogItemId });
+                return RedirectToAction("Index", new { popupItemId = catalogItem.SurfboardId });
                 
             }
             return NotFound();
+        }
+
+        [HttpPost]
+        public IActionResult AddWetsuitToCart(Wetsuit wetsuit)
+        {
+            if (!ModelState.IsValid)
+            {
+                ViewBag.ShowWetsuitPopup = true;
+                return View("Overview", wetsuit); 
+            }
+
+            if (wetsuit != null)
+            {
+                ShoppingCart cart = ShoppingCart.GetInstance();
+                cart.AddToCart(wetsuit); 
+
+                return RedirectToAction("Overview");
+            }
+
+            return NotFound(); 
         }
 
         public async Task<IActionResult> Popup(int id)
@@ -56,5 +76,11 @@ namespace Surfs_Up.Controllers
             return RedirectToAction("Index", new {popupItemId = catalogItem.SurfboardId});
         }
 
+        public IActionResult PopupWetsuit(int id)
+        {
+            Wetsuit wetsuit = new Wetsuit();
+            ViewBag.ShowWetsuitPopup = true;
+            return View("Overview", wetsuit);
+        }
     }
 }

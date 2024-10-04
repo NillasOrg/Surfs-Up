@@ -8,7 +8,7 @@ namespace Surfs_Up.Repository
 {
     class ShoppingCart
     {
-        private readonly List<Surfboard> _items;
+        private readonly List<ICartItem> cart;
         private static ShoppingCart _instance;
         // Singleton :)
         public static ShoppingCart GetInstance()
@@ -20,21 +20,26 @@ namespace Surfs_Up.Repository
             return _instance;
         }
 
-        private ShoppingCart() {
-            _items = [];
+        public ShoppingCart()
+        {
+            cart = new List<ICartItem>();
         }
 
-        public void AddToCart(Surfboard catalogItem) {
-            _items.Add(catalogItem);
+        public void AddToCart<T>(T item) where T : ICartItem
+        {
+            cart.Add(item);
         }
 
-        public void RemoveFromCart(Surfboard catalogItem) {
-            _items.Remove(catalogItem);
+        public void RemoveFromCart<T>(T item) where T : ICartItem 
+        {
+            cart.Remove(item);
         }
         
-        public List<Surfboard> GetCartItems() {
-            return _items ?? new List<Surfboard>();
+        public List<T> GetItemsOfType<T>() where T : ICartItem
+        {
+            return cart.OfType<T>().ToList();
         }
+
     }
     
 }

@@ -17,6 +17,7 @@ public class AdminController : Controller
     {
         var bookings = await _dbContext.Bookings
             .Include(b => b.Surfboards) 
+            .Include(b => b.Wetsuits)
             .Include(b => b.User)      
             .ToListAsync();
 

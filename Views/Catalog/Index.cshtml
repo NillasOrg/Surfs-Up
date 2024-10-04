@@ -17,7 +17,7 @@
         <div class="catalog-grid">
             @foreach (var item in Model)
             {
-                <a class="catalog-card" asp-action="Popup" asp-route-id="@item.CatalogItemId">
+                <a class="catalog-card" asp-action="Popup" asp-route-id="@item.SurfboardId">
                     <img src="@Url.Content(item.ImagePath)"/>
                     <div class="catalog-text-box">
                         <h4><b>@item.Name</b></h4>
@@ -32,7 +32,7 @@
                 <div id="popup" class="popup @(popupItemId.HasValue ? "open-popup" : "")">
                     <div class="popup-content" id="popup">
                         @{
-                            var item = Model.FirstOrDefault(i => i.CatalogItemId == popupItemId.Value);
+                            var item = Model.FirstOrDefault(i => i.SurfboardId == popupItemId.Value);
                             if (item != null)
                             {
                                 <form asp-action="Index" method="post">
@@ -54,7 +54,7 @@
 
                                     <div class="product-price">
                                         <form asp-action="Add" method="post">
-                                            <input type="hidden" name="id" value="@item.CatalogItemId"/>
+                                            <input type="hidden" name="id" value="@item.SurfboardId"/>
                                             <button type="submit" class="cart-btn">Tilføj til kurv</button>
                                         </form>
                                         <h5>@item.Price,- / dag</h5>
@@ -62,7 +62,7 @@
 
                                     <div class="specifications">
                                         <ul>
-                                            <li id="len">L�ngde: @item.Length (Inch)</li>
+                                            <li id="len">Længde: @item.Length (Inch)</li>
                                             <li id="width">Bredde: @item.Width (Inch)</li>
                                             <li id="thick">Tykkelse: @item.Thickness (Inch)</li>
                                             <li id="vol">Volumen: @item.Volume (L)</li>
