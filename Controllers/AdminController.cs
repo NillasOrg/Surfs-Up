@@ -1,29 +1,22 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Surfs_Up.Data.Services;
 using Surfs_Up.Models;
-
 namespace Surfs_Up.Controllers;
+
 
 public class AdminController : Controller
 {
-    private readonly AppDbContext _dbContext;
-
-    public AdminController(AppDbContext dbContext)
+    private BookingService _service;
+    public AdminController()
     {
-        _dbContext = dbContext;
+        _service = new BookingService();
     }
 
     public async Task<IActionResult> Index(int? deleteBookingId = null)
     {
-        var bookings = await _dbContext.Bookings
-            .Include(b => b.Surfboards) 
-            .Include(b => b.Wetsuits)
-            .Include(b => b.User)      
-            .ToListAsync();
-
-        // Pass the booking ID for deletion confirmation to the view
-        ViewBag.DeleteBookingId = deleteBookingId;
-
+        var bookings = await _service.GetAll();
         return View(bookings);
     }
 
@@ -37,13 +30,15 @@ public class AdminController : Controller
     [HttpPost]
     public async Task<IActionResult> ConfirmDeleteBooking(int id)
     {
-        var booking = await _dbContext.Bookings.FirstOrDefaultAsync(x => x.BookingId == id);
+        var booking = await _service.GetById(id);
 
         if (booking != null)
         {
-            _dbContext.Bookings.Remove(booking);
-            await _dbContext.SaveChangesAsync();
-            return RedirectToAction("Index");
+            bool isDeleted = await _service.Delete(id);
+            if (isDeleted)
+            {
+                return RedirectToAction("Index");
+            }
         }
 
         return NotFound();

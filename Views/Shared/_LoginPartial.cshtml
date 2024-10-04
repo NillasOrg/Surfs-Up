@@ -1,6 +1,25 @@
-﻿@if(Context.User.Identity.Name != null)
+﻿@using System.IdentityModel.Tokens.Jwt
+@inject IHttpContextAccessor HttpContextAccessor
+@using System.Security.Claims
+
+@{
+    // Henter JWT token for at se hvem der er logget ind.
+    string token = HttpContextAccessor.HttpContext.Session.GetString("JWToken");
+
+    string name = null;
+    if (!string.IsNullOrEmpty(token))
+    {
+        var handler = new JwtSecurityTokenHandler();
+        var jwtToken = handler.ReadJwtToken(token);
+
+        // Får 
+        name = jwtToken.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Name)?.Value;
+    }
+}
+
+@if (!string.IsNullOrEmpty(name))
 {
-    <a>Goddag @Context.User.Identity.Name</a> 
+    <a>Goddag @name</a>
     <a asp-controller="Account" asp-action="LogOut">Log ud</a>
 }
 else

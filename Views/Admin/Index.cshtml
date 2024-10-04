@@ -17,7 +17,7 @@
             {
                 <div class="booking-item">
                     <div class="booking-item-left">
-                        <h1>Booking ID: @booking.BookingId</h1>
+                        <h1>Booking ID: @booking.Id</h1>
                         <p>Name: @booking.User.Name</p>
                         <p>Email: @booking.User.Email</p>
                         <p>Date: @booking.EndDate.ToString()</p>
@@ -36,13 +36,13 @@
                         </div>
                     </div>
                     <div class="adminPopPopUp">
-                        @if (deleteBookingId == booking.BookingId)
+                        @if (deleteBookingId == booking.Id)
                         {
                             <!-- This block shows if the user clicked delete and is confirming -->
                             <div class="confirmation-box">
-                                <p>Er du sikker på at denne booking skal slettes? @booking.BookingId?</p>
+                                <p>Er du sikker på at denne booking skal slettes? @booking.Id?</p>
                                 <form asp-action="ConfirmDeleteBooking" method="post">
-                                    <input type="hidden" name="id" value="@booking.BookingId" />
+                                    <input type="hidden" name="id" value="@booking.Id" />
                                     <button type="submit" class="admin-confirm">Ja, slet booking</button>
                                 </form>
                                 <form asp-action="Index" method="get">
@@ -54,7 +54,7 @@
                         {
                             <!-- Normal delete button -->
                             <form asp-action="ConfirmDeletionStep" method="post">
-                                <input type="hidden" name="id" value="@booking.BookingId"/>
+                                <input type="hidden" name="id" value="@booking.Id"/>
                                 <button type="submit" class="trashcan">
                                     <img src="~/images/trash-can.png" alt="Remove booking" />
                                 </button>

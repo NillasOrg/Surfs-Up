@@ -76,7 +76,7 @@
                 </div>
                 <div class="booking-item-right">
                     <form asp-action="RemoveFromCart" method="post">
-                        <input type="hidden" name="id" value="@surfboard.SurfboardId" />
+                        <input type="hidden" name="id" value="@surfboard.Id" />
                         <input type="hidden" name="itemType" value="surfboard" />
                         <button type="submit">
                             <img src="~/images/trash-can.png" alt="Remove from cart" />

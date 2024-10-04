@@ -6,28 +6,20 @@ using Surfs_Up.Models;
 using Surfs_Up.Repository;
 
 using System.Threading.Tasks;
+using Surfs_Up.Data.Services;
 
 namespace Surfs_Up.Controllers {
 
     public class BookingController : Controller 
     {
-        private readonly AppDbContext _dbContext;
-        private readonly UserManager<User> _userManager;
-
-        public BookingController(AppDbContext dbContext, UserManager<User> userManager)
+        private readonly BookingService _service;
+        private readonly UserService _userService;
+        public BookingController()
         {
-            _dbContext = dbContext;
-            _userManager = userManager;
+            _userService = new UserService();
+            _service = new BookingService();
         }
-
-     
-
-        public async Task AddBooking(Booking booking)
-        {
-            await _dbContext.Bookings.AddAsync(booking);
-            await _dbContext.SaveChangesAsync();
-        }
-
+        
         public IActionResult Index()
         {
 
@@ -43,7 +35,6 @@ namespace Surfs_Up.Controllers {
         }
 
         [HttpPost]
-
         public async Task<IActionResult> CreateBooking(Booking booking)
         {
             ShoppingCart cart = ShoppingCart.GetInstance();
@@ -57,55 +48,34 @@ namespace Surfs_Up.Controllers {
 
             if (ModelState.IsValid)
             {
+                if (await _userService.isLoggedIn())
 
                 foreach (var item in booking.Surfboards)
                 {
-                    if (_dbContext.Surfboards.Any(c => c.SurfboardId == item.SurfboardId))
-                    {
-                        _dbContext.Attach(item);
-                    } 
+                    User user = await _userService.GetUser();
+                    booking.User = user;
                 }
-
-                foreach (var item in booking.Wetsuits)
+                else
                 {
-                    if (_dbContext.Wetsuits.Any(c => c.WetsuitId == item.WetsuitId))
-                    {
-                        _dbContext.Attach(item);
-                    }
+                    ModelState.AddModelError("", "User not found.");
+                    return View("Index", booking);
                 }
-
-                User user = await _userManager.GetUserAsync(User); 
-            if (user != null)
-            {
-                booking.User = user;
+                
+                var createdBooking = await _service.Create(booking);
+                Console.WriteLine($"Booking ID: {createdBooking.Id}");
+                return RedirectToAction("BookingSuccess", new { bookingId = createdBooking.Id });
             }
-            else
-            {
-                ModelState.AddModelError("", "User not found.");
-            }
-
-
-                await AddBooking(booking);
-                return RedirectToAction("BookingSuccess", booking);
-            }
-            
             return View("Index", booking);
         }
 
-        public IActionResult BookingSuccess(Booking booking, int bookingId)
+        public async Task<IActionResult> BookingSuccess(int bookingId)
         {
-            booking = _dbContext.Bookings
-                   .Include(b => b.Surfboards) 
-                   .Include(b => b.Wetsuits)
-                   .Include(b => b.User)      
-                   .FirstOrDefault(b => b.BookingId == bookingId);
-
+            var booking = await _service.GetById(bookingId);
+            
             if (booking == null)
             {
                 return NotFound();
             }
-
-
            
 
             return View("BookingSuccess", booking);
@@ -115,10 +85,9 @@ namespace Surfs_Up.Controllers {
         public IActionResult RemoveFromCart(int id, string itemType)
         {
             ShoppingCart cart = ShoppingCart.GetInstance();
-
             if (itemType == "surfboard")
             {
-                var surfboard = cart.GetItemsOfType<Surfboard>().FirstOrDefault(item => item.SurfboardId == id);
+                var surfboard = cart.GetItemsOfType<Surfboard>().FirstOrDefault(item => item.Id == id);
                 if (surfboard != null)
                 {
                     cart.RemoveFromCart(surfboard);

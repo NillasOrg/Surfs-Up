@@ -1,19 +1,17 @@
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using Surfs_Up.Models;
 using Surfs_Up.Repository;
-using System.Collections.Generic;
-using System.Linq;
+using Surfs_Up.Data.Services;
 
 namespace Surfs_Up.Controllers
 {
     public class CatalogController : Controller
     {
-        private readonly AppDbContext _dbContext;
+        private readonly SurfboardService _service;
 
-        public CatalogController(AppDbContext dbContext)
+        public CatalogController()
         {
-            _dbContext = dbContext;
+            _service = new SurfboardService();
         }
 
         public IActionResult Overview()
@@ -23,16 +21,16 @@ namespace Surfs_Up.Controllers
 
         public async Task<IActionResult> Index(int? popupItemId = null)
         {
-            var items = await _dbContext.Surfboards.ToListAsync();
+            var apiItems = await _service.GetAll();
             ViewBag.PopupItemId = popupItemId;
-            return View(items);
+            return View(apiItems);
         }
 
         [HttpPost]
         public async Task<IActionResult> Add(int id)
         {
             // Retrieve the catalog item from the database
-            var surfboard = await _dbContext.Surfboards.FirstOrDefaultAsync(item => item.SurfboardId == id);
+            var surfboard = await _service.GetById(id);
 
             // Check if the item was found
             if (surfboard != null)
@@ -44,7 +42,7 @@ namespace Surfs_Up.Controllers
                 cart.AddToCart(surfboard);
 
                 // Redirect to the edit page for the added item
-                return RedirectToAction("Index", new { popupItemId = surfboard.SurfboardId });
+                return RedirectToAction("Index", new { popupItemId = surfboard.Id });
                 
             }
             return NotFound();
@@ -72,8 +70,8 @@ namespace Surfs_Up.Controllers
 
         public async Task<IActionResult> Popup(int id)
         {
-            var catalogItem = await _dbContext.Surfboards.FirstOrDefaultAsync(item => item.SurfboardId == id);
-            return RedirectToAction("Index", new {popupItemId = catalogItem.SurfboardId});
+            var surfboard = await _service.GetById(id);
+            return RedirectToAction("Index", new {popupItemId = surfboard.Id});
         }
 
         public IActionResult PopupWetsuit(int id)
@@ -82,5 +80,6 @@ namespace Surfs_Up.Controllers
             ViewBag.ShowWetsuitPopup = true;
             return View("Overview", wetsuit);
         }
+        
     }
 }
