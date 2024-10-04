@@ -1,10 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using Surfs_Up.Models;
 using Surfs_Up.Repository;
-using System.Collections.Generic;
-using System.Linq;
-using Surfs_Up.Data;
 using Surfs_Up.Data.Services;
 
 namespace Surfs_Up.Controllers
