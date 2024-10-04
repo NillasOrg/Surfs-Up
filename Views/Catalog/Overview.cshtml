@@ -45,28 +45,26 @@
                         <span>Våddragt</span>
                         <h1>Aquasuit</h1>
                     </div>
-
-                    <div class="product-price">
-                        <form asp-action="Add" method="post">
-                            <input type="hidden" name="id" value=""/>
-                            <button type="submit" class="cart-btn">Tilføj til kurv</button>
-                        </form>
-                        <h5>@Model.Price,- / dag</h5>
-                    </div>
+                    <form asp-action="AddWetsuitToCart" method="post">
+                        <div class="product-price">
+                                <input type="hidden" name="id" value=""/>
+                                <button type="submit" class="cart-btn">Tilføj til kurv</button>
+                            <h5>@Model.Price,- / dag</h5>
+                        </div>
                     
-                    <div class="specification">
-                        <label for="size">Størrelse:</label>
-                        <input asp-for="Size" id="size" placeholder="Enter size" />
-                        <span asp-validation-for="Size" class="text-danger"></span>
-                    </div>
+                        <div class="specification">
+                            <label for="size">Størrelse:</label>
+                            <input asp-for="@Model.Size" id="size" placeholder="Enter size" />
+                            <span asp-validation-for="Size" class="text-danger"></span>
+                        </div>
 
 
-                    <div class="specification">
-                        <label for="gender">Køn:</label>
-                        <select asp-for="Gender" asp-items="Html.GetEnumSelectList<Wetsuit.GENDER>()" class="form-control"></select>
-                        <span asp-validation-for="Gender" class="text-danger"></span>
-                    </div>
-
+                        <div class="specification">
+                            <label for="gender">Køn:</label>
+                            <select asp-for="@Model.Gender" asp-items="Html.GetEnumSelectList<Wetsuit.GENDER>()" class="form-control"></select>
+                            <span asp-validation-for="Gender" class="text-danger"></span>
+                        </div>
+                    </form>
                 </div>
             </div>
             }

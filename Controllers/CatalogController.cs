@@ -32,19 +32,19 @@ namespace Surfs_Up.Controllers
         public async Task<IActionResult> Add(int id)
         {
             // Retrieve the catalog item from the database
-            var catalogItem = await _dbContext.Surfboards.FirstOrDefaultAsync(item => item.SurfboardId == id);
+            var surfboard = await _dbContext.Surfboards.FirstOrDefaultAsync(item => item.SurfboardId == id);
 
             // Check if the item was found
-            if (catalogItem != null)
+            if (surfboard != null)
             {
                 // Get the instance of the shopping cart
                 ShoppingCart cart = ShoppingCart.GetInstance();
 
                 // Add the item to the cart
-                cart.AddToCart(catalogItem);
+                cart.AddToCart(surfboard);
 
                 // Redirect to the edit page for the added item
-                return RedirectToAction("Index", new { popupItemId = catalogItem.SurfboardId });
+                return RedirectToAction("Index", new { popupItemId = surfboard.SurfboardId });
                 
             }
             return NotFound();
