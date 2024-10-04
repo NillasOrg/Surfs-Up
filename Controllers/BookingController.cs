@@ -85,11 +85,9 @@ namespace Surfs_Up.Controllers {
         public IActionResult RemoveFromCart(int id, string itemType)
         {
             ShoppingCart cart = ShoppingCart.GetInstance();
-            var item = cart.GetCartItems().FirstOrDefault(item => item.Id == id);
-
             if (itemType == "surfboard")
             {
-                var surfboard = cart.GetItemsOfType<Surfboard>().FirstOrDefault(item => item.SurfboardId == id);
+                var surfboard = cart.GetItemsOfType<Surfboard>().FirstOrDefault(item => item.Id == id);
                 if (surfboard != null)
                 {
                     cart.RemoveFromCart(surfboard);
