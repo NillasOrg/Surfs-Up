@@ -24,10 +24,12 @@ namespace Surfs_Up.Controllers {
         {
 
             ShoppingCart cart = ShoppingCart.GetInstance();
-            var items = cart.GetCartItems();
+            var wetsuits = cart.GetItemsOfType<Wetsuit>();
+            var surfboards = cart.GetItemsOfType<Surfboard>();
             Booking booking = new Booking()
             {
-                Surfboards = items
+                Wetsuits = wetsuits,
+                Surfboards = surfboards
             };
             return View(booking);
         }
@@ -36,16 +38,19 @@ namespace Surfs_Up.Controllers {
         public async Task<IActionResult> CreateBooking(Booking booking)
         {
             ShoppingCart cart = ShoppingCart.GetInstance();
-            booking.Surfboards = cart.GetCartItems();
+            booking.Surfboards = cart.GetItemsOfType<Surfboard>();
+            booking.Wetsuits = cart.GetItemsOfType<Wetsuit>();
 
             if (booking.Surfboards == null || !booking.Surfboards.Any())
             {
-                ModelState.AddModelError("BookingItems", "Kurven er tom!");
+                ModelState.AddModelError("Surfboards", "Kurven er tom!");
             }
 
             if (ModelState.IsValid)
             {
                 if (await _userService.isLoggedIn())
+
+                foreach (var item in booking.Surfboards)
                 {
                     User user = await _userService.GetUser();
                     booking.User = user;
@@ -77,18 +82,32 @@ namespace Surfs_Up.Controllers {
         }
 
         [HttpPost]
-        public IActionResult RemoveFromCart(int id)
+        public IActionResult RemoveFromCart(int id, string itemType)
         {
             ShoppingCart cart = ShoppingCart.GetInstance();
             var item = cart.GetCartItems().FirstOrDefault(item => item.Id == id);
 
-            if(item != null) 
+            if (itemType == "surfboard")
             {
-                cart.RemoveFromCart(item);
-                return RedirectToAction("Index");
+                var surfboard = cart.GetItemsOfType<Surfboard>().FirstOrDefault(item => item.SurfboardId == id);
+                if (surfboard != null)
+                {
+                    cart.RemoveFromCart(surfboard);
+                    return RedirectToAction("Index");
+                }
             }
-            
+            else if (itemType == "wetsuit")
+            {
+                var wetsuit = cart.GetItemsOfType<Wetsuit>().FirstOrDefault(item => item.WetsuitId == id);
+                if (wetsuit != null)
+                {
+                    cart.RemoveFromCart(wetsuit);
+                    return RedirectToAction("Index");
+                }
+            }
+
             return NotFound();
         }
+
     }
 }

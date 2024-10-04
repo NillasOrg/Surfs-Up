@@ -66,23 +66,43 @@
             {
                 <h2 style="display: flex; justify-content: center;">Kurven er tom</h2>
             }
-            @foreach (var item in Model.Surfboards)
-            {
-                <div class="booking-item">
-                    <div class="booking-item-left">
-                        <h1>@item.Name</h1>
-                        <p>@item.Description</p>
-                    </div>
-                    <div class="booking-item-right">
-                        <form asp-action="RemoveFromCart" method="post">
-                            <input type="hidden" name="id" value="@item.Id" />
-                            <button type="submit">
-                                <img src="~/images/trash-can.png" alt="Remove from cart" />
-                            </button>
-                        </form>
-                    </div>
+
+        @foreach (var surfboard in Model.Surfboards)
+        {
+            <div class="booking-item">
+                <div class="booking-item-left">
+                    <h1>@surfboard.Name</h1>
+                    <p>@surfboard.Description</p>
                 </div>
-            }
+                <div class="booking-item-right">
+                    <form asp-action="RemoveFromCart" method="post">
+                        <input type="hidden" name="id" value="@surfboard.SurfboardId" />
+                        <input type="hidden" name="itemType" value="surfboard" />
+                        <button type="submit">
+                            <img src="~/images/trash-can.png" alt="Remove from cart" />
+                        </button>
+                    </form>
+                </div>
+            </div>
+        }
+
+        @foreach (var wetsuit in Model.Wetsuits)
+        {
+            <div class="booking-item">
+                <div class="booking-item-left">
+                    <h1>Vådedragt: @wetsuit.Size, @wetsuit.Gender</h1>
+                </div>
+                <div class="booking-item-right">
+                    <form asp-action="RemoveFromCart" method="post">
+                        <input type="hidden" name="id" value="@wetsuit.WetsuitId" />
+                         <input type="hidden" name="itemType" value="wetsuit" />
+                        <button type="submit">
+                            <img src="~/images/trash-can.png" alt="Remove from cart" />
+                        </button>
+                    </form>
+                </div>
+            </div>
+        }
         </div>
     </div>
 </main>

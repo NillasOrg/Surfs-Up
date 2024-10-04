@@ -11,6 +11,7 @@ namespace Surfs_Up.Models
         [Required]
         public User User { get; set; }
         public List<Surfboard>? Surfboards { get; set; }
+        public List<Wetsuit>? Wetsuits { get; set; }
         public string Remark { get; set; }
     }
 
