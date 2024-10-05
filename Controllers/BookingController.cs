@@ -1,28 +1,26 @@
-
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using Surfs_Up.Models;
 using Surfs_Up.Repository;
-
-using System.Threading.Tasks;
 using Surfs_Up.Data.Services;
+using System.Threading.Tasks;
+using System.Linq;
 
-namespace Surfs_Up.Controllers {
-
-    public class BookingController : Controller 
+namespace Surfs_Up.Controllers
+{
+    public class BookingController : Controller
     {
         private readonly BookingService _service;
         private readonly UserService _userService;
-        public BookingController()
+
+        public BookingController(BookingService service, UserService userService)
         {
-            _userService = new UserService();
-            _service = new BookingService();
+            _service = service;
+            _userService = userService;
         }
-        
+
         public IActionResult Index()
         {
-
             ShoppingCart cart = ShoppingCart.GetInstance();
             var wetsuits = cart.GetItemsOfType<Wetsuit>();
             var surfboards = cart.GetItemsOfType<Surfboard>();
@@ -48,9 +46,7 @@ namespace Surfs_Up.Controllers {
 
             if (ModelState.IsValid)
             {
-                if (await _userService.isLoggedIn())
-
-                foreach (var item in booking.Surfboards)
+                if (await _userService.IsLoggedIn())
                 {
                     User user = await _userService.GetUser();
                     booking.User = user;
@@ -60,7 +56,7 @@ namespace Surfs_Up.Controllers {
                     ModelState.AddModelError("", "User not found.");
                     return View("Index", booking);
                 }
-                
+
                 var createdBooking = await _service.Create(booking);
                 Console.WriteLine($"Booking ID: {createdBooking.Id}");
                 return RedirectToAction("BookingSuccess", new { bookingId = createdBooking.Id });
@@ -71,12 +67,11 @@ namespace Surfs_Up.Controllers {
         public async Task<IActionResult> BookingSuccess(int bookingId)
         {
             var booking = await _service.GetById(bookingId);
-            
+
             if (booking == null)
             {
                 return NotFound();
             }
-           
 
             return View("BookingSuccess", booking);
         }
@@ -106,6 +101,5 @@ namespace Surfs_Up.Controllers {
 
             return NotFound();
         }
-
     }
 }

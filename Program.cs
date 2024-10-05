@@ -1,7 +1,13 @@
+using Surfs_Up.Data.Services;
+
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllersWithViews();
 builder.Services.AddHttpContextAccessor();
+
+builder.Services.AddScoped<BookingService>();
+builder.Services.AddScoped<UserService>();
+
 
 builder.Services.AddSession(options =>
 {
