@@ -1,26 +1,29 @@
+
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Surfs_Up.Models;
 using Surfs_Up.Repository;
-using Surfs_Up.Data.Services;
+
 using System.Threading.Tasks;
-using System.Linq;
+using Surfs_Up.Data.Services;
 
 namespace Surfs_Up.Controllers
 {
+
     public class BookingController : Controller
     {
         private readonly BookingService _service;
         private readonly UserService _userService;
-
-        public BookingController(BookingService service, UserService userService)
+        public BookingController()
         {
-            _service = service;
-            _userService = userService;
+            _userService = new UserService();
+            _service = new BookingService();
         }
 
         public IActionResult Index()
         {
+
             ShoppingCart cart = ShoppingCart.GetInstance();
             var wetsuits = cart.GetItemsOfType<Wetsuit>();
             var surfboards = cart.GetItemsOfType<Surfboard>();
@@ -47,10 +50,12 @@ namespace Surfs_Up.Controllers
             if (ModelState.IsValid)
             {
                 if (await _userService.IsLoggedIn())
-                {
-                    User user = await _userService.GetUser();
-                    booking.User = user;
-                }
+
+                    foreach (var item in booking.Surfboards)
+                    {
+                        User user = await _userService.GetUser();
+                        booking.User = user;
+                    }
                 else
                 {
                     ModelState.AddModelError("", "User not found.");
@@ -72,6 +77,7 @@ namespace Surfs_Up.Controllers
             {
                 return NotFound();
             }
+
 
             return View("BookingSuccess", booking);
         }
@@ -101,5 +107,6 @@ namespace Surfs_Up.Controllers
 
             return NotFound();
         }
+
     }
 }

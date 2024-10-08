@@ -7,12 +7,9 @@ using Surfs_Up.Models;
 
 public class UserService
 {
-    private readonly HttpClient _httpClient;
-
     public UserService()
     {
         ApiContext.Initialize();
-        _httpClient = ApiContext._apiClient; // Forudsætter, at _apiClient er en HttpClient-instans
     }
 
     public async Task<bool> Login(string email, string password)
@@ -26,7 +23,7 @@ public class UserService
         var content = new StringContent(JsonSerializer.Serialize(loginData), Encoding.UTF8, "application/json");
 
         // Sender HTTP Request til at logge ind og få en JWT token
-        using (HttpResponseMessage response = await _httpClient.PostAsync("/api/auth/login", content))
+        using (HttpResponseMessage response = await ApiContext._apiClient.PostAsync("/api/auth/login", content))
         {
             if (response.IsSuccessStatusCode)
             {
@@ -54,47 +51,39 @@ public class UserService
         };
 
         var content = new StringContent(JsonSerializer.Serialize(registerData), Encoding.UTF8, "application/json");
-
         // Sender HTTP Request til at registrere
-        using (HttpResponseMessage response = await _httpClient.PostAsync("/api/auth/register", content))
+        using (HttpResponseMessage response = await ApiContext._apiClient.PostAsync("/api/auth/register", content))
         {
-            return response.IsSuccessStatusCode; // Returner true, hvis registreringen var succesfuld
+            if (response.IsSuccessStatusCode)
+            {
+                return true;
+            }
+
+            return false;
         }
     }
 
     public async Task<bool> Logout()
     {
-        // Fjerner JWT-token fra session
+        // Clear the JWT token from the session
         var contextAccessor = new HttpContextAccessor();
         contextAccessor.HttpContext.Session.Remove("JWToken");
 
-        return true; // Indikerer at logout var succesfuld
+        return true; // Indicate that the logout was successful
     }
+
 
     public async Task<User> GetUser()
     {
         var contextAccessor = new HttpContextAccessor();
         string token = contextAccessor.HttpContext.Session.GetString("JWToken");
 
-        if (string.IsNullOrEmpty(token))
-        {
-            return null; // Returner null hvis ikke logget ind
-        }
-
         var handler = new JwtSecurityTokenHandler();
         var jwtToken = handler.ReadJwtToken(token);
 
         string name = jwtToken.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Name)?.Value;
         string email = jwtToken.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Email)?.Value;
-
-        // Hent ID som string og forsøg at konvertere til int
-        var idClaim = jwtToken.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
-
-        // Kontroller om idClaim er null før konvertering
-        if (idClaim == null || !int.TryParse(idClaim, out int id))
-        {
-            return null; // Hvis konverteringen fejler, returner null
-        }
+        int id = Int32.Parse(jwtToken.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value);
 
         return new User
         {
@@ -108,26 +97,11 @@ public class UserService
         var contextAccessor = new HttpContextAccessor();
         string token = contextAccessor.HttpContext.Session.GetString("JWToken");
 
-        return !string.IsNullOrEmpty(token); // Returner true hvis token eksisterer
-    }
-    public async Task<string> TestApiConnection()
-    {
-        try
+        if (token != null)
         {
-            var response = await _httpClient.GetAsync("/api/auth/test"); // Erstat med et eksisterende endpoint
-            if (response.IsSuccessStatusCode)
-            {
-                return "API connection successful!";
-            }
-            else
-            {
-                return $"API connection failed: {response.StatusCode}";
-            }
+            return true;
         }
-        catch (Exception ex)
-        {
-            return $"API connection error: {ex.Message}";
-        }
-    }
 
+        return false;
+    }
 }
