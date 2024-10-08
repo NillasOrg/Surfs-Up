@@ -53,7 +53,7 @@ namespace Surfs_Up.Controllers
         {
             _service.Logout();
 
-            if (!await _service.IsLoggedIn())
+            if (!await _service.isLoggedIn())
             {
                 return RedirectToAction("Login");
             }
