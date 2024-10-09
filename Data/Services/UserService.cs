@@ -62,7 +62,7 @@ public class UserService
             return false;
         }
     }
-    
+
     public async Task<bool> Logout()
     {
         // Clear the JWT token from the session
@@ -80,14 +80,13 @@ public class UserService
 
         var handler = new JwtSecurityTokenHandler();
         var jwtToken = handler.ReadJwtToken(token);
-        
+
         string name = jwtToken.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Name)?.Value;
         string email = jwtToken.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Email)?.Value;
         int id = Int32.Parse(jwtToken.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value);
 
         return new User
         {
-            Id = id,
             Name = name,
             Email = email
         };
