@@ -121,14 +121,14 @@
 .product-left {
     width: 45%;
     position: relative;
-    border: groove;
+   
     
 }
     
 .product-right {
     width: 55%;
     margin-top: 0px;
-    border: groove;
+    
 }
 
 .specification {
