@@ -12,7 +12,7 @@
         </div>
         <div class="booking-body">
             <form id="booking-form" asp-action="CreateBooking" method="post">
-                @if (await _userService.IsLoggedIn())
+                @if (await _userService.isLoggedIn())
                 {
                     <!-- Hvis brugeren er logget ind, udfyld automatisk navn og email og gør felterne readonly og grayed out -->
                     <div>

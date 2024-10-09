@@ -5,8 +5,11 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 builder.Services.AddHttpContextAccessor();
 
-builder.Services.AddScoped<BookingService>();
-builder.Services.AddScoped<UserService>();
+// gør at den ved hvordan den skal oprette instanser af BookingService og UserService i controllere.
+builder.Services.AddScoped<BookingService>(); 
+
+// Det er bare dependency injection || Hvis den skal oprettes en gang pr. HTTP-anmodning (Scoped):
+builder.Services.AddScoped<UserService>(); 
 
 
 builder.Services.AddSession(options =>

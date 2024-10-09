@@ -8,8 +8,7 @@ using Surfs_Up.Repository;
 using System.Threading.Tasks;
 using Surfs_Up.Data.Services;
 
-namespace Surfs_Up.Controllers
-{
+namespace Surfs_Up.Controllers{
 
     public class BookingController : Controller
     {
@@ -49,7 +48,7 @@ namespace Surfs_Up.Controllers
 
             if (ModelState.IsValid)
             {
-                if (await _userService.IsLoggedIn())
+                if (await _userService.isLoggedIn())
 
                     foreach (var item in booking.Surfboards)
                     {
