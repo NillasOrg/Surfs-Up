@@ -26,14 +26,15 @@
                         <div class="booking-item-inner">
                             @foreach (var item in booking.Surfboards)
                             {
-                                <p>- @item.Name</p>
+                                <p>- <strong>@item.Name</strong></p>
                             }
                             @foreach (var item in booking.Wetsuits)
                             {
-                                <p>- Våddragt størrele: @item.Size</p>
-                                <p>@item.Gender</p>
+                                <p>- Våddragt størrelse: <strong>@item.Size</strong></p> <!-- Bold size -->
+                                <p>Køn: <strong>@item.Gender</strong></p> <!-- Bold gender -->
                             }
                         </div>
+
                     </div>
                     <div class="adminPopPopUp">
                         @if (deleteBookingId == booking.Id)

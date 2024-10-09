@@ -21,7 +21,7 @@
     min-height: 450px;
     max-height: 450px;
     margin: 20px;
-    border: 1px solid #000000;
+    border: 1px solid #ddd;
     border-radius: 10px;
     padding: 10px;
     box-sizing: border-box;
@@ -29,10 +29,15 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: #f9f9f9;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #ffffff;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     transition: transform 0.2s, box-shadow 0.2s;
+    margin-top: 10px;
 }
+
+    .catalog-card h4 {
+        margin-bottom: 5px; /* Reduce space under headings */
+    }
 
 .catalog-card img {
     width: 100%;
@@ -91,6 +96,7 @@
     text-decoration: none;
     padding: 12px 30px;
     transition: all .5s;
+    margin-top: 10px;
 }
 
 .cart-btn:hover {
@@ -115,19 +121,45 @@
 .product-left {
     width: 45%;
     position: relative;
-    border: groove;
+   
     
 }
     
 .product-right {
     width: 55%;
     margin-top: 0px;
-    border: groove;
-}
-
-.Container1{
     
 }
+
+.specification {
+    display: flex;
+    flex-direction: column; 
+    margin-bottom: 15px;
+}
+
+.specification label {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.specification input, .specification select{
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+.specification input:focus, .specification select:focus {
+        outline: none;
+        border-color: #7DC855; /* Highlight border when focused */
+        box-shadow: 0 0 5px rgba(125, 200, 85, 0.5);
+    }
+
+.text-danger {
+    color: red;
+    font-size: 12px;
+}
+
 .product-left img {
     width: 100%;
     height: auto;
@@ -176,6 +208,7 @@
 .product-price {
     display: flex;
     align-items: center;
+    margin-bottom: 20px;
 }
 
 .product-price span {

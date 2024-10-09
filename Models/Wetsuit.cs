@@ -9,9 +9,8 @@ namespace Surfs_Up.Models
 
         public double Price { get; set; } = 149;
 
-        [Wetsuit_EnsureCorrectSizing]
-        [Required]
-        public double Size { get; set; }
+        //[Wetsuit_EnsureCorrectSizing]
+        [Required] public SIZES Size { get; set; } = Wetsuit.SIZES.M;
 
         public List<Booking>? Bookings { get; set; }
 
@@ -20,7 +19,12 @@ namespace Surfs_Up.Models
 
         public enum GENDER
         {
-            Men, Women
-        } 
+            Mand, Kvinde
+        }
+
+        public enum SIZES
+        {
+            XS, S, M, L, XL, XXL, XXXL
+        }
     }
 }

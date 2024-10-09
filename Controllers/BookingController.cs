@@ -8,9 +8,9 @@ using Surfs_Up.Repository;
 using System.Threading.Tasks;
 using Surfs_Up.Data.Services;
 
-namespace Surfs_Up.Controllers{
+namespace Surfs_Up.Controllers {
 
-    public class BookingController : Controller
+    public class BookingController : Controller 
     {
         private readonly BookingService _service;
         private readonly UserService _userService;
@@ -19,7 +19,7 @@ namespace Surfs_Up.Controllers{
             _userService = new UserService();
             _service = new BookingService();
         }
-
+        
         public IActionResult Index()
         {
 
@@ -50,17 +50,17 @@ namespace Surfs_Up.Controllers{
             {
                 if (await _userService.isLoggedIn())
 
-                    foreach (var item in booking.Surfboards)
-                    {
-                        User user = await _userService.GetUser();
-                        booking.User = user;
-                    }
+                foreach (var item in booking.Surfboards)
+                {
+                    User user = await _userService.GetUser();
+                    booking.User = user;
+                }
                 else
                 {
                     ModelState.AddModelError("", "User not found.");
                     return View("Index", booking);
                 }
-
+                
                 var createdBooking = await _service.Create(booking);
                 Console.WriteLine($"Booking ID: {createdBooking.Id}");
                 return RedirectToAction("BookingSuccess", new { bookingId = createdBooking.Id });
@@ -71,12 +71,12 @@ namespace Surfs_Up.Controllers{
         public async Task<IActionResult> BookingSuccess(int bookingId)
         {
             var booking = await _service.GetById(bookingId);
-
+            
             if (booking == null)
             {
                 return NotFound();
             }
-
+           
 
             return View("BookingSuccess", booking);
         }
