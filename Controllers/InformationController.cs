@@ -12,7 +12,7 @@ namespace Surfs_Up.Controllers {
         
         public IActionResult Edit(int? id)
         {
-            Information information = new Information { InformationId = id ?? 0 };
+            Information information = new Information {InformationId = id ?? 0};
             return View(information);
         }
     }

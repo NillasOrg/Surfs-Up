@@ -48,7 +48,7 @@ namespace Surfs_Up.Controllers {
 
             if (ModelState.IsValid)
             {
-                if (await _userService.isLoggedIn())
+                if (await _userService.IsLoggedIn())
                 {
                     foreach (var item in booking.Surfboards)
                     {
@@ -64,7 +64,7 @@ namespace Surfs_Up.Controllers {
                 
                 var createdBooking = await _service.Create(booking);
                 Console.WriteLine($"Booking ID: {createdBooking.Id}");
-                return RedirectToAction("BookingSuccess", new { bookingId = createdBooking.Id });
+                return RedirectToAction("BookingSuccess", new {bookingId = createdBooking.Id});
             }
             return View("Index", booking);
         }
@@ -104,9 +104,7 @@ namespace Surfs_Up.Controllers {
                     return RedirectToAction("Index");
                 }
             }
-
             return NotFound();
         }
-
     }
 }

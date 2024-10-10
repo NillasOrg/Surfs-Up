@@ -37,7 +37,7 @@ public class AdminController : Controller
     public IActionResult ConfirmDeletionStep(int id)
     {
         // Redirect to index with a delete confirmation step
-        return RedirectToAction("Index", new { deleteBookingId = id });
+        return RedirectToAction("Index", new {deleteBookingId = id});
     }
 
     [HttpPost]
@@ -53,7 +53,6 @@ public class AdminController : Controller
                 return RedirectToAction("Index");
             }
         }
-
         return NotFound();
     }
 }
