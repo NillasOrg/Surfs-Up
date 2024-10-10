@@ -28,6 +28,8 @@ public class AdminController : Controller
             ApiRequestLogs = apiRequestLogs
         };
 
+        ViewBag.DeleteBookingId = deleteBookingId;
+
         return View(dashboard);
     }
 
