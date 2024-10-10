@@ -181,3 +181,10 @@
     font-weight: bold;
 }
 
+.grayed-out {
+    background-color: #f0f0f0; /* Lys grå baggrund */
+    color: #999999; /* Mørk grå tekst */
+    cursor: not-allowed; /* Ændrer markøren for at indikere, at feltet er inaktivt */
+}
+
+
