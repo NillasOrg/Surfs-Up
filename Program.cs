@@ -18,8 +18,8 @@ app.UseSession();
 app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
-
 app.UseStaticFiles();
+app.UseAPILog();
 
 app.MapControllerRoute(
     name: "default",
