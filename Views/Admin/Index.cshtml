@@ -1,4 +1,4 @@
-﻿@model List<Booking>
+﻿@model AdminDashboard
 @{
     int? deleteBookingId = ViewBag.DeleteBookingId;
 }
@@ -13,7 +13,7 @@
             <h2>Current bookings</h2>
         </div>
         <div class="booking-body">
-            @foreach (var booking in Model)
+            @foreach (var booking in Model.Bookings)
             {
                 <div class="booking-item">
                     <div class="booking-item-left">
@@ -71,8 +71,34 @@
         <div class="booking-head">
             <h2>Dashboard</h2>
         </div>
+
         <div class="booking-body">
-            <h2 style="display: flex; justify-content: center;">Indhold er ikke bestemt endnu</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>IpAddress</th>
+                        @* <th>UserId</th> *@
+                        <th>SuccessfulRequests</th>
+                        <th>FailedRequests</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @* @{
+                        
+                        var groupedLogs = Model.ApiRequestLogs.GroupBy(log => log.IpAddress);
+                        var groupedLogs = Model.ApiRequestLogs.GroupBy(log => log.User.Id);
+                    } *@
+
+                    @foreach (var item in Model.ApiRequestLogs)
+                    {
+                        <tr>
+                            <td>@item.IpAddress</td> 
+                            <td>@item.SuccessfulRequests</td>
+                            <td>@item.FailedRequests</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
         </div>
     </div>
 </main>
