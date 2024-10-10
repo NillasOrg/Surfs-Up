@@ -48,17 +48,15 @@ namespace Surfs_Up.Controllers
             return View(model);
         }
 
-
         public async Task<IActionResult> LogOut()
         {
             _service.Logout();
 
-            if (!await _service.isLoggedIn())
+            if (!await _service.IsLoggedIn())
             {
                 return RedirectToAction("Login");
             }
             return RedirectToAction("Index", "Home");
         }
-
     }
 }

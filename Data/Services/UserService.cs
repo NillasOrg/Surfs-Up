@@ -93,7 +93,7 @@ public class UserService
         };
     }
 
-    public async Task<bool> isLoggedIn()
+    public async Task<bool> IsLoggedIn()
     {
         var contextAccessor = new HttpContextAccessor();
         string token = contextAccessor.HttpContext.Session.GetString("JWToken");
