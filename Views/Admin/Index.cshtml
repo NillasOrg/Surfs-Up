@@ -89,7 +89,7 @@
                         var groupedLogs = Model.ApiRequestLogs.GroupBy(log => log.User.Id);
                     } *@
 
-                    @foreach (var item in Model.ApiRequestLogs)
+                    @foreach (var item in Model.Request)
                     {
                         <tr>
                             <td>@item.IpAddress</td> 

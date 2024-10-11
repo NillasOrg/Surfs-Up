@@ -1,6 +1,6 @@
 ﻿namespace Surfs_Up.Models
 {
-    public class APIRequestLog
+    public class Request
     {
         public int Id { get; set; }
         public string IpAddress { get; set; }

@@ -25,7 +25,7 @@ public class AdminController : Controller
         AdminDashboard dashboard = new AdminDashboard
         {
             Bookings = bookings,
-            ApiRequestLogs = apiRequestLogs
+            Request = apiRequestLogs
         };
 
         ViewBag.DeleteBookingId = deleteBookingId;

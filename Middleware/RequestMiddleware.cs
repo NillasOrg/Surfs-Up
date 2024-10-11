@@ -5,11 +5,11 @@ using System;
 
 namespace Surfs_Up.Middleware
 {
-    public class APILogMiddleware
+    public class RequestMiddleware
     {
         private readonly RequestDelegate _next;
 
-        public APILogMiddleware(RequestDelegate next)
+        public RequestMiddleware(RequestDelegate next)
         {
             ApiContext.Initialize();
             _next = next;
@@ -21,14 +21,14 @@ namespace Surfs_Up.Middleware
 
             var ipAddress = context.Connection.RemoteIpAddress?.ToString();
 
-            var apiRequestLog = new APIRequestLog
+            Request failedRequest = new Request
             {
                 IpAddress = ipAddress
             };
 
             if(context.Response.StatusCode >= 400)
             {
-                await ApiContext._apiClient.PostAsJsonAsync("/api/admin", apiRequestLog);
+                await ApiContext._apiClient.PostAsJsonAsync("/api/admin", failedRequest);
             }
 
         }
@@ -39,6 +39,6 @@ public static class APILogMiddlewareExtensions
 {
     public static IApplicationBuilder UseAPILog(this IApplicationBuilder builder)
     {
-        return builder.UseMiddleware<APILogMiddleware>();
+        return builder.UseMiddleware<Surfs_Up.Middleware.RequestMiddleware>();
     }
 }

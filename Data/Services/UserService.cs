@@ -22,7 +22,7 @@ public class UserService
 
         var content = new StringContent(JsonSerializer.Serialize(loginData), Encoding.UTF8, "application/json");
 
-        // Sender HTTP Request til at logge ind og få en JWT token
+        // Sender HTTP RequestMiddleware til at logge ind og få en JWT token
         using (HttpResponseMessage response = await ApiContext._apiClient.PostAsync("/api/auth/login", content))
         {
             if (response.IsSuccessStatusCode)
@@ -51,7 +51,7 @@ public class UserService
         };
 
         var content = new StringContent(JsonSerializer.Serialize(registerData), Encoding.UTF8, "application/json");
-        // Sender HTTP Request til at registrere
+        // Sender HTTP RequestMiddleware til at registrere
         using (HttpResponseMessage response = await ApiContext._apiClient.PostAsync("/api/auth/register", content))
         {
             if (response.IsSuccessStatusCode)
