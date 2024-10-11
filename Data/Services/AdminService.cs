@@ -10,7 +10,7 @@ namespace Surfs_Up.Data.Services
             ApiContext.Initialize();
         }
 
-        public async Task<List<Request>> GetAllRequest()
+        public async Task<List<Request>> GetAllRequests()
         {
             using (HttpResponseMessage response = await ApiContext._apiClient.GetAsync("/api/admin"))
             {

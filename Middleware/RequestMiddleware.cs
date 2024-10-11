@@ -37,7 +37,7 @@ namespace Surfs_Up.Middleware
 
 public static class APILogMiddlewareExtensions
 {
-    public static IApplicationBuilder UseAPILog(this IApplicationBuilder builder)
+    public static IApplicationBuilder UseRequestLog(this IApplicationBuilder builder)
     {
         return builder.UseMiddleware<Surfs_Up.Middleware.RequestMiddleware>();
     }

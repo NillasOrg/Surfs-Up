@@ -19,7 +19,7 @@ app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
 app.UseStaticFiles();
-app.UseAPILog();
+app.UseRequestLog();
 
 app.MapControllerRoute(
     name: "default",
