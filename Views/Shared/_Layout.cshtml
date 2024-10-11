@@ -1,3 +1,6 @@
+@using Surfs_Up.Repository
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -19,7 +22,15 @@
                 <a href="/Admin/index">Administrer bookings</a>
             }
             <a href="/catalog/overview">Katalog</a>
-            <a href="/booking/index">Booking</a>
+            @{
+                var Cart = ShoppingCart.GetInstance().GetItemsOfType<ICartItem>();
+                if (Cart.Any())
+                {
+                    <a href="/booking/index">Booking (@Cart.Count)</a>
+                }
+                else  {<a href = "/booking/index" >Booking</a>}
+            }
+           
             <a href="/information/index">Information</a>
             @await Html.PartialAsync("_LoginPartial")
         </nav>
