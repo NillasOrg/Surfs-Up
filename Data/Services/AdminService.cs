@@ -10,14 +10,14 @@ namespace Surfs_Up.Data.Services
             ApiContext.Initialize();
         }
 
-        public async Task<List<Request>> GetAllRequestLogs()
+        public async Task<List<Request>> GetAllRequest()
         {
             using (HttpResponseMessage response = await ApiContext._apiClient.GetAsync("/api/admin"))
             {
                 if (response.IsSuccessStatusCode)
                 {
-                    List<Request> apiRequestLogs = await response.Content.ReadFromJsonAsync<List<Request>>();
-                    return apiRequestLogs;
+                    List<Request> requests = await response.Content.ReadFromJsonAsync<List<Request>>();
+                    return requests;
                 }
 
                 throw new Exception(response.ReasonPhrase);

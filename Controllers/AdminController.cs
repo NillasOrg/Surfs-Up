@@ -20,7 +20,7 @@ public class AdminController : Controller
     public async Task<IActionResult> Index(int? deleteBookingId = null)
     {
         var bookings = await _service.GetAll();
-        var apiRequestLogs = await _adminService.GetAllRequestLogs();
+        var apiRequestLogs = await _adminService.GetAllRequest();
 
         AdminDashboard dashboard = new AdminDashboard
         {
