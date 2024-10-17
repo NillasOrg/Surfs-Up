@@ -1,19 +1,14 @@
-﻿@using System.IdentityModel.Tokens.Jwt
-@inject IHttpContextAccessor HttpContextAccessor
-@using System.Security.Claims
+﻿@inject IHttpContextAccessor HttpContextAccessor
 
 @{
-    // Henter JWT token for at se hvem der er logget ind.
-    string token = HttpContextAccessor.HttpContext.Session.GetString("JWToken");
+    UserService _userService = new UserService();
+    string email = HttpContextAccessor.HttpContext.Session.GetString("Email");
 
     string name = null;
-    if (!string.IsNullOrEmpty(token))
+    if (!string.IsNullOrEmpty(email))
     {
-        var handler = new JwtSecurityTokenHandler();
-        var jwtToken = handler.ReadJwtToken(token);
-
-        // Får 
-        name = jwtToken.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Name)?.Value;
+        var user = await _userService.GetUser(email);
+        name = user.Name;
     }
 }
 

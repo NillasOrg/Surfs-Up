@@ -1,9 +1,12 @@
 ﻿using System.IdentityModel.Tokens.Jwt;
+using System.Net.Http.Headers;
 using System.Security.Claims;
 using System.Text;
 using System.Text.Json;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Surfs_Up.Data;
 using Surfs_Up.Models;
+using Surfs_Up.ViewModels;
 
 public class UserService
 {
@@ -12,34 +15,20 @@ public class UserService
         ApiContext.Initialize();
     }
 
-    public async Task<bool> Login(string email, string password)
+    public async Task<LoginResponseModel> Login(LoginViewModel loginViewModel)
     {
-        var loginData = new
+        var response = await ApiContext._apiClient.PostAsJsonAsync("/login", loginViewModel );
+
+        if (response.IsSuccessStatusCode)
         {
-            Email = email,
-            Password = password
-        };
-
-        var content = new StringContent(JsonSerializer.Serialize(loginData), Encoding.UTF8, "application/json");
-
-        // Sender HTTP RequestMiddleware til at logge ind og få en JWT token
-        using (HttpResponseMessage response = await ApiContext._apiClient.PostAsync("/api/auth/login", content))
-        {
-            if (response.IsSuccessStatusCode)
-            {
-                var responseContent = await response.Content.ReadAsStringAsync();
-                var token = JsonSerializer.Deserialize<Dictionary<string, string>>(responseContent)?["token"];
-
-                // Opbevarer token i Session
-                var contextAccessor = new HttpContextAccessor();
-                contextAccessor.HttpContext.Session.SetString("JWToken", token);
-
-                return true;
-            }
-
-            return false;
+            return await response.Content.ReadFromJsonAsync<LoginResponseModel>();
         }
+
+        // Handle errors as needed
+        var responseContent = await response.Content.ReadAsStringAsync();
+        throw new HttpRequestException($"Login failed. Status Code: {response.StatusCode}, Response: {responseContent}");
     }
+    
 
     public async Task<bool> Register(string name, string email, string password)
     {
@@ -67,30 +56,31 @@ public class UserService
     {
         // Clear the JWT token from the session
         var contextAccessor = new HttpContextAccessor();
-        contextAccessor.HttpContext.Session.Remove("JWToken");
+        contextAccessor.HttpContext.Session.Remove("AccessToken");
+        contextAccessor.HttpContext.Session.Remove("RefreshToken");
+        contextAccessor.HttpContext.Session.Remove("Email");
 
-        return true; // Indicate that the logout was successful
+        return true;
     }
 
 
-    public async Task<User> GetUser()
+    public async Task<User> GetUser(string email)
     {
         var contextAccessor = new HttpContextAccessor();
-        string token = contextAccessor.HttpContext.Session.GetString("JWToken");
-
-        var handler = new JwtSecurityTokenHandler();
-        var jwtToken = handler.ReadJwtToken(token);
+        var accessToken = contextAccessor.HttpContext.Session.GetString("AccessToken");
         
-        string name = jwtToken.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Name)?.Value;
-        string email = jwtToken.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Email)?.Value;
-        int id = Int32.Parse(jwtToken.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value);
-
-        return new User
+        ApiContext._apiClient.DefaultRequestHeaders.Authorization =
+            new AuthenticationHeaderValue("Bearer", accessToken);
+        
+        using (HttpResponseMessage response = await ApiContext._apiClient.GetAsync($"/api/user/{email}"))
         {
-            Id = id,
-            Name = name,
-            Email = email
-        };
+            if (response.IsSuccessStatusCode)
+            {
+                User user = await response.Content.ReadFromJsonAsync<User>();
+                return user;
+            }
+            throw new Exception(response.ReasonPhrase);
+        }
     }
 
     public async Task<bool> isLoggedIn()

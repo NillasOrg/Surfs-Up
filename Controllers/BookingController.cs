@@ -49,11 +49,13 @@ namespace Surfs_Up.Controllers {
             if (ModelState.IsValid)
             {
                 if (await _userService.isLoggedIn())
-
-                foreach (var item in booking.Surfboards)
                 {
-                    User user = await _userService.GetUser();
-                    booking.User = user;
+                    string? email = HttpContext.Session.GetString("Email");
+                    foreach (var item in booking.Surfboards)
+                    {
+                        User user = await _userService.GetUser(email);
+                        booking.User = user;
+                    }
                 }
                 else
                 {

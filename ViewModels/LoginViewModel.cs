@@ -8,7 +8,7 @@ namespace Surfs_Up.ViewModels
         [Required(ErrorMessage = "Indtast en gyldig Email")]
         [MaxLength(320)]
         [DisplayName("Email")]
-        public string UserNameOrEmail { get; set; }
+        public string Email { get; set; }
 
         [Required(ErrorMessage = "Indtast korrekt adgangskode")]
         [MaxLength(25, ErrorMessage = "Adgangskode må maks være 25 tegn")]

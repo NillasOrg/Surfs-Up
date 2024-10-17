@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using System.Security.Claims;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Surfs_Up.Data.Services;
 using Surfs_Up.Models;
@@ -39,10 +40,16 @@ namespace Surfs_Up.Controllers
         [HttpPost]
         public async Task<IActionResult> Login(LoginViewModel model)
         {
-            var isLoggedIn = await _service.Login(model.UserNameOrEmail, model.Password);
+            var isLoggedIn = await _service.Login(model);
 
-            if (isLoggedIn)
+            if (isLoggedIn != null)
             {
+                var response = await _service.Login(model);
+                // Store the token in session
+                HttpContext.Session.SetString("AccessToken", response.AccessToken);
+                HttpContext.Session.SetString("RefreshToken", response.RefreshToken);
+                HttpContext.Session.SetString("Email", model.Email);
+
                 return RedirectToAction("Index", "Home");
             }
             return View(model);
