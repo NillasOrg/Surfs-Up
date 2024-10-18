@@ -7,6 +7,6 @@
         public int SuccessfulRequests { get; set; }
         public int FailedRequests { get; set; }
 
-        //public User User { get; set; }
+        public User User { get; set; }
     }
 }

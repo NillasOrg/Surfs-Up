@@ -76,10 +76,10 @@
             <table>
                 <thead>
                     <tr>
-                        <th>IpAddress</th>
-                        @* <th>UserId</th> *@
-                        <th>SuccessfulRequests</th>
-                        <th>FailedRequests</th>
+                        <th>Ip Adresse</th>
+                        <th>Brugerens Navn</th>
+                        <th>Success</th>
+                        <th>Failed</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -93,6 +93,14 @@
                     {
                         <tr>
                             <td>@item.IpAddress</td> 
+                            @if (item.User != null)
+                            {
+                                <td>@item.User.Name</td>
+                            }
+                            else
+                            {
+                                <td>Ingen Bruger</td>
+                            }
                             <td>@item.SuccessfulRequests</td>
                             <td>@item.FailedRequests</td>
                         </tr>
