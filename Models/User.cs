@@ -7,7 +7,7 @@ using System.Text;
 namespace Surfs_Up.Models
 {
     [Index(nameof(Email), IsUnique = true)]
-    public class User
+    public class User : IdentityUser
     {
         [StringLength(100)]
         [MaxLength(100, ErrorMessage = "Navn må maks være 50 tegn")]

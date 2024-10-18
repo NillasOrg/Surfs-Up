@@ -2,12 +2,11 @@
 
 @{
     UserService _userService = new UserService();
-    string email = HttpContextAccessor.HttpContext.Session.GetString("Email");
-
     string name = null;
-    if (!string.IsNullOrEmpty(email))
+   
+    if (await _userService.isLoggedIn())
     {
-        var user = await _userService.GetUser(email);
+        var user = await _userService.GetUser();
         name = user.Name;
     }
 }

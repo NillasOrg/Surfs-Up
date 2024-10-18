@@ -54,7 +54,7 @@ public class UserService
     
     public async Task<bool> Logout()
     {
-        // Clear the JWT token from the session
+        // For at logge ud, sletter man bare tokens fra browseren
         var contextAccessor = new HttpContextAccessor();
         contextAccessor.HttpContext.Session.Remove("AccessToken");
         contextAccessor.HttpContext.Session.Remove("RefreshToken");
@@ -64,11 +64,12 @@ public class UserService
     }
 
 
-    public async Task<User> GetUser(string email)
+    public async Task<User> GetUser()
     {
         var contextAccessor = new HttpContextAccessor();
         var accessToken = contextAccessor.HttpContext.Session.GetString("AccessToken");
-        
+        string? email = contextAccessor.HttpContext.Session.GetString("Email");
+
         ApiContext._apiClient.DefaultRequestHeaders.Authorization =
             new AuthenticationHeaderValue("Bearer", accessToken);
         
@@ -86,7 +87,7 @@ public class UserService
     public async Task<bool> isLoggedIn()
     {
         var contextAccessor = new HttpContextAccessor();
-        string token = contextAccessor.HttpContext.Session.GetString("JWToken");
+        string token = contextAccessor.HttpContext.Session.GetString("AccessToken");
 
         if (token != null)
         {

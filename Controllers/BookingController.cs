@@ -50,10 +50,9 @@ namespace Surfs_Up.Controllers {
             {
                 if (await _userService.isLoggedIn())
                 {
-                    string? email = HttpContext.Session.GetString("Email");
                     foreach (var item in booking.Surfboards)
                     {
-                        User user = await _userService.GetUser(email);
+                        User user = await _userService.GetUser();
                         booking.User = user;
                     }
                 }

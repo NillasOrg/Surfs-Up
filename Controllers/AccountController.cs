@@ -45,10 +45,10 @@ namespace Surfs_Up.Controllers
             if (isLoggedIn != null)
             {
                 var response = await _service.Login(model);
-                // Store the token in session
+                // Det er her magien sker!
                 HttpContext.Session.SetString("AccessToken", response.AccessToken);
                 HttpContext.Session.SetString("RefreshToken", response.RefreshToken);
-                HttpContext.Session.SetString("Email", model.Email);
+                HttpContext.Session.SetString("Email", model.Email); // En user har unik email, så vi gemmer email i session, så den kan sendes til API.
 
                 return RedirectToAction("Index", "Home");
             }
