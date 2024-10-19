@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using System.Security.Claims;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Surfs_Up.Data.Services;
 using Surfs_Up.Models;
@@ -39,10 +40,16 @@ namespace Surfs_Up.Controllers
         [HttpPost]
         public async Task<IActionResult> Login(LoginViewModel model)
         {
-            var isLoggedIn = await _service.Login(model.UserNameOrEmail, model.Password);
+            var isLoggedIn = await _service.Login(model);
 
-            if (isLoggedIn)
+            if (isLoggedIn != null)
             {
+                var response = await _service.Login(model);
+                // Det er her magien sker!
+                HttpContext.Session.SetString("AccessToken", response.AccessToken);
+                HttpContext.Session.SetString("RefreshToken", response.RefreshToken);
+                HttpContext.Session.SetString("Email", model.Email); // En user har unik email, så vi gemmer email i session, så den kan sendes til API.
+
                 return RedirectToAction("Index", "Home");
             }
             return View(model);
