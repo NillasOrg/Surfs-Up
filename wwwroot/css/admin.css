@@ -127,40 +127,42 @@
     background-color: #d9534f; /* Blue color */
     color: black;
 }
-
-yling af tabeloverskrifter */
+/* Styling af tabeloverskrifter */
 table th {
-    background-color: #f0f0f0; 
-    color: #333; 
-    padding: 10px 15px; 
-    border-bottom: 2px solid #ccc; 
-    font-weight: bold; 
-    text-align: left; 
-    font-size: 16px;
-}
-
-
-table th:nth-child(3) {
-    color: #28a745; 
+    background-color: #f0f0f0; /* Lys grå baggrund */
+    color: #333; /* Mørk tekstfarve */
+    padding: 10px 15px; /* Polstring inde i cellerne */
+    border-bottom: 2px solid #ccc; /* Understregning af tabeloverskrifter */
+    font-weight: bold; /* Gør teksten fed */
+    text-align: left; /* Venstrestillet tekst */
+    font-size: 16px; /* Størrelse af tekst */
 }
 
 
 table {
-    width: 100%; 
-    border-collapse: collapse;
+    width: 100%; /* Gør tabellen bredere */
+    border-collapse: collapse; /* Fjern ekstra afstand mellem celler */
 }
 
 table td {
-    padding: 10px 15px; 
-    border-bottom: 1px solid #ddd;
+    padding: 10px 15px; /* Polstring for tabelceller */
+    border-bottom: 1px solid #ddd; /* Let kant mellem rækker */
 }
 
 
+table tr:nth-child(even) {
+    background-color: #f9f9f9; /* Alternativ baggrundsfarve for lige rækker */
+}
+
 table th:first-child {
-    border-top-left-radius: 8px;
+    border-top-left-radius: 8px; /* Runding af hjørnet på første kolonne */
+}
+
+table th:nth-child(3) {
+    color: #28a745; /* Grøn farve */
 }
 
 table th:last-child {
-    border-top-right-radius: 8px;
+    border-top-right-radius: 8px; /* Runding af hjørnet på sidste kolonne */
     color: red;
 }
