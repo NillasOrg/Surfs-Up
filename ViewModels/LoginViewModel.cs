@@ -14,6 +14,6 @@ namespace Surfs_Up.ViewModels
         [MaxLength(25, ErrorMessage = "Adgangskode må maks være 25 tegn")]
         [MinLength(8, ErrorMessage = "Adgangskode skal være minimum 8 tegn")]
         [DataType(DataType.Password)]
-        public string Password { get; set; }
+        public string Password {get; set;}
     }
 }

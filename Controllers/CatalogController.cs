@@ -42,7 +42,7 @@ namespace Surfs_Up.Controllers
                 cart.AddToCart(surfboard);
 
                 // Redirect to the edit page for the added item
-                return RedirectToAction("Index", new { popupItemId = surfboard.Id });
+                return RedirectToAction("Index", new {popupItemId = surfboard.Id});
                 
             }
             return NotFound();
