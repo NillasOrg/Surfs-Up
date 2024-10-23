@@ -12,7 +12,7 @@ namespace Surfs_Up.Models
         //[Wetsuit_EnsureCorrectSizing]
         [Required] public SIZES Size {get; set;} = Wetsuit.SIZES.M;
 
-        public List<Booking>? Bookings {get; set;}
+        public Booking? Booking { get; set; } //denne linje refererer til Booking
 
         [Required]
         public GENDER Gender {get; set;}
