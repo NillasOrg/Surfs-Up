@@ -7,6 +7,21 @@
 
 <head>
     <link href="~/css/booking.css" rel="stylesheet" />
+
+    <script>
+        function setMinEndDate() {
+            var startDate = document.querySelector("input[name='StartDate']").value;
+            var endDate = document.querySelector("input[name='EndDate']");
+
+
+            if (startDate) {
+                endDate.min = startDate;
+            } 
+            if (endDate.value && startDate > endDate.value) {
+                endDate.value = "";
+            }
+        }
+    </script>
 </head>
 
 <main class="container">
@@ -52,14 +67,14 @@
                     <div class="dateElement-left">
                         <label for="start-date">Start Dato:</label>
                         <br />
-                        <input type="date" id="booking-date" name="StartDate" asp-for="StartDate" />
+                        <input type="date" id="booking-date" name="StartDate" asp-for="StartDate" min="@DateTime.Now.ToString("yyyy-MM-dd")" onchange="setMinEndDate()" />
                         <span asp-validation-for="StartDate" class="text-danger"></span>
                     </div>
 
                     <div class="dateElement-left">
                         <label for="end-date">Slut Dato:</label>
                         <br />
-                        <input type="date" id="booking-date" name="EndDate" asp-for="EndDate" />
+                        <input type="date" id="booking-date" name="EndDate" asp-for="EndDate" min="@(Model.StartDate.HasValue ? Model.StartDate.Value.ToString("yyyy-MM-dd") : DateTime.Now.ToString("yyyy-MM-dd"))" />
                         <span asp-validation-for="EndDate" class="text-danger"></span>
                     </div>
                 </div>
