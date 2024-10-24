@@ -1,5 +1,9 @@
+@using Surfs_Up.Repository
 @model Booking
 @inject UserService _userService
+@{
+    var cart = ShoppingCart.GetInstance();
+}
 
 <head>
     <link href="~/css/booking.css" rel="stylesheet" />
@@ -65,7 +69,7 @@
                     <textarea id="booking-remark" name="Remark" asp-for="Remark"></textarea>
                 </div>
                 <div id="booking-submit">
-                    @if (!Model.Surfboards.Any())
+                    @if (!cart.GetItemsOfType<ICartItem>().Any())
                     {
                         <button disabled style="background-color: rgb(98, 98, 98);">Book Nu</button>
                     }
@@ -83,7 +87,7 @@
             <h2>Kurv</h2>
         </div>
         <div class="booking-body">
-            @if (!Model.Surfboards.Any())
+            @if (!cart.GetItemsOfType<ICartItem>().Any())
             {
                 <h2 style="display: flex; justify-content: center;">Kurven er tom</h2>
             }
