@@ -8,6 +8,7 @@ namespace Surfs_Up.ViewModels
         [Required(ErrorMessage = "Indtast en gyldig Email")]
         [MaxLength(320)]
         [DisplayName("Email")]
+        [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
 
         [Required(ErrorMessage = "Indtast korrekt adgangskode")]
