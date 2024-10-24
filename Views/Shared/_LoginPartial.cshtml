@@ -4,7 +4,7 @@
     UserService _userService = new UserService();
     string name = null;
    
-    if (await _userService.isLoggedIn())
+    if (await _userService.IsLoggedIn())
     {
         var user = await _userService.GetUser();
         name = user.Name;

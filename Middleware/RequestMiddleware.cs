@@ -28,7 +28,7 @@ namespace Surfs_Up.Middleware
                 IpAddress = ipAddress
             };
             
-            if (await _userService.isLoggedIn())
+            if (await _userService.IsLoggedIn())
             {
                 request.User = await _userService.GetUser();
             }

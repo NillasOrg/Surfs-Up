@@ -1,12 +1,13 @@
 @using Surfs_Up.Repository
 @model Booking
+@inject UserService _userService
 @{
     var cart = ShoppingCart.GetInstance();
 }
+
 <head>
     <link href="~/css/booking.css" rel="stylesheet" />
 </head>
-
 
 <main class="container">
     <div class="booking-left">
@@ -15,30 +16,50 @@
         </div>
         <div class="booking-body">
             <form id="booking-form" asp-action="CreateBooking" method="post">
-                <div>
-                    <label for="name">Navn:</label>
-                    <br />
-                    <input type="text" id="booking-name" name="User.Name" asp-for="User.Name"  />
-                    <span asp-validation-for="User.Name" class="text-danger"></span>
-                </div>
-                <div>
-                    <label for="email">E-mail:</label>
-                    <br />
-                    <input type="email" id="booking-email" name="User.Email" asp-for="User.Email"  />
-                    <span asp-validation-for="User.Email" class="text-danger"></span>
-                </div>
+                @if (await _userService.IsLoggedIn())
+                {
+                    <!-- Hvis brugeren er logget ind, udfyld automatisk navn og email, gør felterne readonly og grayed out -->
+                    <div>
+                        <label for="name">Navn:</label>
+                        <br />
+                        <input type="text" id="booking-name" name="User.Name" asp-for="User.Name" value="@_userService.GetUser().Result.Name" readonly class="grayed-out" />
+                        <span asp-validation-for="User.Name" class="text-danger"></span>
+                    </div>
+                    <div>
+                        <label for="email">E-mail:</label>
+                        <br />
+                        <input type="email" id="booking-email" name="User.Email" asp-for="User.Email" value="@_userService.GetUser().Result.Email" readonly class="grayed-out" />
+                        <span asp-validation-for="User.Email" class="text-danger"></span>
+                    </div>
+                }
+                else
+                {
+                    <!-- Hvis brugeren ikke er logget ind, lad dem indtaste navn og email -->
+                    <div>
+                        <label for="name">Navn:</label>
+                        <br />
+                        <input type="text" id="booking-name" name="User.Name" asp-for="User.Name" />
+                        <span asp-validation-for="User.Name" class="text-danger"></span>
+                    </div>
+                    <div>
+                        <label for="email">E-mail:</label>
+                        <br />
+                        <input type="email" id="booking-email" name="User.Email" asp-for="User.Email" />
+                        <span asp-validation-for="User.Email" class="text-danger"></span>
+                    </div>
+                }
                 <div id="date-elem">
                     <div class="dateElement-left">
                         <label for="start-date">Start Dato:</label>
                         <br />
-                        <input type="date" id="booking-date" name="StartDate" asp-for="StartDate"  />
+                        <input type="date" id="booking-date" name="StartDate" asp-for="StartDate" />
                         <span asp-validation-for="StartDate" class="text-danger"></span>
                     </div>
 
                     <div class="dateElement-left">
                         <label for="end-date">Slut Dato:</label>
                         <br />
-                        <input type="date" id="booking-date" name="EndDate" asp-for="EndDate"  />
+                        <input type="date" id="booking-date" name="EndDate" asp-for="EndDate" />
                         <span asp-validation-for="EndDate" class="text-danger"></span>
                     </div>
                 </div>
@@ -71,42 +92,42 @@
                 <h2 style="display: flex; justify-content: center;">Kurven er tom</h2>
             }
 
-        @foreach (var surfboard in Model.Surfboards)
-        {
-            <div class="booking-item">
-                <div class="booking-item-left">
-                    <h1>@surfboard.Name</h1>
-                    <p>@surfboard.Description</p>
+            @foreach (var surfboard in Model.Surfboards)
+            {
+                <div class="booking-item">
+                    <div class="booking-item-left">
+                        <h1>@surfboard.Name</h1>
+                        <p>@surfboard.Description</p>
+                    </div>
+                    <div class="booking-item-right">
+                        <form asp-action="RemoveFromCart" method="post">
+                            <input type="hidden" name="id" value="@surfboard.Id" />
+                            <input type="hidden" name="itemType" value="surfboard" />
+                            <button type="submit">
+                                <img src="~/images/trash-can.png" alt="Remove from cart" />
+                            </button>
+                        </form>
+                    </div>
                 </div>
-                <div class="booking-item-right">
-                    <form asp-action="RemoveFromCart" method="post">
-                        <input type="hidden" name="id" value="@surfboard.Id" />
-                        <input type="hidden" name="itemType" value="surfboard" />
-                        <button type="submit">
-                            <img src="~/images/trash-can.png" alt="Remove from cart" />
-                        </button>
-                    </form>
-                </div>
-            </div>
-        }
+            }
 
-        @foreach (var wetsuit in Model.Wetsuits)
-        {
-            <div class="booking-item">
-                <div class="booking-item-left">
-                    <h1>Våddragt: @wetsuit.Size, @wetsuit.Gender</h1>
+            @foreach (var wetsuit in Model.Wetsuits)
+            {
+                <div class="booking-item">
+                    <div class="booking-item-left">
+                        <h1>Vådedragt: @wetsuit.Size, @wetsuit.Gender</h1>
+                    </div>
+                    <div class="booking-item-right">
+                        <form asp-action="RemoveFromCart" method="post">
+                            <input type="hidden" name="id" value="@wetsuit.WetsuitId" />
+                            <input type="hidden" name="itemType" value="wetsuit" />
+                            <button type="submit">
+                                <img src="~/images/trash-can.png" alt="Remove from cart" />
+                            </button>
+                        </form>
+                    </div>
                 </div>
-                <div class="booking-item-right">
-                    <form asp-action="RemoveFromCart" method="post">
-                        <input type="hidden" name="id" value="@wetsuit.WetsuitId" />
-                         <input type="hidden" name="itemType" value="wetsuit" />
-                        <button type="submit">
-                            <img src="~/images/trash-can.png" alt="Remove from cart" />
-                        </button>
-                    </form>
-                </div>
-            </div>
-        }
+            }
         </div>
     </div>
 </main>
