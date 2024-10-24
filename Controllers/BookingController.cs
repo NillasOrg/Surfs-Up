@@ -20,9 +20,12 @@ namespace Surfs_Up.Controllers {
             _service = new BookingService();
         }
         
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-
+            if (!await _userService.IsLoggedIn())
+            {
+                return RedirectToAction("Login", "Account");
+            }
             ShoppingCart cart = ShoppingCart.GetInstance();
             var wetsuits = cart.GetItemsOfType<Wetsuit>();
             var surfboards = cart.GetItemsOfType<Surfboard>();
