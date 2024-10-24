@@ -24,9 +24,7 @@ public class UserService
             return await response.Content.ReadFromJsonAsync<LoginResponseModel>();
         }
 
-        // Handle errors as needed
-        var responseContent = await response.Content.ReadAsStringAsync();
-        throw new HttpRequestException($"Login failed. Status Code: {response.StatusCode}, Response: {responseContent}");
+        return null; // Verdens dummeste fix :)
     }
     
 
